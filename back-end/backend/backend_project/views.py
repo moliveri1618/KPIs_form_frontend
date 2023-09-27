@@ -9,3 +9,6 @@ def homepage(request):
 # Create your views here.
 def yo(request):
     return HttpResponse("yooyoyyoy")
+
+
+####
