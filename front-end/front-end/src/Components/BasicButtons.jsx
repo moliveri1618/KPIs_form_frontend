@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Avatar from '@mui/material/Avatar';
@@ -10,11 +10,27 @@ import axios from 'axios';
 
 export default function BasicButtons() {
   const [inputValue, setInputValue] = useState('HelloooooOOoOoo');
+  const [data, setData] = useState(null);
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
     console.log(event.target.value)
   };
+
+  const handleApiTest = async () => {
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/stoca');
+      setData(response.data['message']);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    // This block will execute whenever 'data' changes
+    console.log(data);
+  }, [data]); // Dependency array ensures this effect runs only when 'data' changes
+
 
   //hellooo
 
@@ -141,7 +157,7 @@ export default function BasicButtons() {
         <Button type="submit" variant="contained" color="primary">
           Submit
         </Button>
-        <Button type="submit" variant="contained" color="primary">
+        <Button type="submit" variant="contained" color="primary" onClick={handleApiTest}>
           Test api
         </Button>
       </div>

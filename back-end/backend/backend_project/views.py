@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from django.http import JsonResponse
+
 
 
 # Create your views here.
@@ -17,4 +19,5 @@ def yo(request):
 # Create your views here.
 @api_view(['POST'])
 def stoca(request):
-    return HttpResponse("Stocazz")
+    data = {'message': 'Hello from Django!'}
+    return JsonResponse(data)
