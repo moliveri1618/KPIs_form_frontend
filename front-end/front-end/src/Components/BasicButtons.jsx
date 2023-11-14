@@ -21,18 +21,16 @@ export default function BasicButtons() {
     try {
       const response = await axios.post('http://127.0.0.1:8000/stoca');
       setData(response.data['message']);
+      console.log(response.data['message'])
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
 
   useEffect(() => {
-    // This block will execute whenever 'data' changes
-    console.log(data);
+    //console.log(data);
   }, [data]); // Dependency array ensures this effect runs only when 'data' changes
 
-
-  //hellooo
 
   return (
     <Box
