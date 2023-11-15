@@ -19,5 +19,17 @@ def yo(request):
 # Create your views here.
 @api_view(['POST'])
 def stoca(request):
-    data = {'message': 'Hello from Django!'}
+    data = {
+        'title'     : 'Hello from Django!',
+        'volume'    : 'aaa',
+        'ISSN'      : 'dsfdsf',
+        'url'       : 'sdgfdfs',
+        'number'    : 'gfggg',
+        'journal'   : 'qwqwqw',
+        'publisher' : 'asdfs',
+        'author'    : 'mjjjj',
+        'year'      : 'dgfhdgfhfgh',
+        'month'     : 'asfdxcz',
+        'pages'     : 'dfscdfv'
+        }
     return JsonResponse(data)

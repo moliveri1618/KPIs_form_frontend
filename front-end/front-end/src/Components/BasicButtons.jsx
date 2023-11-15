@@ -20,8 +20,8 @@ export default function BasicButtons() {
   const handleApiTest = async () => {
     try {
       const response = await axios.post('http://127.0.0.1:8000/stoca');
-      setData(response.data['message']);
-      console.log(response.data['message'])
+      setData(response.data);
+      console.log(response.data['title'])
     } catch (error) {
       console.error('Error fetching data:', error);
     }
