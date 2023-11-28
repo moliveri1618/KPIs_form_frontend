@@ -25,6 +25,7 @@ export default function BasicButtons() {
   };
 
   const [age, setAge] = React.useState('');
+  const ages = ['10', 'ffff', 'dsfdf'];
   const handleChange = (event) => {
     setAge(event.target.value);
   };
@@ -77,7 +78,7 @@ export default function BasicButtons() {
                   width: '100vw',  
                   justifyContent: 'center',
                   paddingTop: '40px', 
-                  paddingBottom: '40px'}}> 
+                  paddingBottom: '60px'}}> 
       <FormControl fullWidth style={{ width: '40%' }}>
         <InputLabel id="demo-simple-select-label">Groups</InputLabel>
         <Select
@@ -87,18 +88,17 @@ export default function BasicButtons() {
           label="Age"
           onChange={handleChange}
         >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+        {ages.map((value) => (
+          <MenuItem key={value} value={value}>
+            {value}
+          </MenuItem>
+        ))}
         </Select>
       </FormControl>
       <TextField id="outlined-search" label="DOI" type="search" style={{ width: '40%', height: '40px',margin: '0'}} />
     </div>
     <div style={{ display: 'flex', justifyContent: 'right', width: '81.5vw' }}>
-    {/* <Button type="submit" variant="contained" color="primary">
-      Submit
-    </Button> */}
-    <Button type="submit" variant="contained" color="primary" onClick={handleApiTest} style={{ width: '10%' }}>
+    <Button type="submit" variant="contained" color="primary" onClick={handleApiTest} style={{ width: '15%' }}>
       Test api
     </Button>
     </div>
