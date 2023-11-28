@@ -18,11 +18,17 @@ export default function BasicButtons() {
   };
 
   const handleApiTest = async () => {
+    let api = ''
     try {
-      const response = await axios.post('http://127.0.0.1:8000/stoca');
+      if (process.env.NODE_ENV !== 'production') {
+        api = 'http://' + process.env.REACT_APP_API_URL_DEV + '/stoca'
+      } else {
+        api = 'http://' + process.env.REACT_APP_API_URL_PROD + '/stoca'
+      }
+      const response = await axios.post(api);
       setData(response.data);
-
       console.log(response.data)
+      
     } catch (error) {
       console.error('Error fetching data:', error);
     }
