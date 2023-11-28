@@ -1,9 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
-import Form from './Components/Form'
-import BasicButtons from './Components/BasicButtons';
-import AddressForm from './Components/AddressForm';
-import CheckoutPage from './Components/Checkout';
+import StartingForm from './Components/StartingForm';
+import FormSuccess from './Components/FormSuccess'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
 
@@ -11,8 +8,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<BasicButtons/>} />
-        <Route path="/about" element={<BasicButtons/>} />
+        <Route path="/" element={<StartingForm/>} />
+        <Route path="/success" element={<FormSuccess/>} />
       </Routes>
     </Router>
   );
