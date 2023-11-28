@@ -1,109 +1,110 @@
-import * as React from 'react';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
+import React, {useState, useEffect } from 'react';
+import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import axios from 'axios';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
 
-export default function FormSuccess() {
+
+
+
+
+export default function StartingForm() {
+  const [data, setData] = useState(null);
+  const [group, setGroup] = React.useState('');
+  const groups = ['10', 'ffff', 'dsfdf'];
+
+  const handleChange = (event) => {
+    setGroup(event.target.value);
+  };
+
+  const handleApiTest = async () => {
+    let api = ''
+    try {
+      if (process.env.NODE_ENV !== 'production') {
+        api = 'http://' + process.env.REACT_APP_API_URL_DEV + '/stoca'
+      } else {
+        api = 'http://' + process.env.REACT_APP_API_URL_PROD + '/stoca'
+      }
+      const response = await axios.post(api);
+      setData(response.data);
+      console.log(response.data)
+      
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    //console.log(data);
+  }, [data]); // Dependency array ensures this effect runs only when 'data' changes
+
+
   return (
-    <React.Fragment>
-      <Typography variant="h6" gutterBottom>
-        Shipping address
-      </Typography>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="firstName"
-            name="firstName"
-            label="First name"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="lastName"
-            name="lastName"
-            label="Last name"
-            fullWidth
-            autoComplete="family-name"
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            required
-            id="address1"
-            name="address1"
-            label="Address line 1"
-            fullWidth
-            autoComplete="shipping address-line1"
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            id="address2"
-            name="address2"
-            label="Address line 2"
-            fullWidth
-            autoComplete="shipping address-line2"
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="city"
-            name="city"
-            label="City"
-            fullWidth
-            autoComplete="shipping address-level2"
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="state"
-            name="state"
-            label="State/Province/Region"
-            fullWidth
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="zip"
-            name="zip"
-            label="Zip / Postal code"
-            fullWidth
-            autoComplete="shipping postal-code"
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="country"
-            name="country"
-            label="Country"
-            fullWidth
-            autoComplete="shipping country"
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <FormControlLabel
-            control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
-            label="Use this address for payment details"
-          />
-        </Grid>
-      </Grid>
-    </React.Fragment>
+    <Box
+      component="form"
+      sx={{
+        marginTop: 8,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        '& .MuiTextField-root': { m: 1, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
+        <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
+          Submit your DOI
+        </Typography>
+      </div>
+      <div style={{ display: 'flex', 
+                    gap: '10px',  
+                    width: '100vw',  
+                    justifyContent: 'center',
+                    paddingTop: '40px', 
+                    paddingBottom: '20px'}}> 
+        <TextField id="outlined-search" label="DOI" type="search" style={{ width: '80%', height: '40px',margin: '0'}} />
+      </div>
+      <div style={{ display: 'flex', 
+                    gap: '10px',  
+                    width: '100vw',  
+                    justifyContent: 'center',
+                    paddingTop: '40px', 
+                    paddingBottom: '20px'}}> 
+        <TextField id="outlined-search" label="DOI" type="search" style={{ width: '26.5%', height: '40px',margin: '0'}} />
+        <TextField id="outlined-search" label="DOI" type="search" style={{ width: '26%', height: '40px',margin: '0'}} />
+        <TextField id="outlined-search" label="DOI" type="search" style={{ width: '26.5%', height: '40px',margin: '0'}} />
+      </div>
+      <div style={{ display: 'flex', 
+                    gap: '10px',  
+                    width: '100vw',  
+                    justifyContent: 'center',
+                    paddingTop: '40px', 
+                    paddingBottom: '20px'}}> 
+        <TextField id="outlined-search" label="DOI" type="search" style={{ width: '26.5%', height: '40px',margin: '0'}} />
+        <TextField id="outlined-search" label="DOI" type="search" style={{ width: '26%', height: '40px',margin: '0'}} />
+        <TextField id="outlined-search" label="DOI" type="search" style={{ width: '26.5%', height: '40px',margin: '0'}} />
+      </div>
+      <div style={{ display: 'flex', 
+                    gap: '10px',  
+                    width: '100vw',  
+                    justifyContent: 'center',
+                    paddingTop: '40px', 
+                    paddingBottom: '60px'}}> 
+        <TextField id="outlined-search" label="DOI" type="search" style={{ width: '26.5%', height: '40px',margin: '0'}} />
+        <TextField id="outlined-search" label="DOI" type="search" style={{ width: '26%', height: '40px',margin: '0'}} />
+        <TextField id="outlined-search" label="DOI" type="search" style={{ width: '26.5%', height: '40px',margin: '0'}} />
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'right', width: '80.5vw' }}>
+        <Button type="submit" variant="contained" color="primary" onClick={handleApiTest} style={{ width: '15%' }}>
+          Test api
+        </Button>
+      </div>
+    </Box>
   );
 }
