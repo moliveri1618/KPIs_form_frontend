@@ -25,7 +25,6 @@ export default function BasicButtons() {
   };
 
   const [age, setAge] = React.useState('');
-
   const handleChange = (event) => {
     setAge(event.target.value);
   };
@@ -93,7 +92,7 @@ export default function BasicButtons() {
           <MenuItem value={30}>Thirty</MenuItem>
         </Select>
       </FormControl>
-      <TextField id="outlined-search" label="Search field" type="search" style={{ width: '40%', height: '40px',margin: '0'}} />
+      <TextField id="outlined-search" label="DOI" type="search" style={{ width: '40%', height: '40px',margin: '0'}} />
     </div>
     <div style={{ display: 'flex', justifyContent: 'right', width: '81.5vw' }}>
     {/* <Button type="submit" variant="contained" color="primary">
