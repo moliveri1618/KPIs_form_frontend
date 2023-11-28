@@ -8,8 +8,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-
-
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -17,6 +16,7 @@ export default function StartingForm() {
   const [data, setData] = useState(null);
   const [group, setGroup] = React.useState('');
   const groups = ['10', 'ffff', 'dsfdf'];
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     setGroup(event.target.value);
@@ -30,18 +30,19 @@ export default function StartingForm() {
       } else {
         api = 'http://' + process.env.REACT_APP_API_URL_PROD + '/stoca'
       }
-      const response = await axios.post(api);
+      const response = axios.post(api)
+      if (data !== 'DOI doesnt exists') {
+        navigate('/fail', { replace: true });
+      } 
       setData(response.data);
       console.log(response.data)
-      
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
 
   useEffect(() => {
-    //console.log(data);
-  }, [data]); // Dependency array ensures this effect runs only when 'data' changes
+  }, []); // Dependency array ensures this effect runs only when 'data' changes
 
 
   return (
