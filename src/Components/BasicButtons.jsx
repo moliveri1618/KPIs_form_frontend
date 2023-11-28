@@ -6,6 +6,13 @@ import Typography from '@mui/material/Typography';
 import AssignmentTurnedInRoundedIcon from '@mui/icons-material/AssignmentTurnedInRounded';
 import Button from '@mui/material/Button';
 import axios from 'axios';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+
+
+
 
 
 export default function BasicButtons() {
@@ -15,6 +22,12 @@ export default function BasicButtons() {
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
     console.log(event.target.value)
+  };
+
+  const [age, setAge] = React.useState('');
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
   };
 
   const handleApiTest = async () => {
@@ -60,20 +73,36 @@ export default function BasicButtons() {
         Submit your DOI
       </Typography>
     </div>
-    <div style={{ display: 'flex', gap: '10px',  width: '100vw', height: '100vh', justifyContent: 'center'}}>
-      <TextField id="outlined-search" label="Search field" type="search" style={{ width: '40%' }} />
-      <TextField id="outlined-search" label="Search field" type="search" style={{ width: '40%' }} />
+    <div style={{ display: 'flex', 
+                  gap: '10px',  
+                  width: '100vw',  
+                  justifyContent: 'center',
+                  paddingTop: '40px', 
+                  paddingBottom: '40px'}}> 
+      <FormControl fullWidth style={{ width: '40%' }}>
+        <InputLabel id="demo-simple-select-label">Groups</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Age"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+      <TextField id="outlined-search" label="Search field" type="search" style={{ width: '40%', height: '40px',margin: '0'}} />
     </div>
-      <div>
-        <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
-        <Button type="submit" variant="contained" color="primary">
-          Submit
-        </Button>
-        <Button type="submit" variant="contained" color="primary" onClick={handleApiTest}>
-          Test api
-        </Button>
-      </div>
-      </div>
+    <div style={{ display: 'flex', justifyContent: 'right', width: '81.5vw' }}>
+    {/* <Button type="submit" variant="contained" color="primary">
+      Submit
+    </Button> */}
+    <Button type="submit" variant="contained" color="primary" onClick={handleApiTest} style={{ width: '10%' }}>
+      Test api
+    </Button>
+    </div>
     </Box>
   );
 }
