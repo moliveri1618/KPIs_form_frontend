@@ -5,6 +5,7 @@ import FormSuccess from './Components/FormSuccess'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import React, {useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import BasicButtons from './Components/BasicButtons';
 
 
 function App() {
