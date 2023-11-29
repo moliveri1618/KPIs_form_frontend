@@ -31,11 +31,11 @@ export default function StartingForm() {
         api = 'http://' + process.env.REACT_APP_API_URL_PROD + '/stoca'
       }
       const response = axios.post(api)
-      if (data !== 'DOI doesnt exists') {
-        navigate('/fail', { replace: true });
-      } 
       setData(response.data);
       console.log(response.data)
+      if (data !== 'DOI doesnt exists') {
+        navigate('/success');
+      } 
     } catch (error) {
       console.error('Error fetching data:', error);
     }

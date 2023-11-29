@@ -3,19 +3,17 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
 
-export default function FormFail() {
-  const [data, setData] = useState(null);
-  const [group, setGroup] = React.useState('');
-  const groups = ['10', 'ffff', 'dsfdf'];
+export default function FormSuccess() {
+
   const notify = () => {
     console.log('hi')
-    toast.success('🦄 Wow so easy!', {
+    toast.success('The information for this paper are successfully saved into the database 😍', {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -23,12 +21,18 @@ export default function FormFail() {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "light",
+      theme: "colored",
       });
   }
 
   useEffect(() => {
-  }, []); // Dependency array ensures this effect runs only when 'data' changes
+    notify()
+
+    // Cleanup function
+    return () => {
+      toast.dismiss(); // Dismiss any existing toasts when the component unmounts
+    };
+  }, []); 
 
 
   return (
@@ -88,9 +92,11 @@ export default function FormFail() {
         <TextField id="l" label="DOI" type="search" style={{ width: '26.5%', height: '40px',margin: '0'}} />
       </div>
       <div style={{ display: 'flex', justifyContent: 'right', width: '80.5vw' }}>
-        <Button variant="contained" color="primary" onClick={notify} style={{ width: '15%' }}>
-          Test api
-        </Button>
+        <Link to="/home">
+          <Button variant="contained" color="primary" style={{ width: '15%' }}>
+            Close
+          </Button>
+      </Link>
         <ToastContainer
           position="top-right"
           autoClose={5000}
@@ -101,10 +107,8 @@ export default function FormFail() {
           pauseOnFocusLoss
           draggable
           pauseOnHover
-          theme="light"
+          theme="colored"
           />
-          {/* Same as */}
-          <ToastContainer />
       </div>
     </Box>
   );
