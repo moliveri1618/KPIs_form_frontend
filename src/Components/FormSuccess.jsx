@@ -227,10 +227,10 @@ export default function FormFail() {
           </Table>
         </TableContainer>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'right', width: '82vw' }}>
+      <div style={{ display: 'flex', justifyContent: 'right', width: '81.5vw' }}>
         <Link to="/KPIs_form_frontend">
           <Button variant="contained" color="primary" style={{ width: '15%' }}>
-            Close
+            Back
           </Button>
       </Link>
         <ToastContainer

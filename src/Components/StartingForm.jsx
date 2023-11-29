@@ -9,6 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 
@@ -134,10 +135,12 @@ export default function StartingForm() {
         }
         />
       </div>
-      <div style={{ display: 'flex', justifyContent: 'right', width: '80.5vw' }}>
-        <Button type="submit" variant="contained" color="primary" onClick={handleApiTest} style={{ width: '15%' }}>
-          Submit
-        </Button>
+      <div style={{ display: 'flex', justifyContent: 'right', width: '83.5vw' }}>
+        <Link to="/home">
+          <Button type="submit" variant="contained" color="primary" onClick={handleApiTest} style={{ width: '15%' }}>
+            Submit
+          </Button>
+        </Link>
       </div>
     </Box>
   );
