@@ -121,6 +121,17 @@ export default function StartingForm() {
         value={doi} 
         onChange={handleDoiChange}
         error={!isValidDoi}
+        helperText={
+            <>
+                <Typography variant="body2" component="span">
+                    Example:
+                </Typography>
+                {' '}
+                <Typography variant="body2" component="span" style={{ fontWeight: 'bold' }}>
+                    10.1016/j.carbpol.2016.01.046
+                </Typography>
+            </>
+        }
         />
       </div>
       <div style={{ display: 'flex', justifyContent: 'right', width: '80.5vw' }}>
