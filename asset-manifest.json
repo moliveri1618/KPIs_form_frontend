@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/KPIs_form_frontend/static/css/main.a4838356.css",
-    "main.js": "/KPIs_form_frontend/static/js/main.9eee753b.js",
+    "main.js": "/KPIs_form_frontend/static/js/main.cf4ad2a6.js",
     "static/js/787.22edae46.chunk.js": "/KPIs_form_frontend/static/js/787.22edae46.chunk.js",
     "index.html": "/KPIs_form_frontend/index.html",
     "main.a4838356.css.map": "/KPIs_form_frontend/static/css/main.a4838356.css.map",
-    "main.9eee753b.js.map": "/KPIs_form_frontend/static/js/main.9eee753b.js.map",
+    "main.cf4ad2a6.js.map": "/KPIs_form_frontend/static/js/main.cf4ad2a6.js.map",
     "787.22edae46.chunk.js.map": "/KPIs_form_frontend/static/js/787.22edae46.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a4838356.css",
-    "static/js/main.9eee753b.js"
+    "static/js/main.cf4ad2a6.js"
   ]
 }
