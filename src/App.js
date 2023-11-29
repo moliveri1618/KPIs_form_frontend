@@ -10,6 +10,7 @@ function App() {
     <div className="App">
         {/* <Form /> */}
         <BasicButtons />
+        {/* <Form /> */}
         {/* <AddressForm /> */}
         {/* <CheckoutPage /> */}
     </div>
