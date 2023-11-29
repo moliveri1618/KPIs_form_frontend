@@ -59,9 +59,9 @@ export default function StartingForm() {
         }
         const response = axios.post(api)
         setData(response.data);
-        console.log(response.data)
         if (data !== 'DOI doesnt exists') {
-          navigate('/KPIs_form_frontend/fail');
+          var url = `/KPIs_form_frontend/fail?DOI=${doi}`;
+          navigate(url);
         } 
       } catch (error) {
         console.error('Error fetching data:', error);

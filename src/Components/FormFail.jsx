@@ -12,11 +12,21 @@ import { useNavigate } from 'react-router-dom';
 
 export default function FormFail() {
 
-  const notify = () => {
-    console.log('hi')
-    toast.error('The information for this paper are successfully saved into the database 😍', {
+  const notify = (varValue) => {
+    toast.error(`${varValue} could not be found`, {
       position: "top-right",
-      autoClose: 5000,
+      autoClose: 7000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      });
+
+    toast.error(`Go back to change it or input data manually`, {
+      position: "top-right",
+      autoClose: 7000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -43,7 +53,15 @@ export default function FormFail() {
   };
 
   useEffect(() => {
-    notify()
+    // Get doi from url
+    const url = window.location.href;
+    const doiMatch = url.match(/DOI=([^&]+)/);
+    let doi = ''
+    if (doiMatch && doiMatch[1]) {
+      doi = doiMatch[1];
+      console.log(doi);
+    }
+    notify(doi)
 
     // Cleanup function
     return () => {
