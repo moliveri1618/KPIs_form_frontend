@@ -17,6 +17,7 @@ export default function StartingForm() {
   const [group, setGroup] = React.useState('');
   const [doi, setDoi] = useState('');
   const [isValid, setIsValid] = useState(false);
+  const [isValidDoi, setIsValidDoi] = useState(true);
   const groups = ['10', 'ffff', 'dsfdf'];
   const navigate = useNavigate();
 
@@ -26,20 +27,28 @@ export default function StartingForm() {
 
   };
 
+  const isValidDOI = (doi) => {
+    // Define the regular expression pattern for a valid DOI
+    const doiPattern = /^10\.\d{4,9}\/[-._;()/:A-Z0-9]+$/i;
+  
+    // Test the DOI against the pattern
+    return doiPattern.test(doi);
+  };
+
   const handleDoiChange = (event) => {
     setDoi(event.target.value);
+    setIsValidDoi(isValidDOI(event.target.value));
     validateForm(group, event.target.value);
   };
 
   const validateForm = (groupValue, doiValue) => {
-    // Add your validation logic here
     const isValidForm = groupValue.trim() !== '' && doiValue.trim() !== '';
     setIsValid(isValidForm);
   };
 
   const handleApiTest = async (event) => {
     event.preventDefault();
-    if (isValid) {
+    if (isValid && isValidDoi) {
       let api = ''
       try {
         if (process.env.NODE_ENV !== 'production') {
@@ -89,7 +98,7 @@ export default function StartingForm() {
                     paddingTop: '40px', 
                     paddingBottom: '60px'}}> 
         <FormControl fullWidth style={{ width: '40%' }}>
-          <InputLabel id="demo-simple-select-label">Groups</InputLabel>
+          <InputLabel id="demo-simple-select-label">Groups *</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
@@ -104,7 +113,15 @@ export default function StartingForm() {
           ))}
           </Select>
         </FormControl>
-        <TextField id="outlined-search" label="DOI" type="search" style={{ width: '40%', height: '40px',margin: '0'}} value={doi} onChange={handleDoiChange}/>
+        <TextField 
+        id="outlined-search" 
+        label="DOI *" 
+        type="search" 
+        style={{ width: '40%', height: '40px',margin: '0'}} 
+        value={doi} 
+        onChange={handleDoiChange}
+        error={!isValidDoi}
+        />
       </div>
       <div style={{ display: 'flex', justifyContent: 'right', width: '80.5vw' }}>
         <Button type="submit" variant="contained" color="primary" onClick={handleApiTest} style={{ width: '15%' }}>
