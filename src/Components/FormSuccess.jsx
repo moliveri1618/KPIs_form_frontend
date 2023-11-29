@@ -33,7 +33,40 @@ function createData(
 }
 
 const rows = [
-  createData('dsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsf', 159, 6.0, 24, 4.0, 159, 6.0, 24, 4.0, 88, 99),
+  createData('Combination of Zinc Oxide Photocatalysis with Membrane Filtration for Surface Water Disinfection', 
+  12,
+  2305-5934, 
+  'http://dx.doi.org/10.3390/foods12071383', 
+  7, 
+  'foods', 
+  'MDPI AG', 
+  'Mecha, Elsa and Alves, Mara Lisa and Bento da Silva, Andreia and Pereira, Ana Bárbara and Rubiales, Diego and Vaz Patto, Maria Carlota and Bronze, Maria Rosário', 
+  2023, 
+  'mar', 
+  1395),
+  createData('Combination of Zinc Oxide Photocatalysis with Membrane Filtration for Surface Water Disinfection', 
+  12,
+  2305-5934, 
+  'http://dx.doi.org/10.3390/foods12071383', 
+  7, 
+  'foods', 
+  'MDPI AG', 
+  'Mecha, Elsa and Alves, Mara Lisa and Bento da Silva, Andreia and Pereira, Ana Bárbara and Rubiales, Diego and Vaz Patto, Maria Carlota and Bronze, Maria Rosário', 
+  2023, 
+  'mar', 
+  1395),
+
+  createData('Combination of Zinc Oxide Photocatalysis with Membrane Filtration for Surface Water Disinfection', 
+  12,
+  2305-5934, 
+  'http://dx.doi.org/10.3390/foods12071383', 
+  7, 
+  'foods', 
+  'MDPI AG', 
+  'Mecha, Elsa and Alves, Mara Lisa and Bento da Silva, Andreia and Pereira, Ana Bárbara and Rubiales, Diego and Vaz Patto, Maria Carlota and Bronze, Maria Rosário', 
+  2023, 
+  'mar', 
+  1395),
 ];
 
 
@@ -93,16 +126,16 @@ export default function FormFail() {
             <TableHead>
               <TableRow>
                 <TableCell sx={{ fontWeight: 'bold' }} >Title </TableCell>
-                <TableCell sx={{ fontWeight: 'bold' }} align="right">Volume</TableCell>
-                <TableCell sx={{ fontWeight: 'bold' }} align="right">ISSN</TableCell>
-                <TableCell sx={{ fontWeight: 'bold' }} align="right">Url</TableCell>
-                <TableCell sx={{ fontWeight: 'bold' }} align="right">Number</TableCell>
-                <TableCell sx={{ fontWeight: 'bold' }} align="right">Journal</TableCell>
-                <TableCell sx={{ fontWeight: 'bold' }} align="right">Publisher</TableCell>
-                <TableCell sx={{ fontWeight: 'bold' }} align="right">Author</TableCell>
-                <TableCell sx={{ fontWeight: 'bold' }} align="right">Year</TableCell>
-                <TableCell sx={{ fontWeight: 'bold' }} align="right">Month</TableCell>
-                <TableCell sx={{ fontWeight: 'bold' }} align="right">Pages</TableCell>
+                <TableCell sx={{ fontWeight: 'bold' }} >Volume</TableCell>
+                <TableCell sx={{ fontWeight: 'bold' }} >ISSN</TableCell>
+                <TableCell sx={{ fontWeight: 'bold' }} >Url</TableCell>
+                <TableCell sx={{ fontWeight: 'bold' }} >Number</TableCell>
+                <TableCell sx={{ fontWeight: 'bold' }} >Journal</TableCell>
+                <TableCell sx={{ fontWeight: 'bold' }} >Publisher</TableCell>
+                <TableCell sx={{ fontWeight: 'bold' }} >Author</TableCell>
+                <TableCell sx={{ fontWeight: 'bold' }} >Year</TableCell>
+                <TableCell sx={{ fontWeight: 'bold' }} >Month</TableCell>
+                <TableCell sx={{ fontWeight: 'bold' }} >Pages</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -118,16 +151,76 @@ export default function FormFail() {
                     </div>
                   </Tooltip>
                 </TableCell>
-                <TableCell align="right">{row.volume}</TableCell>
-                <TableCell align="right">{row.ISSN}</TableCell>
-                <TableCell align="right">{row.url}</TableCell>
-                <TableCell align="right">{row.number}</TableCell>
-                <TableCell align="right">{row.journal}</TableCell>
-                <TableCell align="right">{row.publisher}</TableCell>
-                <TableCell align="right">{row.author}</TableCell>
-                <TableCell align="right">{row.year}</TableCell>
-                <TableCell align="right">{row.month}</TableCell>
-                <TableCell align="right">{row.pages}</TableCell>
+                <TableCell component="th"scope="row">
+                  <Tooltip title={row.volume} arrow >
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
+                        {row.volume}
+                      </div>
+                    </Tooltip>
+                </TableCell>
+                <TableCell component="th"scope="row">
+                  <Tooltip title={row.ISSN} arrow >
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
+                        {row.ISSN}
+                      </div>
+                    </Tooltip>
+                </TableCell>
+                <TableCell component="th"scope="row">
+                  <Tooltip title={row.url} arrow >
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
+                        {row.url}
+                      </div>
+                    </Tooltip>
+                </TableCell>
+                <TableCell component="th"scope="row">
+                  <Tooltip title={row.number} arrow >
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
+                        {row.number}
+                      </div>
+                    </Tooltip>
+                </TableCell>
+                <TableCell component="th"scope="row">
+                  <Tooltip title={row.journal} arrow >
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
+                        {row.journal}
+                      </div>
+                    </Tooltip>
+                </TableCell>
+                <TableCell component="th"scope="row">
+                  <Tooltip title={row.publisher} arrow >
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
+                        {row.publisher}
+                      </div>
+                    </Tooltip>
+                </TableCell>
+                <TableCell component="th"scope="row">
+                  <Tooltip title={row.author} arrow >
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
+                        {row.author}
+                      </div>
+                    </Tooltip>
+                </TableCell>
+                <TableCell component="th"scope="row">
+                  <Tooltip title={row.year} arrow >
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
+                        {row.year}
+                      </div>
+                    </Tooltip>
+                </TableCell>
+                <TableCell component="th"scope="row">
+                  <Tooltip title={row.month} arrow >
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
+                        {row.month}
+                      </div>
+                    </Tooltip>
+                </TableCell>
+                <TableCell component="th"scope="row">
+                  <Tooltip title={row.pages} arrow >
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
+                        {row.pages}
+                      </div>
+                    </Tooltip>
+                </TableCell>
               </TableRow>
               ))}
             </TableBody>
@@ -135,7 +228,7 @@ export default function FormFail() {
         </TableContainer>
       </div>
       <div style={{ display: 'flex', justifyContent: 'right', width: '82vw' }}>
-        <Link to="/home">
+        <Link to="/KPIs_form_frontend">
           <Button variant="contained" color="primary" style={{ width: '15%' }}>
             Close
           </Button>
