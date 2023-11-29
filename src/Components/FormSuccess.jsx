@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import Tooltip from '@mui/material/Tooltip';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -14,6 +14,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+
 
 function createData(
   title,
@@ -32,11 +33,7 @@ function createData(
 }
 
 const rows = [
-  createData(8789, 159, 6.0, 24, 4.0, 159, 6.0, 24, 4.0, 88, 99),
-  // createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  // createData('Eclair', 262, 16.0, 24, 6.0),
-  // createData('Cupcake', 305, 3.7, 67, 4.3),
-  // createData('Gingerbread', 356, 16.0, 49, 3.9),
+  createData('dsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsf', 159, 6.0, 24, 4.0, 159, 6.0, 24, 4.0, 88, 99),
 ];
 
 
@@ -114,8 +111,12 @@ export default function FormFail() {
                 key={row.name}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-                <TableCell component="th" scope="row">
-                  {row.title}
+                <TableCell component="th"scope="row">
+                  <Tooltip title={row.title} arrow >
+                    <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
+                      {row.title}
+                    </div>
+                  </Tooltip>
                 </TableCell>
                 <TableCell align="right">{row.volume}</TableCell>
                 <TableCell align="right">{row.ISSN}</TableCell>
@@ -155,5 +156,3 @@ export default function FormFail() {
     </Box>
   );
 }
-
-
