@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
-export default function FormSuccess() {
+export default function FormFail() {
 
   const notify = () => {
     console.log('hi')
@@ -50,7 +50,7 @@ export default function FormSuccess() {
     >
       <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
         <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
-          Submit your DOI
+          DOI Info
         </Typography>
       </div>
       <div style={{ display: 'flex', 
@@ -94,7 +94,7 @@ export default function FormSuccess() {
       <div style={{ display: 'flex', justifyContent: 'right', width: '80.5vw' }}>
         <Link to="/home">
           <Button variant="contained" color="primary" style={{ width: '15%' }}>
-            Close
+            Submit
           </Button>
       </Link>
         <ToastContainer

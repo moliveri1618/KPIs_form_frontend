@@ -1,5 +1,6 @@
 import './App.css';
 import StartingForm from './Components/StartingForm';
+import FormFail from './Components/FormFail'
 import FormSuccess from './Components/FormSuccess'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import React, {useEffect } from 'react';
@@ -12,6 +13,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/home" element={<StartingForm/>} />
+        <Route path="/fail" element={<FormFail/>} />
         <Route path="/success" element={<FormSuccess/>} />
         <Route index element={<StartingForm />} /> {/* Index route for the default starting page */}
       </Routes>

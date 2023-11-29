@@ -34,7 +34,7 @@ export default function StartingForm() {
       setData(response.data);
       console.log(response.data)
       if (data !== 'DOI doesnt exists') {
-        navigate('/success');
+        navigate('/fail');
       } 
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -87,9 +87,9 @@ export default function StartingForm() {
         </FormControl>
         <TextField id="outlined-search" label="DOI" type="search" style={{ width: '40%', height: '40px',margin: '0'}} />
       </div>
-      <div style={{ display: 'flex', justifyContent: 'right', width: '81.5vw' }}>
+      <div style={{ display: 'flex', justifyContent: 'right', width: '80.5vw' }}>
         <Button type="submit" variant="contained" color="primary" onClick={handleApiTest} style={{ width: '15%' }}>
-          Test api
+          Submit
         </Button>
       </div>
     </Box>
