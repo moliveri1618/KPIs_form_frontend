@@ -156,70 +156,70 @@ export default function FormFail() {
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
                         {row.volume}
                       </div>
-                    </Tooltip>
+                  </Tooltip>
                 </TableCell>
                 <TableCell component="th"scope="row">
                   <Tooltip title={row.ISSN} arrow >
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
                         {row.ISSN}
                       </div>
-                    </Tooltip>
+                  </Tooltip>
                 </TableCell>
                 <TableCell component="th"scope="row">
                   <Tooltip title={row.url} arrow >
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
                         {row.url}
                       </div>
-                    </Tooltip>
+                  </Tooltip>
                 </TableCell>
                 <TableCell component="th"scope="row">
                   <Tooltip title={row.number} arrow >
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
                         {row.number}
                       </div>
-                    </Tooltip>
+                  </Tooltip>
                 </TableCell>
                 <TableCell component="th"scope="row">
                   <Tooltip title={row.journal} arrow >
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
                         {row.journal}
                       </div>
-                    </Tooltip>
+                  </Tooltip>
                 </TableCell>
                 <TableCell component="th"scope="row">
                   <Tooltip title={row.publisher} arrow >
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
                         {row.publisher}
                       </div>
-                    </Tooltip>
+                  </Tooltip>
                 </TableCell>
                 <TableCell component="th"scope="row">
                   <Tooltip title={row.author} arrow >
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
                         {row.author}
                       </div>
-                    </Tooltip>
+                  </Tooltip>
                 </TableCell>
                 <TableCell component="th"scope="row">
                   <Tooltip title={row.year} arrow >
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
                         {row.year}
                       </div>
-                    </Tooltip>
+                  </Tooltip>
                 </TableCell>
                 <TableCell component="th"scope="row">
                   <Tooltip title={row.month} arrow >
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
                         {row.month}
                       </div>
-                    </Tooltip>
+                  </Tooltip>
                 </TableCell>
                 <TableCell component="th"scope="row">
                   <Tooltip title={row.pages} arrow >
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
                         {row.pages}
                       </div>
-                    </Tooltip>
+                  </Tooltip>
                 </TableCell>
               </TableRow>
               ))}
@@ -232,7 +232,7 @@ export default function FormFail() {
           <Button variant="contained" color="primary" style={{ width: '15%' }}>
             Back
           </Button>
-      </Link>
+        </Link>
         <ToastContainer
           position="top-right"
           autoClose={5000}

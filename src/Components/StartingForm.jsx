@@ -22,18 +22,18 @@ export default function StartingForm() {
   const groups = ['10', 'ffff', 'dsfdf'];
   const navigate = useNavigate();
 
-  const handleChange = (event) => {
-    setGroup(event.target.value);
-    validateForm(event.target.value, doi);
-
-  };
-
   const isValidDOI = (doi) => {
     // Define the regular expression pattern for a valid DOI
     const doiPattern = /^10\.\d{4,9}\/[-._;()/:A-Z0-9]+$/i;
   
     // Test the DOI against the pattern
     return doiPattern.test(doi);
+  };
+
+  const handleChange = (event) => {
+    setGroup(event.target.value);
+    validateForm(event.target.value, doi);
+
   };
 
   const handleDoiChange = (event) => {
@@ -58,6 +58,7 @@ export default function StartingForm() {
           api = 'http://' + process.env.REACT_APP_API_URL_PROD + '/stoca'
         }
         const response = axios.post(api)
+        // add loading circle, fetching data 3 secs
         setData(response.data);
         if (data !== 'DOI doesnt exists') {
           var url = `/KPIs_form_frontend/fail?DOI=${doi}`;
