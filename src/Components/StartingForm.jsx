@@ -19,7 +19,7 @@ export default function StartingForm() {
   const [doi, setDoi] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [isValidDoi, setIsValidDoi] = useState(true);
-  const groups = ['10', 'ffff', 'dsfdf'];
+  const groups = ['Group1', 'Group2', 'Group3'];
   const navigate = useNavigate();
 
   const isValidDOI = (doi) => {
@@ -53,9 +53,9 @@ export default function StartingForm() {
       let api = ''
       try {
         if (process.env.NODE_ENV !== 'production') {
-          api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/stoca?${doi}`
+          api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/stoca?DOI=${doi}`
         } else {
-          api = 'http://' + process.env.REACT_APP_API_URL_PROD + `/stoca?${doi}`
+          api = 'http://' + process.env.REACT_APP_API_URL_PROD + `/stoca?DOI=${doi}`
         }
         axios.post(api)
           .then(response => {

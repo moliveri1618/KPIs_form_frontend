@@ -113,7 +113,6 @@ export default function FormFail() {
                 <TableCell sx={{ fontWeight: 'bold' }} >Publisher</TableCell>
                 <TableCell sx={{ fontWeight: 'bold' }} >Author</TableCell>
                 <TableCell sx={{ fontWeight: 'bold' }} >Year</TableCell>
-                <TableCell sx={{ fontWeight: 'bold' }} >Month</TableCell>
                 <TableCell sx={{ fontWeight: 'bold' }} >Pages</TableCell>
               </TableRow>
             </TableHead>
@@ -129,76 +128,69 @@ export default function FormFail() {
                     </div>
                   </Tooltip>
                 </TableCell>
-                {/* <TableCell component="th"scope="row">
-                  <Tooltip title={rows[0].volume} arrow >
+                <TableCell component="th"scope="row">
+                  <Tooltip arrow >
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
-                        {row.volume}
+                        {jsonData['volume']}
                       </div>
                   </Tooltip>
                 </TableCell>
                 <TableCell component="th"scope="row">
-                  <Tooltip title={rows[0].ISSN} arrow >
+                  <Tooltip arrow >
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
-                        {row.ISSN}
+                        {jsonData['ISSN']}
                       </div>
                   </Tooltip>
                 </TableCell>
                 <TableCell component="th"scope="row">
-                  <Tooltip title={row.url} arrow >
+                  <Tooltip arrow >
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
-                        {row.url}
+                        {jsonData['url']}
                       </div>
                   </Tooltip>
                 </TableCell>
                 <TableCell component="th"scope="row">
-                  <Tooltip title={row.number} arrow >
+                  <Tooltip arrow >
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
-                        {row.number}
+                        {jsonData['pages']}
                       </div>
                   </Tooltip>
                 </TableCell>
                 <TableCell component="th"scope="row">
-                  <Tooltip title={row.journal} arrow >
+                  <Tooltip arrow >
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
-                        {row.journal}
+                        {jsonData['journal']}
                       </div>
                   </Tooltip>
                 </TableCell>
                 <TableCell component="th"scope="row">
-                  <Tooltip title={row.publisher} arrow >
+                  <Tooltip arrow >
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
-                        {row.publisher}
+                        {jsonData['publisher']}
                       </div>
                   </Tooltip>
                 </TableCell>
                 <TableCell component="th"scope="row">
-                  <Tooltip title={row.author} arrow >
+                  <Tooltip arrow >
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
-                        {row.author}
+                        {jsonData['author']}
                       </div>
                   </Tooltip>
                 </TableCell>
                 <TableCell component="th"scope="row">
-                  <Tooltip title={row.year} arrow >
+                  <Tooltip arrow >
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
-                        {row.year}
+                        {jsonData['year']}
                       </div>
                   </Tooltip>
                 </TableCell>
                 <TableCell component="th"scope="row">
-                  <Tooltip title={row.month} arrow >
+                  <Tooltip arrow >
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
-                        {row.month}
+                        {jsonData['pages']}
                       </div>
                   </Tooltip>
-                </TableCell>
-                <TableCell component="th"scope="row">
-                  <Tooltip title={row.pages} arrow >
-                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
-                        {row.pages}
-                      </div>
-                  </Tooltip>
-                </TableCell> */}
+                </TableCell> 
               </TableRow>
             </TableBody>
           </Table>
