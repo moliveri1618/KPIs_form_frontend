@@ -49,6 +49,10 @@ export default function StartingForm() {
 
   const handleApiTest = async (event) => {
     event.preventDefault();
+    let timeoutReached = false;
+    const timeoutId = setTimeout(() => {
+      console.log('Timeout completed!'); // Change the message after the timeout
+    }, 1000000);
     if (isValid && isValidDoi) {
       let api = ''
       try {
