@@ -53,9 +53,9 @@ export default function StartingForm() {
       let api = ''
       try {
         if (process.env.NODE_ENV !== 'production') {
-          api = 'http://' + process.env.REACT_APP_API_URL_DEV + '/stoca?DOI=1'
+          api = 'http://' + process.env.REACT_APP_API_URL_DEV + '/stoca?DOI=10.1016/j.carbpol.2016.01.046'
         } else {
-          api = 'http://' + process.env.REACT_APP_API_URL_PROD + '/stoca?DOI=1'
+          api = 'http://' + process.env.REACT_APP_API_URL_PROD + '/stoca?DOI=10.1016/j.carbpol.2016.01.046'
         }
         axios.post(api)
           .then(response => {
@@ -80,15 +80,16 @@ export default function StartingForm() {
     //the state update might not have been completed yet, and data may still be null.
     //To address this, you should use the useEffect hook to observe changes in the state and 
     //perform actions after the state has been updated. Here's an example of how you can modify your code:
-    
+
     console.log(data);
     if (data !== null) {
       if (data === 'No DOIs found') {
         var url = `/KPIs_form_frontend/fail?DOI=${doi}`;
         navigate(url);
       } else {
+        console.log(data)
         var url = `/KPIs_form_frontend/success`;
-        navigate(url);
+        navigate(url, { state: { data } });
       }
     }
 

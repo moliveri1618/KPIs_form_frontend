@@ -1,4 +1,5 @@
 import React, {useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
@@ -43,37 +44,15 @@ const rows = [
   'Mecha, Elsa and Alves, Mara Lisa and Bento da Silva, Andreia and Pereira, Ana Bárbara and Rubiales, Diego and Vaz Patto, Maria Carlota and Bronze, Maria Rosário', 
   2023, 
   'mar', 
-  1395),
-  createData('Combination of Zinc Oxide Photocatalysis with Membrane Filtration for Surface Water Disinfection', 
-  12,
-  2305-5934, 
-  'http://dx.doi.org/10.3390/foods12071383', 
-  7, 
-  'foods', 
-  'MDPI AG', 
-  'Mecha, Elsa and Alves, Mara Lisa and Bento da Silva, Andreia and Pereira, Ana Bárbara and Rubiales, Diego and Vaz Patto, Maria Carlota and Bronze, Maria Rosário', 
-  2023, 
-  'mar', 
-  1395),
-
-  createData('Combination of Zinc Oxide Photocatalysis with Membrane Filtration for Surface Water Disinfection', 
-  12,
-  2305-5934, 
-  'http://dx.doi.org/10.3390/foods12071383', 
-  7, 
-  'foods', 
-  'MDPI AG', 
-  'Mecha, Elsa and Alves, Mara Lisa and Bento da Silva, Andreia and Pereira, Ana Bárbara and Rubiales, Diego and Vaz Patto, Maria Carlota and Bronze, Maria Rosário', 
-  2023, 
-  'mar', 
-  1395),
+  1395)
 ];
 
 
 export default function FormFail() {
-
+  const location = useLocation();
+  const jsonData = location.state && location.state.data;
+  console.log(jsonData)
   const notify = () => {
-    console.log('hi')
     toast.success('The information for this paper are successfully saved into the database 😍', {
       position: "top-right",
       autoClose: 5000,
@@ -139,27 +118,26 @@ export default function FormFail() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
               <TableRow
-                key={row.name}
+                key={'aaaaa'}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component="th"scope="row">
-                  <Tooltip title={row.title} arrow >
+                  <Tooltip arrow >
                     <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
-                      {row.title}
+                      {jsonData['title']}
                     </div>
                   </Tooltip>
                 </TableCell>
-                <TableCell component="th"scope="row">
-                  <Tooltip title={row.volume} arrow >
+                {/* <TableCell component="th"scope="row">
+                  <Tooltip title={rows[0].volume} arrow >
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
                         {row.volume}
                       </div>
                   </Tooltip>
                 </TableCell>
                 <TableCell component="th"scope="row">
-                  <Tooltip title={row.ISSN} arrow >
+                  <Tooltip title={rows[0].ISSN} arrow >
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
                         {row.ISSN}
                       </div>
@@ -220,9 +198,8 @@ export default function FormFail() {
                         {row.pages}
                       </div>
                   </Tooltip>
-                </TableCell>
+                </TableCell> */}
               </TableRow>
-              ))}
             </TableBody>
           </Table>
         </TableContainer>
