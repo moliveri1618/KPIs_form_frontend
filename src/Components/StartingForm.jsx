@@ -53,9 +53,9 @@ export default function StartingForm() {
       let api = ''
       try {
         if (process.env.NODE_ENV !== 'production') {
-          api = 'http://' + process.env.REACT_APP_API_URL_DEV + '/stoca?DOI=10.1016/j.carbpol.2016.01.046'
+          api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/stoca?${doi}`
         } else {
-          api = 'http://' + process.env.REACT_APP_API_URL_PROD + '/stoca?DOI=10.1016/j.carbpol.2016.01.046'
+          api = 'http://' + process.env.REACT_APP_API_URL_PROD + `/stoca?${doi}`
         }
         axios.post(api)
           .then(response => {
