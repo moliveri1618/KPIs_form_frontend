@@ -53,17 +53,19 @@ export default function StartingForm() {
       let api = ''
       try {
         if (process.env.NODE_ENV !== 'production') {
-          api = 'http://' + process.env.REACT_APP_API_URL_DEV + '/stoca'
+          api = 'http://' + process.env.REACT_APP_API_URL_DEV + '/stoca?DOI=1'
         } else {
-          api = 'http://' + process.env.REACT_APP_API_URL_PROD + '/stoca'
+          api = 'http://' + process.env.REACT_APP_API_URL_PROD + '/stoca?DOI=1'
         }
-        const response = axios.post(api)
-        // add loading circle, fetching data 3 secs
-        setData(response.data);
-        if (data !== 'DOI doesnt exists') {
-          var url = `/KPIs_form_frontend/fail?DOI=${doi}`;
-          navigate(url);
-        } 
+        axios.post(api)
+          .then(response => {
+            // The promise has resolved, and you can access the response data here
+            setData(response.data['response']);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+        
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -72,7 +74,25 @@ export default function StartingForm() {
   };
 
   useEffect(() => {
-  }, []); // Dependency array ensures this effect runs only when 'data' changes
+    
+    //The issue here might be related to the asynchronous nature of the axios.post call. 
+    //When you call console.log(data) immediately after setData(response.data['response']), 
+    //the state update might not have been completed yet, and data may still be null.
+    //To address this, you should use the useEffect hook to observe changes in the state and 
+    //perform actions after the state has been updated. Here's an example of how you can modify your code:
+    
+    console.log(data);
+    if (data !== null) {
+      if (data === 'No DOIs found') {
+        var url = `/KPIs_form_frontend/fail?DOI=${doi}`;
+        navigate(url);
+      } else {
+        var url = `/KPIs_form_frontend/success`;
+        navigate(url);
+      }
+    }
+
+  }, [data]); // Dependency array ensures this effect runs only when 'data' changes
 
 
   return (
