@@ -196,6 +196,38 @@ export default function FormFail() {
           </Table>
         </TableContainer>
       </div>
+      {/* <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '40px', paddingBottom: '20px' }}>
+        <TableContainer component={Paper} style={{ width: '100%' }}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableBody>
+              <TableRow>
+                <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Title:</TableCell>
+                <TableCell>
+                  <Tooltip arrow>
+                    <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      {jsonData['title']}
+                    </div>
+                  </Tooltip>
+                </TableCell>
+              </TableRow>
+
+              <TableRow>
+                <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Volume:</TableCell>
+                <TableCell>
+                  <Tooltip arrow>
+                    <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100px' }}>
+                      {jsonData['volume']}
+                    </div>
+                  </Tooltip>
+                </TableCell>
+              </TableRow>
+
+              {/* Repeat the above structure for each field in your original table */}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div> */}
+
       <div style={{ display: 'flex', justifyContent: 'right', width: '81.5vw' }}>
         <Link to="/KPIs_form_frontend">
           <Button variant="contained" color="primary" style={{ width: '15%' }}>
