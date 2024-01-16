@@ -82,12 +82,13 @@ export default function StartingForm() {
     if (isValid && isValidDoi) {
       let api = ''
       try {
-          api = 'http://' + process.env.REACT_APP_API_URL_PROD + `/yo`
+          api = 'http://127.0.0.1:8000/yo'
+          api = 'https://mauri1618.pythonanywhere.com/yo'
           console.log(api)
           axios.post(api)
             .then(response => {
               // The promise has resolved, and you can access the response data here
-              setData(response.data['response']);
+              console.log(response)
             })
             .catch(error => {
               console.error(error);
