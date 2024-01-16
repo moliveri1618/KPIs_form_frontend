@@ -56,7 +56,7 @@ export default function StartingForm() {
     if (isValid && isValidDoi) {
       let api = ''
       try {
-          api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/stoca?DOI=${doi}`
+          api = 'http://' + process.env.REACT_APP_API_URL_PROD + `/stoca?DOI=${doi}`
           axios.post(api)
             .then(response => {
               // The promise has resolved, and you can access the response data here
