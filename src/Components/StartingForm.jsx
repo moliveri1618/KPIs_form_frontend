@@ -56,7 +56,34 @@ export default function StartingForm() {
     if (isValid && isValidDoi) {
       let api = ''
       try {
-          api = 'http://' + process.env.REACT_APP_API_URL_PROD + `/stoca?DOI=${doi}`
+          api = 'https://' + process.env.REACT_APP_API_URL_PROD + `/stoca?DOI=${doi}`
+          console.log(api)
+          axios.post(api)
+            .then(response => {
+              // The promise has resolved, and you can access the response data here
+              setData(response.data['response']);
+            })
+            .catch(error => {
+              console.error(error);
+            });
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+  };
+
+  const handleApiTest2 = async (event) => {
+    event.preventDefault();
+    let timeoutReached = false;
+    const timeoutId = setTimeout(() => {
+      console.log('Timeout completed!'); // Change the message after the timeout
+    }, 1000000);
+    if (isValid && isValidDoi) {
+      let api = ''
+      try {
+          api = 'http://' + process.env.REACT_APP_API_URL_PROD + `/yo`
+          console.log(api)
           axios.post(api)
             .then(response => {
               // The promise has resolved, and you can access the response data here
@@ -112,6 +139,9 @@ export default function StartingForm() {
         <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
           Submit your DOI
         </Typography>
+        <Button type="submit" variant="contained" color="primary" onClick={handleApiTest2} style={{ width: '15%' }}>
+            AAAA
+          </Button>
       </div>
       <div style={{ display: 'flex', 
                     gap: '10px',  
