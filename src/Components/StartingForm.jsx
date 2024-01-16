@@ -56,20 +56,15 @@ export default function StartingForm() {
     if (isValid && isValidDoi) {
       let api = ''
       try {
-        if (process.env.NODE_ENV !== 'production') {
           api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/stoca?DOI=${doi}`
-        } else {
-          api = 'http://' + process.env.REACT_APP_API_URL_PROD + `/stoca?DOI=${doi}`
-        }
-        axios.post(api)
-          .then(response => {
-            // The promise has resolved, and you can access the response data here
-            setData(response.data['response']);
-          })
-          .catch(error => {
-            console.error(error);
-          });
-        
+          axios.post(api)
+            .then(response => {
+              // The promise has resolved, and you can access the response data here
+              setData(response.data['response']);
+            })
+            .catch(error => {
+              console.error(error);
+            });
       } catch (error) {
         console.error('Error fetching data:', error);
       }
