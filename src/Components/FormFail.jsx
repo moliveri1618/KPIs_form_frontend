@@ -6,8 +6,7 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import Copyright from './CopyRight';
 
 
 export default function FormFail() {
@@ -193,86 +192,89 @@ export default function FormFail() {
 
 
   return (
-    <Box
-      component="form"
-      sx={{
-        marginTop: 8,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
-        <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
-          DOI Info
-        </Typography>
-      </div>
-      <div style={{ display: 'flex', 
-                    gap: '10px',  
-                    width: '100vw',  
-                    justifyContent: 'center',
-                    paddingTop: '40px', 
-                    paddingBottom: '20px'}}> 
-        <TextField id="a" label="Title" type="search" style={{ width: '40%', height: '40px',margin: '0'}} onChange={handleChangeTitle} required/>
-        <TextField id="a" label="Author" type="search" style={{ width: '40%', height: '40px',margin: '0'}} onChange={handleChangeAuthor} required/>
-      </div>
-      <div style={{ display: 'flex', 
-                    gap: '10px',  
-                    width: '100vw',  
-                    justifyContent: 'center',
-                    paddingTop: '40px', 
-                    paddingBottom: '20px'}}> 
-        <TextField id="b" label="Volume" type="number" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangeVolume} required/>
-        <TextField id="c" label="ISSN" type="number" style={{ width: '26%', height: '40px',margin: '0'}} onChange={handleChangeISSN} required/>
-        <TextField id="d" label="Url" type="search" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangeUrl} required/>
-      </div>
-      <div style={{ display: 'flex', 
-                    gap: '10px',  
-                    width: '100vw',  
-                    justifyContent: 'center',
-                    paddingTop: '40px', 
-                    paddingBottom: '20px'}}> 
-        <TextField id="e" label="Number" type="number" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangeNumber} required/>
-        <TextField id="f" label="Journal" type="search" style={{ width: '26%', height: '40px',margin: '0'}} onChange={handleChangeJournal} required/>
-        <TextField id="g" label="Publisher" type="search" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangePublisher} required/>
-      </div>
-      <div style={{ display: 'flex', 
-                    gap: '10px',  
-                    width: '100vw',  
-                    justifyContent: 'center',
-                    paddingTop: '40px', 
-                    paddingBottom: '60px'}}> 
-        <TextField id="h" label="Pages" type="number" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangePages} required/>
-        <TextField id="i" label="Year" type="number" style={{ width: '26%', height: '40px',margin: '0'}} onChange={handleChangeYear} required/>
-        <TextField id="l" label="Month" type="number" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangeMonth} required/>
-      </div>
-      <div style={{ display: 'flex', justifyContent: 'right', width: '83vw' }}>
-        <Link to="/KPIs_form_frontend">
-          <Button variant="contained" color="primary" style={{ width: '15%' }}>
-            Back
-          </Button>
-        </Link>
-        <Link>
-          <Button variant="contained" color="primary" onClick={handleApiTest} disabled={buttonDisabled} style={{ width: '15%' }}>
-            Submit
-          </Button>
-        </Link>
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored"
-          />
-      </div>
-    </Box>
+    <>
+      <Box
+        component="form"
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          '& .MuiTextField-root': { m: 1, width: '25ch' },
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
+          <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
+            Publication Details
+          </Typography>
+        </div>
+        <div style={{ display: 'flex', 
+                      gap: '10px',  
+                      width: '100vw',  
+                      justifyContent: 'center',
+                      paddingTop: '40px', 
+                      paddingBottom: '20px'}}> 
+          <TextField id="a" label="Title" type="search" style={{ width: '40%', height: '40px',margin: '0'}} onChange={handleChangeTitle} required/>
+          <TextField id="a" label="Author" type="search" style={{ width: '40%', height: '40px',margin: '0'}} onChange={handleChangeAuthor} required/>
+        </div>
+        <div style={{ display: 'flex', 
+                      gap: '10px',  
+                      width: '100vw',  
+                      justifyContent: 'center',
+                      paddingTop: '40px', 
+                      paddingBottom: '20px'}}> 
+          <TextField id="b" label="Volume" type="number" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangeVolume} required/>
+          <TextField id="c" label="ISSN" type="number" style={{ width: '26%', height: '40px',margin: '0'}} onChange={handleChangeISSN} required/>
+          <TextField id="d" label="Url" type="search" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangeUrl} required/>
+        </div>
+        <div style={{ display: 'flex', 
+                      gap: '10px',  
+                      width: '100vw',  
+                      justifyContent: 'center',
+                      paddingTop: '40px', 
+                      paddingBottom: '20px'}}> 
+          <TextField id="e" label="Number" type="number" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangeNumber} required/>
+          <TextField id="f" label="Journal" type="search" style={{ width: '26%', height: '40px',margin: '0'}} onChange={handleChangeJournal} required/>
+          <TextField id="g" label="Publisher" type="search" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangePublisher} required/>
+        </div>
+        <div style={{ display: 'flex', 
+                      gap: '10px',  
+                      width: '100vw',  
+                      justifyContent: 'center',
+                      paddingTop: '40px', 
+                      paddingBottom: '60px'}}> 
+          <TextField id="h" label="Pages" type="number" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangePages} required/>
+          <TextField id="i" label="Year" type="number" style={{ width: '26%', height: '40px',margin: '0'}} onChange={handleChangeYear} required/>
+          <TextField id="l" label="Month" type="number" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangeMonth} required/>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'right', width: '83vw' }}>
+          <Link to="/KPIs_form_frontend">
+            <Button variant="contained" color="primary" style={{ width: '15%' }}>
+              Back
+            </Button>
+          </Link>
+          <Link>
+            <Button variant="contained" color="primary" onClick={handleApiTest} disabled={buttonDisabled} style={{ width: '15%' }}>
+              Submit
+            </Button>
+          </Link>
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+            />
+        </div>
+      </Box>
+      <Copyright sx={{ mt: 5 }} />
+    </>
   );
 }

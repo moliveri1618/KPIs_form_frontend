@@ -15,6 +15,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Copyright from './CopyRight';
 
 
 function createData(
@@ -77,156 +78,159 @@ export default function FormFail() {
 
 
   return (
-    <Box
-      component="form"
-      sx={{
-        marginTop: 8,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
-        <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
-          DOI Info
-        </Typography>
-      </div>
+    <>
+      <Box
+        component="form"
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          '& .MuiTextField-root': { m: 1, width: '25ch' },
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
+          <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
+            Publication Details
+          </Typography>
+        </div>
 
-      <div style={{ display: 'flex', 
-                    gap: '10px',  
-                    width: '100vw',  
-                    justifyContent: 'center',
-                    paddingTop: '40px', 
-                    paddingBottom: '20px'}}>        
-        <TableContainer component={Paper} style={{ width: '80%' }}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableBody>
-              <TableRow>
-                <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Title:</TableCell>
-                <TableCell>
-                  <Tooltip  title={jsonData['title']} arrow>
-                    <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                      {jsonData['title']}
-                    </div>
-                  </Tooltip>
-                </TableCell>
-              </TableRow>
+        <div style={{ display: 'flex', 
+                      gap: '10px',  
+                      width: '100vw',  
+                      justifyContent: 'center',
+                      paddingTop: '40px', 
+                      paddingBottom: '20px'}}>        
+          <TableContainer component={Paper} style={{ width: '80%' }}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableBody>
+                <TableRow>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Title:</TableCell>
+                  <TableCell>
+                    <Tooltip  title={jsonData['title']} arrow>
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        {jsonData['title']}
+                      </div>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
 
-              <TableRow>
-                <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Authors:</TableCell>
-                <TableCell>
-                  <Tooltip  title={jsonData['author']} arrow>
-                    <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                      {jsonData['author']}
-                    </div>
-                  </Tooltip>
-                </TableCell>
-              </TableRow>
+                <TableRow>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Authors:</TableCell>
+                  <TableCell>
+                    <Tooltip  title={jsonData['author']} arrow>
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                        {jsonData['author']}
+                      </div>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
 
-              <TableRow>
-                <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Year:</TableCell>
-                <TableCell>
-                  <Tooltip  title={jsonData['year']} arrow>
-                    <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                      {jsonData['year']}
-                    </div>
-                  </Tooltip>
-                </TableCell>
-              </TableRow>
+                <TableRow>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Year:</TableCell>
+                  <TableCell>
+                    <Tooltip  title={jsonData['year']} arrow>
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                        {jsonData['year']}
+                      </div>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
 
-              <TableRow>
-                <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Journal:</TableCell>
-                <TableCell>
-                  <Tooltip  title={jsonData['journal']} arrow>
-                    <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                      {jsonData['journal']}
-                    </div>
-                  </Tooltip>
-                </TableCell>
-              </TableRow>
+                <TableRow>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Journal:</TableCell>
+                  <TableCell>
+                    <Tooltip  title={jsonData['journal']} arrow>
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                        {jsonData['journal']}
+                      </div>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
 
-              <TableRow>
-                <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Volume:</TableCell>
-                <TableCell>
-                  <Tooltip  title={jsonData['volume']} arrow>
-                    <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                      {jsonData['volume']}
-                    </div>
-                  </Tooltip>
-                </TableCell>
-              </TableRow>
+                <TableRow>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Volume:</TableCell>
+                  <TableCell>
+                    <Tooltip  title={jsonData['volume']} arrow>
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                        {jsonData['volume']}
+                      </div>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
 
-              <TableRow>
-                <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Pages:</TableCell>
-                <TableCell>
-                  <Tooltip  title={jsonData['pages']} arrow>
-                    <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                      {jsonData['pages']}
-                    </div>
-                  </Tooltip>
-                </TableCell>
-              </TableRow>
+                <TableRow>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Pages:</TableCell>
+                  <TableCell>
+                    <Tooltip  title={jsonData['pages']} arrow>
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                        {jsonData['pages']}
+                      </div>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
 
-              <TableRow>
-                <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Publisher:</TableCell>
-                <TableCell>
-                  <Tooltip  title={jsonData['publisher']} arrow>
-                    <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                      {jsonData['publisher']}
-                    </div>
-                  </Tooltip>
-                </TableCell>
-              </TableRow>
+                <TableRow>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Publisher:</TableCell>
+                  <TableCell>
+                    <Tooltip  title={jsonData['publisher']} arrow>
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                        {jsonData['publisher']}
+                      </div>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
 
-              <TableRow>
-                <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>ISSN:</TableCell>
-                <TableCell>
-                  <Tooltip  title={jsonData['ISSN']} arrow>
-                    <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                      {jsonData['ISSN']}
-                    </div>
-                  </Tooltip>
-                </TableCell>
-              </TableRow>
+                <TableRow>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>ISSN:</TableCell>
+                  <TableCell>
+                    <Tooltip  title={jsonData['ISSN']} arrow>
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                        {jsonData['ISSN']}
+                      </div>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
 
-              {/* <TableRow>
-                <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Url:</TableCell>
-                <TableCell>
-                  <Tooltip  title={jsonData['url']} arrow>
-                    <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                      {jsonData['url']}
-                    </div>
-                  </Tooltip>
-                </TableCell>
-              </TableRow> */}
-              
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </div>
+                {/* <TableRow>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Url:</TableCell>
+                  <TableCell>
+                    <Tooltip  title={jsonData['url']} arrow>
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                        {jsonData['url']}
+                      </div>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow> */}
+                
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
 
-      <div style={{ display: 'flex', justifyContent: 'right', width: '81.5vw' }}>
-        <Link to="/KPIs_form_frontend">
-          <Button variant="contained" color="primary" style={{ width: '15%' }}>
-            Back
-          </Button>
-        </Link>
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored"
-          />
-      </div>
-    </Box>
+        <div style={{ display: 'flex', justifyContent: 'right', width: '81.5vw' }}>
+          <Link to="/KPIs_form_frontend">
+            <Button variant="contained" color="primary" style={{ width: '15%' }}>
+              Back
+            </Button>
+          </Link>
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+            />
+        </div>
+      </Box>
+      <Copyright sx={{ mt: 5 }} />
+    </>
   );
 }

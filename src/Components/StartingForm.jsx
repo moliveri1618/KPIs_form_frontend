@@ -11,33 +11,8 @@ import FormControl from '@mui/material/FormControl';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import logos from './Images/ibet_logo.png'
-import Container from '@mui/material/Container';
 import SPLoader from './SpinnerLoader';
-
-
-const style = {
-  py: 0,
-  width: '100%',
-  maxWidth: 360,
-  borderRadius: 2,
-  border: '1px solid',
-  borderColor: 'divider',
-  backgroundColor: 'background.paper',
-};
-
-function Copyright(props) {
-  return (
-    <Container>
-      <Typography variant="body2" color="text.secondary" align="center" {...props} style={{ marginTop: '100px'}}>
-        Developed by Pedro Cruz, Inês Isidro and Mauro Oliveri.
-      </Typography>
-    <Typography variant="body2" color="text.secondary" align="center" {...props} style={{marginTop: '0' }}>
-      {'Copyright © '}
-      <strong>{'2023 iBET - Instituto de Biologia Experimental e Tecnológica.'}{' '}</strong>
-    </Typography>
-    </Container>
-  );
-}
+import Copyright from './CopyRight';
 
 export default function StartingForm() {
   const [data, setData] = useState(null);
