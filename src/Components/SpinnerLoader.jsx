@@ -1,5 +1,5 @@
 import React, {useState, useEffect } from 'react';
-import aa from './Images/SP_Loader.gif'
+import aa from './Images/SP_Loader_2.gif'
 
 export default function SPLoader() {
 
