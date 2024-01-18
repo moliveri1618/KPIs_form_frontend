@@ -16,6 +16,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Copyright from './CopyRight';
+import logos from './Images/ibet_logo.png'
 
 
 function createData(
@@ -91,6 +92,7 @@ export default function FormFail() {
         noValidate
         autoComplete="off"
       >
+        <img src={logos} alt="logo" width="150" height="80" style={{ float: 'left', marginRight: '1450px'}} />
         <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
           <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
             Publication Details

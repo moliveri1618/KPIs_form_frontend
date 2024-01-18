@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Copyright from './CopyRight';
+import logos from './Images/ibet_logo.png'
 
 
 export default function FormFail() {
@@ -205,6 +206,7 @@ export default function FormFail() {
         noValidate
         autoComplete="off"
       >
+        <img src={logos} alt="logo" width="150" height="80" style={{ float: 'left', marginRight: '1450px'}} />
         <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
           <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
             Publication Details
