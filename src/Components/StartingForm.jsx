@@ -29,7 +29,8 @@ export default function StartingForm() {
   const [doi, setDoi] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [isValidDoi, setIsValidDoi] = useState(true);
-  const groups = ['Group1', 'Group2', 'Group3'];
+  const groups = ['Lab X', 'Lab Y', 'Lab Z'];
+  const [selectedGroups, setSelectedGroups] = useState([]);
   const navigate = useNavigate();
 
   const isValidDOI = (doi) => {
@@ -41,6 +42,7 @@ export default function StartingForm() {
   };
 
   const handleChange = (event) => {
+    setSelectedGroups(event.target.value);
     setGroup(event.target.value);
     validateForm(event.target.value, doi);
 
@@ -53,7 +55,8 @@ export default function StartingForm() {
   };
 
   const validateForm = (groupValue, doiValue) => {
-    const isValidForm = groupValue.trim() !== '' && doiValue.trim() !== '';
+    const groupValue_str = groupValue.join(', ');
+    const isValidForm = groupValue_str.trim() !== '' && doiValue.trim() !== '';
     setIsValid(isValidForm);
   };
 
@@ -138,7 +141,8 @@ export default function StartingForm() {
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={group}
+            multiple
+            value={selectedGroups}
             label="Group"
             onChange={handleChange}
           >
