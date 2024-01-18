@@ -10,8 +10,18 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import logos from './Images/ibet_logo.png'
 
 
+const style = {
+  py: 0,
+  width: '100%',
+  maxWidth: 360,
+  borderRadius: 2,
+  border: '1px solid',
+  borderColor: 'divider',
+  backgroundColor: 'background.paper',
+};
 
 export default function StartingForm() {
   const [data, setData] = useState(null);
@@ -110,13 +120,11 @@ export default function StartingForm() {
       noValidate
       autoComplete="off"
     >
+      <div style={{ marginBottom: '50px', fontWeight: 'bold', fontStyle: 'italic', borderBottom: '2px solid black'  }}>"This is a simple interface to test our new script to retrieve paper details based on the DOI alone. This script will be integrated into a new approach to collect iBET's scientific KPIs to save time that is best used doing actual research.</div>
+      <img src={logos} alt="logo" width="100" height="60" style={{ float: 'left', marginRight: '1500px' }} />
       <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
-        {/* <img
-          src={"logo512.png"}
-          style={{ marginRight: '10px' }}  // Adjust the style as needed
-        /> */}
         <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
-          Submit your DOI
+          Add publication
         </Typography>
       </div>
       <div style={{ display: 'flex', 
