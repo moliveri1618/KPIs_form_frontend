@@ -14,7 +14,8 @@ export default function SPLoader() {
 
     return (
         <>
-            <div>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <p>Fetching Data...</p>
                 {showImg ? (<img src={aa} style={{ width: '100px', height: '100px' }}/>) : ( <h3>{text}</h3>)}
             </div>
         </>
