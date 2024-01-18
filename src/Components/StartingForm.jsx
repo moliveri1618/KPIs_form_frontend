@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import logos from './Images/ibet_logo.png'
 import Container from '@mui/material/Container';
+import SPLoader from './SpinnerLoader';
 
 
 const style = {
@@ -47,7 +48,7 @@ export default function StartingForm() {
   const groups = ['Lab X', 'Lab Y', 'Lab Z'];
   const [selectedGroups, setSelectedGroups] = useState([]);
   const navigate = useNavigate();
-  const [flag, setFlag] = useState(1); // Use state for flag
+  const [flag, setFlag] = useState(0); // Use state for flag
 
   
   const isValidDOI = (doi) => {
@@ -207,8 +208,8 @@ export default function StartingForm() {
             </Link>
             )}
           {flag === 1 && (
-            <div>
-              Fetching Data ...
+            <div style={{}}>
+              <SPLoader />
             </div>
           )}
         </div>
