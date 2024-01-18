@@ -56,7 +56,7 @@ export default function StartingForm() {
     if (isValid && isValidDoi) {
       let api = ''
       try {
-          api = 'https://' + process.env.REACT_APP_API_URL_DEV + `/stoca?DOI=${doi}`
+          api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/stoca?DOI=${doi}`
           console.log(api)
           axios.post(api)
             .then(response => {
