@@ -29,8 +29,8 @@ function Copyright(props) {
   return (
     <Container>
       <Typography variant="body2" color="text.secondary" align="center" {...props} style={{ marginTop: '100px'}}>
-      Developed by Mauro Oliveri, Inês Isidro and Pedro Cruz.
-    </Typography>
+        Developed by Pedro Cruz, Inês Isidro and Mauro Oliveri.
+      </Typography>
     <Typography variant="body2" color="text.secondary" align="center" {...props} style={{marginTop: '0' }}>
       {'Copyright © '}
       <strong>{'2023 iBET - Instituto de Biologia Experimental e Tecnológica.'}{' '}</strong>
