@@ -47,7 +47,9 @@ export default function StartingForm() {
   const groups = ['Lab X', 'Lab Y', 'Lab Z'];
   const [selectedGroups, setSelectedGroups] = useState([]);
   const navigate = useNavigate();
+  const [flag, setFlag] = useState(1); // Use state for flag
 
+  
   const isValidDOI = (doi) => {
     // Define the regular expression pattern for a valid DOI
     const doiPattern = /^10\.\d{4,9}\/[-._;()/:A-Z0-9]+$/i;
@@ -79,12 +81,14 @@ export default function StartingForm() {
   };
 
   const handleApiTest = async (event) => {
+    console.log(flag)
     event.preventDefault();
     let timeoutReached = false;
     const timeoutId = setTimeout(() => {
       console.log('Timeout completed!'); // Change the message after the timeout
     }, 1000000);
     if (isValid && isValidDoi) {
+      setFlag(1);
       let api = ''
       try {
           api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/stoca?DOI=${doi}`
@@ -195,11 +199,18 @@ export default function StartingForm() {
           />
         </div>
         <div style={{ display: 'flex', justifyContent: 'right', width: '83.5vw' }}>
-          <Link to="/home">
-            <Button type="submit" variant="contained" color="primary" onClick={handleApiTest} style={{ width: '15%' }}>
-              Submit
-            </Button>
-          </Link>
+          {flag === 0 && (
+            <Link to="/home">
+              <Button type="submit" variant="contained" color="primary" onClick={handleApiTest} style={{ width: '15%' }}>
+                Submit
+              </Button>
+            </Link>
+            )}
+          {flag === 1 && (
+            <div>
+              Fetching Data ...
+            </div>
+          )}
         </div>
       </Box>
       <Copyright sx={{ mt: 5 }} />
