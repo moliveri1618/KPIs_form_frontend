@@ -111,6 +111,10 @@ export default function StartingForm() {
       autoComplete="off"
     >
       <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
+        {/* <img
+          src={"logo512.png"}
+          style={{ marginRight: '10px' }}  // Adjust the style as needed
+        /> */}
         <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
           Submit your DOI
         </Typography>
