@@ -11,6 +11,7 @@ import FormControl from '@mui/material/FormControl';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import logos from './Images/ibet_logo.png'
+import Container from '@mui/material/Container';
 
 
 const style = {
@@ -22,6 +23,20 @@ const style = {
   borderColor: 'divider',
   backgroundColor: 'background.paper',
 };
+
+function Copyright(props) {
+  return (
+    <Container>
+      <Typography variant="body2" color="text.secondary" align="center" {...props} style={{ marginTop: '100px'}}>
+      Developed by Mauro Oliveri, Inês Isidro and Pedro Cruz.
+    </Typography>
+    <Typography variant="body2" color="text.secondary" align="center" {...props} style={{marginTop: '0' }}>
+      {'Copyright © '}
+      <strong>{'2023 iBET - Instituto de Biologia Experimental e Tecnológica.'}{' '}</strong>
+    </Typography>
+    </Container>
+  );
+}
 
 export default function StartingForm() {
   const [data, setData] = useState(null);
@@ -111,76 +126,80 @@ export default function StartingForm() {
 
 
   return (
-    <Box
-      component="form"
-      sx={{
-        marginTop: 8,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <div style={{ marginBottom: '50px', fontWeight: 'bold', fontStyle: 'italic', borderBottom: '2px solid black'  }}>"This is a simple interface to test our new script to retrieve paper details based on the DOI alone. This script will be integrated into a new approach to collect iBET's scientific KPIs to save time that is best used doing actual research.</div>
-      <img src={logos} alt="logo" width="100" height="60" style={{ float: 'left', marginRight: '1500px' }} />
-      <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
-        <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
-          Add publication
-        </Typography>
-      </div>
-      <div style={{ display: 'flex', 
-                    gap: '10px',  
-                    width: '100vw',  
-                    justifyContent: 'center',
-                    paddingTop: '40px', 
-                    paddingBottom: '60px'}}> 
-        <FormControl fullWidth style={{ width: '40%' }}>
-          <InputLabel id="demo-simple-select-label">Groups *</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            multiple
-            value={selectedGroups}
-            label="Group"
-            onChange={handleChange}
-          >
-          {groups.map((value) => (
-            <MenuItem key={value} value={value}>
-              {value}
-            </MenuItem>
-          ))}
-          </Select>
-        </FormControl>
-        <TextField 
-        id="outlined-search" 
-        label="DOI *" 
-        type="search" 
-        style={{ width: '40%', height: '40px',margin: '0'}} 
-        value={doi} 
-        onChange={handleDoiChange}
-        error={!isValidDoi}
-        helperText={
-            <>
-                <Typography variant="body2" component="span">
-                    Example:
-                </Typography>
-                {' '}
-                <Typography variant="body2" component="span" style={{ fontWeight: 'bold' }}>
-                    10.1016/j.carbpol.2016.01.046
-                </Typography>
-            </>
-        }
-        />
-      </div>
-      <div style={{ display: 'flex', justifyContent: 'right', width: '83.5vw' }}>
-        <Link to="/home">
-          <Button type="submit" variant="contained" color="primary" onClick={handleApiTest} style={{ width: '15%' }}>
-            Submit
-          </Button>
-        </Link>
-      </div>
-    </Box>
+    <>
+      <Box
+        component="form"
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          '& .MuiTextField-root': { m: 1, width: '25ch' },
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <div style={{ marginBottom: '5px', fontWeight: 'bold', fontStyle: 'italic', borderBottom: '2px solid black'  }}>"This is a simple interface to test our new script to retrieve paper details based on the DOI alone. This script will be integrated into a new approach to collect iBET's scientific KPIs to save time that is best used doing actual research.</div>
+        <div style={{ marginBottom: '50px', fontWeight: 'bold', fontStyle: 'italic', borderBottom: '2px solid black'  }}>"Thanks for testing! Any feedback is welcome. Please send an email to Pedro Cruz, Ines Isidro and Mauro Oliveri or reach out to any of us directly.</div>
+        <img src={logos} alt="logo" width="110" height="60" style={{ float: 'left', marginRight: '1450px' }} />
+        <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
+          <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
+            Add publication
+          </Typography>
+        </div>
+        <div style={{ display: 'flex', 
+                      gap: '10px',  
+                      width: '100vw',  
+                      justifyContent: 'center',
+                      paddingTop: '40px', 
+                      paddingBottom: '60px'}}> 
+          <FormControl fullWidth style={{ width: '40%' }}>
+            <InputLabel id="demo-simple-select-label">Groups *</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              multiple
+              value={selectedGroups}
+              label="Group"
+              onChange={handleChange}
+            >
+            {groups.map((value) => (
+              <MenuItem key={value} value={value}>
+                {value}
+              </MenuItem>
+            ))}
+            </Select>
+          </FormControl>
+          <TextField 
+          id="outlined-search" 
+          label="DOI *" 
+          type="search" 
+          style={{ width: '40%', height: '40px',margin: '0'}} 
+          value={doi} 
+          onChange={handleDoiChange}
+          error={!isValidDoi}
+          helperText={
+              <>
+                  <Typography variant="body2" component="span">
+                      Example:
+                  </Typography>
+                  {' '}
+                  <Typography variant="body2" component="span" style={{ fontWeight: 'bold' }}>
+                      10.1016/j.carbpol.2016.01.046
+                  </Typography>
+              </>
+          }
+          />
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'right', width: '83.5vw' }}>
+          <Link to="/home">
+            <Button type="submit" variant="contained" color="primary" onClick={handleApiTest} style={{ width: '15%' }}>
+              Submit
+            </Button>
+          </Link>
+        </div>
+      </Box>
+      <Copyright sx={{ mt: 5 }} />
+    </>
   );
 }
