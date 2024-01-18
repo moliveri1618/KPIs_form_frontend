@@ -140,9 +140,6 @@ export default function StartingForm() {
         <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
           Submit your DOI
         </Typography>
-        <Button type="submit" variant="contained" color="primary" onClick={handleApiTest2} style={{ width: '15%' }}>
-            AAAA
-          </Button>
       </div>
       <div style={{ display: 'flex', 
                     gap: '10px',  
