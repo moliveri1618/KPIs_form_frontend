@@ -142,7 +142,7 @@ export default function StartingForm() {
                       justifyContent: 'center',
                       paddingTop: '40px', 
                       paddingBottom: '60px'}}> 
-          <FormControl fullWidth style={{ width: '40%' }}>
+          <FormControl fullWidth style={{ width: '27%' }}>
             <InputLabel id="demo-simple-select-label">Groups *</InputLabel>
             <Select
               labelId="demo-simple-select-label"
@@ -163,7 +163,7 @@ export default function StartingForm() {
           id="outlined-search" 
           label="DOI *" 
           type="search" 
-          style={{ width: '40%', height: '40px',margin: '0'}} 
+          style={{ width: '27%', height: '40px',margin: '0'}} 
           value={doi} 
           onChange={handleDoiChange}
           error={!isValidDoi}
@@ -177,8 +177,22 @@ export default function StartingForm() {
                       10.1016/j.carbpol.2016.01.046
                   </Typography>
               </>
-          }
-          />
+          }/>
+          <TextField 
+          id="outlined-search" 
+          label="Project *" 
+          type="search" 
+          style={{ width: '27%', height: '40px',margin: '0'}} 
+          value={doi} 
+          onChange={handleDoiChange}
+          error={!isValidDoi}
+          helperText={
+              <>
+                  <Typography variant="body2" component="span">
+                    Project(s) associated with this KPI. Enter the project LabOrders codes, separated by commas, e.g.: <i>P-123, PI-456</i>
+                  </Typography>
+              </>
+          }/>
         </div>
         <div style={{ display: 'flex', justifyContent: 'right', width: '83.5vw' }}>
           {flag === 0 && (
