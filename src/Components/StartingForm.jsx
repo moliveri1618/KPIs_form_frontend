@@ -21,6 +21,7 @@ export default function StartingForm() {
   const [data, setData] = useState(null);
   const [group, setGroup] = React.useState('AAA');
   const [doi, setDoi] = useState('');
+  const [project, setProject] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [isValidDoi, setIsValidDoi] = useState(true);
   const groups = ['Lab X', 'Lab Y', 'Lab Z'];
@@ -50,6 +51,12 @@ export default function StartingForm() {
     validateForm(group, event.target.value);
   };
 
+  const handleProjectChange = (event) => {
+    setProject(event.target.value);
+    // setIsValidDoi(isValidDOI(event.target.value));
+    // validateForm(group, event.target.value);
+  };
+
   const validateForm = (groupValue, doiValue) => {
 
     if (groupValue !== 'AAA') {
@@ -57,6 +64,18 @@ export default function StartingForm() {
     } 
     const isValidForm = groupValue.trim() !== '' && doiValue.trim() !== '';
     setIsValid(isValidForm);
+  };
+
+  const handleCheckboxChange = (value) => {
+    // Check if the group is already selected
+    const isSelected = selectedGroups.includes(value);
+
+    // If selected, remove from the array; otherwise, add to the array
+    setSelectedGroups((prevSelectedGroups) =>
+      isSelected
+        ? prevSelectedGroups.filter((group) => group !== value)
+        : [...prevSelectedGroups, value]
+    );
   };
 
   const handleApiTest = async (event) => {
@@ -165,17 +184,17 @@ export default function StartingForm() {
               <MenuItem key={value} value={value}>
                 <span style={{ marginRight: '75px' }}>{value}</span>
                 <Checkbox style={{ marginRight: '95px' }}
-                  // checked={selectedGroups.includes(value)}
-                  // onChange={() => handleCheckboxChange(value)}
+                  checked={selectedGroups.includes(value)}
+                  onChange={() => handleCheckboxChange(value)}
                 />
-                <Checkbox style={{ marginRight: '105px' }}
+                {/* <Checkbox style={{ marginRight: '105px' }}
                   // checked={selectedGroups.includes(value)}
                   // onChange={() => handleCheckboxChange(value)}
                 />
                 <Checkbox
                   // checked={selectedGroups.includes(value)}
                   // onChange={() => handleCheckboxChange(value)}
-                />
+                /> */}
               </MenuItem>
             ))}
             </Select>
@@ -204,8 +223,8 @@ export default function StartingForm() {
           label="Project *" 
           type="search" 
           style={{ width: '27%', height: '40px',margin: '0'}} 
-          value={doi} 
-          onChange={handleDoiChange}
+          value={project} 
+          onChange={handleProjectChange}
           error={!isValidDoi}
           helperText={
               <>
