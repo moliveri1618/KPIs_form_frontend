@@ -14,7 +14,8 @@ import logos from './Images/ibet_logo.png'
 import SPLoader from './SpinnerLoader';
 import Copyright from './CopyRight';
 import Alert from '@mui/material/Alert';
-import CheckIcon from '@mui/icons-material/Check';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 
 export default function StartingForm() {
   const [data, setData] = useState(null);
@@ -151,6 +152,7 @@ export default function StartingForm() {
               value={selectedGroups}
               label="Group"
               onChange={handleChange}
+              renderValue={() => ''}
             >
               <MenuItem value="">
                 <em> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -161,7 +163,19 @@ export default function StartingForm() {
               </MenuItem>
             {groups.map((value) => (
               <MenuItem key={value} value={value}>
-                {value}
+                <span style={{ marginRight: '75px' }}>{value}</span>
+                <Checkbox style={{ marginRight: '95px' }}
+                  // checked={selectedGroups.includes(value)}
+                  // onChange={() => handleCheckboxChange(value)}
+                />
+                <Checkbox style={{ marginRight: '105px' }}
+                  // checked={selectedGroups.includes(value)}
+                  // onChange={() => handleCheckboxChange(value)}
+                />
+                <Checkbox
+                  // checked={selectedGroups.includes(value)}
+                  // onChange={() => handleCheckboxChange(value)}
+                />
               </MenuItem>
             ))}
             </Select>
