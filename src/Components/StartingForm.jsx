@@ -24,6 +24,7 @@ export default function StartingForm() {
   const [project, setProject] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [isValidDoi, setIsValidDoi] = useState(true);
+  const [isValidProject, setIsValidProject] = useState('');
   const groups = ['Lab X', 'Lab Y', 'Lab Z'];
   const [selectedGroups, setSelectedGroups] = useState([]);
   const [selectedGroupFirst, setSelectedGroupFirst] = useState([]);
@@ -44,28 +45,29 @@ export default function StartingForm() {
   const handleChange = (event) => {
     setSelectedGroups(event.target.value);
     setGroup(event.target.value);
-    validateForm(event.target.value, doi);
+    validateForm(event.target.value, doi, project);
 
   };
 
   const handleDoiChange = (event) => {
     setDoi(event.target.value);
     setIsValidDoi(isValidDOI(event.target.value));
-    validateForm(group, event.target.value);
+    validateForm(group, event.target.value, project);
   };
 
   const handleProjectChange = (event) => {
     setProject(event.target.value);
-    // setIsValidDoi(isValidDOI(event.target.value));
-    // validateForm(group, event.target.value);
+    setIsValidProject(isValidDOI(event.target.value));
+    validateForm(group, doi, event.target.value);
   };
 
-  const validateForm = (groupValue, doiValue) => {
+  const validateForm = (groupValue, doiValue, projectValue) => {
     if (groupValue !== 'AAA') {
       groupValue = groupValue.join(', ');
     } 
-    const isValidForm = groupValue.trim() !== '' && doiValue.trim() !== '';
+    const isValidForm = groupValue.trim() !== '' && doiValue.trim() !== ''  && projectValue.trim() !== '';
     setIsValid(isValidForm);
+    setIsValidProject(isValidForm);
   };
 
   const handleCheckboxChangeFirst = (value) => {
@@ -111,7 +113,7 @@ export default function StartingForm() {
     const timeoutId = setTimeout(() => {
       console.log('Timeout completed!'); // Change the message after the timeout
     }, 1000000);
-    if (isValid && isValidDoi) {
+    if (isValid && isValidDoi && isValidProject) {
       setFlag(1);
       let api = ''
       try {
