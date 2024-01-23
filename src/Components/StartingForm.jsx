@@ -26,6 +26,9 @@ export default function StartingForm() {
   const [isValidDoi, setIsValidDoi] = useState(true);
   const groups = ['Lab X', 'Lab Y', 'Lab Z'];
   const [selectedGroups, setSelectedGroups] = useState([]);
+  const [selectedGroupFirst, setSelectedGroupFirst] = useState([]);
+  const [selectedGroupOther, setSelectedGroupOther] = useState([]);
+  const [selectedGroupCorresp, setSelectedGroupCorresp] = useState([]);
   const navigate = useNavigate();
   const [flag, setFlag] = useState(0); // Use state for flag
 
@@ -58,7 +61,6 @@ export default function StartingForm() {
   };
 
   const validateForm = (groupValue, doiValue) => {
-
     if (groupValue !== 'AAA') {
       groupValue = groupValue.join(', ');
     } 
@@ -66,12 +68,36 @@ export default function StartingForm() {
     setIsValid(isValidForm);
   };
 
-  const handleCheckboxChange = (value) => {
+  const handleCheckboxChangeFirst = (value) => {
     // Check if the group is already selected
-    const isSelected = selectedGroups.includes(value);
+    const isSelected = selectedGroupFirst.includes(value);
 
     // If selected, remove from the array; otherwise, add to the array
-    setSelectedGroups((prevSelectedGroups) =>
+    setSelectedGroupFirst((prevSelectedGroups) =>
+      isSelected
+        ? prevSelectedGroups.filter((group) => group !== value)
+        : [...prevSelectedGroups, value]
+    );
+  };
+
+  const handleCheckboxChangeOther = (value) => {
+    // Check if the group is already selected
+    const isSelected = selectedGroupOther.includes(value);
+
+    // If selected, remove from the array; otherwise, add to the array
+    setSelectedGroupOther((prevSelectedGroups) =>
+      isSelected
+        ? prevSelectedGroups.filter((group) => group !== value)
+        : [...prevSelectedGroups, value]
+    );
+  };
+
+  const handleCheckboxChangeCorresp = (value) => {
+    // Check if the group is already selected
+    const isSelected = selectedGroupCorresp.includes(value);
+
+    // If selected, remove from the array; otherwise, add to the array
+    setSelectedGroupCorresp((prevSelectedGroups) =>
       isSelected
         ? prevSelectedGroups.filter((group) => group !== value)
         : [...prevSelectedGroups, value]
@@ -184,17 +210,17 @@ export default function StartingForm() {
               <MenuItem key={value} value={value}>
                 <span style={{ marginRight: '75px' }}>{value}</span>
                 <Checkbox style={{ marginRight: '95px' }}
-                  checked={selectedGroups.includes(value)}
-                  onChange={() => handleCheckboxChange(value)}
+                  checked={selectedGroupFirst.includes(value)}
+                  onChange={() => handleCheckboxChangeFirst(value)}
                 />
-                {/* <Checkbox style={{ marginRight: '105px' }}
-                  // checked={selectedGroups.includes(value)}
-                  // onChange={() => handleCheckboxChange(value)}
+                <Checkbox style={{ marginRight: '105px' }}
+                  checked={selectedGroupCorresp.includes(value)}
+                  onChange={() => handleCheckboxChangeCorresp(value)}
                 />
                 <Checkbox
-                  // checked={selectedGroups.includes(value)}
-                  // onChange={() => handleCheckboxChange(value)}
-                /> */}
+                  checked={selectedGroupOther.includes(value)}
+                  onChange={() => handleCheckboxChangeOther(value)}
+                />
               </MenuItem>
             ))}
             </Select>
