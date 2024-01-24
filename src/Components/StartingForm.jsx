@@ -73,21 +73,32 @@ export default function StartingForm() {
   const handleCheckboxChange = (value, group) => {
     switch (group) {
       case 'first':
-        console.log(value)
-        setRenderValue(String(value) +' (First)')
-        setSelectedGroupFirst(selectedGroupFirst === value ? null : value);
+        if (selectedGroupFirst === value) {
+            setRenderValue('')
+          } else {
+            setRenderValue(String(value) +' (First)')
+        }
+        setSelectedGroupFirst(value);
         setSelectedGroupCorresp(null); // Unselect other groups
         setSelectedGroupOther(null);
-        break;
+        break
       case 'corresp':
-        setRenderValue(String(value) +' (Corresponding)')
-        setSelectedGroupCorresp(selectedGroupCorresp === value ? null : value);
+        if (selectedGroupCorresp === value) {
+            setRenderValue('')
+          } else {
+            setRenderValue(String(value) +' (Corresponding)')
+        }
+        setSelectedGroupCorresp(value);
         setSelectedGroupFirst(null); // Unselect other groups
         setSelectedGroupOther(null);
         break;
       case 'other':
-        setRenderValue(String(value) + ' (Other)')
-        setSelectedGroupOther(selectedGroupOther === value ? null : value);
+        if (selectedGroupOther === value) {
+            setRenderValue('')
+          } else {
+            setRenderValue(String(value) +' (Other)')
+        }
+        setSelectedGroupOther(value);
         setSelectedGroupFirst(null); // Unselect other groups
         setSelectedGroupCorresp(null);
         break;
@@ -281,7 +292,6 @@ export default function StartingForm() {
           style={{ width: '27%', height: '40px',margin: '0'}} 
           value={project} 
           onChange={handleProjectChange}
-          error={!isValidDoi}
           helperText={
               <>
                   <Typography variant="body2" component="span">
