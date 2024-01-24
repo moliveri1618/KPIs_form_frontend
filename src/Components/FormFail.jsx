@@ -209,7 +209,7 @@ export default function FormFail() {
         <img src={logos} alt="logo" width="150" height="80" style={{ float: 'left', marginRight: '1450px'}} />
         <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
           <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
-            Publication Details
+            Add Publication Details
           </Typography>
         </div>
         <div style={{ display: 'flex', 

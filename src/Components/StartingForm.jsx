@@ -156,7 +156,7 @@ export default function StartingForm() {
         <img src={logos} alt="logo" width="150" height="80" style={{ float: 'left', marginRight: '1450px', paddingTop: '40px'  }} />
         <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
           <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
-            Add publication
+            Add Publication
           </Typography>
         </div>
         <div style={{ display: 'flex', 
