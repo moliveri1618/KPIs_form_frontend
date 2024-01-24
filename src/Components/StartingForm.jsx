@@ -24,6 +24,7 @@ export default function StartingForm() {
   const [project, setProject] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [isValidDoi, setIsValidDoi] = useState(true);
+  const [isValidGroup, setIsValidGroup] = useState(false);
   const [isValidProject, setIsValidProject] = useState('');
   const groups = ['Lab X', 'Lab Y', 'Lab Z'];
   const [selectedGroups, setSelectedGroups] = useState([]);
@@ -42,32 +43,30 @@ export default function StartingForm() {
     return doiPattern.test(doi);
   };
 
-  const handleChange = (event) => {
-    setSelectedGroups(event.target.value);
-    setGroup(event.target.value);
-    validateForm(event.target.value, doi, project);
+  // const handleChange = (event) => {
+  //   console.log(event.target.value)
+  //   setIsValidGroup(event.target.value)
+  //   setSelectedGroups(event.target.value);
+  //   setGroup(event.target.value);
+  //   validateForm(event.target.value, doi, project);
 
-  };
+  // };
 
   const handleDoiChange = (event) => {
     setDoi(event.target.value);
     setIsValidDoi(isValidDOI(event.target.value));
-    validateForm(group, event.target.value, project);
+    validateForm(event.target.value, project);
   };
 
   const handleProjectChange = (event) => {
     setProject(event.target.value);
-    setIsValidProject(isValidDOI(event.target.value));
-    validateForm(group, doi, event.target.value);
+    setIsValidProject(event.target.value);
+    validateForm(doi, event.target.value);
   };
 
-  const validateForm = (groupValue, doiValue, projectValue) => {
-    if (groupValue !== 'AAA') {
-      groupValue = groupValue.join(', ');
-    } 
-    const isValidForm = groupValue.trim() !== '' && doiValue.trim() !== ''  && projectValue.trim() !== '';
+  const validateForm = (doiValue, projectValue) => {
+    const isValidForm = doiValue.trim() !== ''  && projectValue.trim() !== '';
     setIsValid(isValidForm);
-    setIsValidProject(isValidForm);
   };
 
   const handleCheckboxChange = (value, group) => {
@@ -75,8 +74,10 @@ export default function StartingForm() {
       case 'first':
         if (selectedGroupFirst === value) {
             setRenderValue('')
+            setIsValidGroup(true)
           } else {
             setRenderValue(String(value) +' (First)')
+            setIsValidGroup(false)
         }
         setSelectedGroupFirst(value);
         setSelectedGroupCorresp(null); // Unselect other groups
@@ -235,7 +236,7 @@ export default function StartingForm() {
               multiple
               value={selectedGroups}
               label="Group"
-              onChange={handleChange}
+              // onChange={handleChange}
               renderValue={() => renderValue}
             >
               <MenuItem value="">
