@@ -35,10 +35,7 @@ export default function StartingForm() {
   const [renderValue, setRenderValue] = useState(''); // Use state for flag
   
   const isValidDOI = (doi) => {
-    // Define the regular expression pattern for a valid DOI
     const doiPattern = /^10\.\d{4,9}\/[-._;()/:A-Z0-9]+$/i;
-  
-    // Test the DOI against the pattern
     return doiPattern.test(doi);
   };
 
@@ -68,7 +65,6 @@ export default function StartingForm() {
   const handleCheckboxChange = (value, group) => {
     switch (group) {
       case 'first':
-        console.log(value)
         setRenderValue(String(value) +' (First)')
         setSelectedGroupFirst(value);
         setSelectedGroupCorresp(null); // Unselect other groups
@@ -91,55 +87,16 @@ export default function StartingForm() {
     }
   };
 
-  // const handleCheckboxChangeFirst = (value) => {
-  //   // Check if the group is already selected
-  //   const isSelected = selectedGroupFirst.includes(value);
-
-  //   // If selected, remove from the array; otherwise, add to the array
-  //   setSelectedGroupFirst((prevSelectedGroups) =>
-  //     isSelected
-  //       ? prevSelectedGroups.filter((group) => group !== value)
-  //       : [...prevSelectedGroups, value]
-  //   );
-  // };
-
-  // const handleCheckboxChangeOther = (value) => {
-  //   // Check if the group is already selected
-  //   const isSelected = selectedGroupOther.includes(value);
-
-  //   // If selected, remove from the array; otherwise, add to the array
-  //   setSelectedGroupOther((prevSelectedGroups) =>
-  //     isSelected
-  //       ? prevSelectedGroups.filter((group) => group !== value)
-  //       : [...prevSelectedGroups, value]
-  //   );
-  // };
-
-  // const handleCheckboxChangeCorresp = (value) => {
-  //   // Check if the group is already selected
-  //   const isSelected = selectedGroupCorresp.includes(value);
-
-  //   // If selected, remove from the array; otherwise, add to the array
-  //   setSelectedGroupCorresp((prevSelectedGroups) =>
-  //     isSelected
-  //       ? prevSelectedGroups.filter((group) => group !== value)
-  //       : [...prevSelectedGroups, value]
-  //   );
-  // };
-
   const handleApiTest = async (event) => {
-    console.log(flag)
     event.preventDefault();
-    let timeoutReached = false;
     const timeoutId = setTimeout(() => {
-      console.log('Timeout completed!'); // Change the message after the timeout
+
     }, 1000000);
     if (isValid && isValidDoi && isValidProject) {
       setFlag(1);
       let api = ''
       try {
           api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/stoca?DOI=${doi}`
-          console.log(api)
           axios.post(api)
             .then(response => {
               // The promise has resolved, and you can access the response data here
@@ -164,13 +121,11 @@ export default function StartingForm() {
     //To address this, you should use the useEffect hook to observe changes in the state and 
     //perform actions after the state has been updated. Here's an example of how you can modify your code:
 
-    console.log(data);
     if (data !== null) {
       if (data === 'No DOIs found') {
         var url = `/KPIs_form_frontend/fail?DOI=${doi}`;
         navigate(url);
       } else {
-        console.log(data)
         var url = `/KPIs_form_frontend/success`;
         navigate(url, { state: { data } });
       }
