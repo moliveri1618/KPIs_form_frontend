@@ -157,7 +157,7 @@ export default function FormFail() {
       res['pages'] = pages
       res['year'] = year
       res['month'] = month
-      console.log(res)
+
       let api = ''
       try {
         // if (process.env.NODE_ENV !== 'production') {

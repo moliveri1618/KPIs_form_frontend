@@ -19,12 +19,10 @@ import Checkbox from '@mui/material/Checkbox';
 
 export default function StartingForm() {
   const [data, setData] = useState(null);
-  const [group, setGroup] = React.useState('AAA');
   const [doi, setDoi] = useState('');
   const [project, setProject] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [isValidDoi, setIsValidDoi] = useState(true);
-  const [isValidGroup, setIsValidGroup] = useState(false);
   const [isValidProject, setIsValidProject] = useState('');
   const groups = ['Lab X', 'Lab Y', 'Lab Z'];
   const [selectedGroups, setSelectedGroups] = useState([]);
@@ -74,10 +72,8 @@ export default function StartingForm() {
       case 'first':
         if (selectedGroupFirst === value) {
             setRenderValue('')
-            setIsValidGroup(true)
           } else {
             setRenderValue(String(value) +' (First)')
-            setIsValidGroup(false)
         }
         setSelectedGroupFirst(value);
         setSelectedGroupCorresp(null); // Unselect other groups
@@ -145,18 +141,16 @@ export default function StartingForm() {
   // };
 
   const handleApiTest = async (event) => {
-    console.log(flag)
     event.preventDefault();
-    let timeoutReached = false;
     const timeoutId = setTimeout(() => {
-      console.log('Timeout completed!'); // Change the message after the timeout
+
     }, 1000000);
-    if (isValid && isValidDoi && isValidProject) {
+
+    if (isValid) {
       setFlag(1);
       let api = ''
       try {
           api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/stoca?DOI=${doi}`
-          console.log(api)
           axios.post(api)
             .then(response => {
               // The promise has resolved, and you can access the response data here
@@ -181,13 +175,11 @@ export default function StartingForm() {
     //To address this, you should use the useEffect hook to observe changes in the state and 
     //perform actions after the state has been updated. Here's an example of how you can modify your code:
 
-    console.log(data);
     if (data !== null) {
       if (data === 'No DOIs found') {
         var url = `/KPIs_form_frontend/fail?DOI=${doi}`;
         navigate(url);
       } else {
-        console.log(data)
         var url = `/KPIs_form_frontend/success`;
         navigate(url, { state: { data } });
       }

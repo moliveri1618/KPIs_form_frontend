@@ -53,7 +53,7 @@ const rows = [
 export default function FormSuccess() {
   const location = useLocation();
   const jsonData = location.state && location.state.data;
-  console.log(jsonData)
+
   const notify = () => {
     toast.success('The information for this paper are successfully saved into the database 😍', {
       position: "top-right",
@@ -68,7 +68,6 @@ export default function FormSuccess() {
   }
 
   useEffect(() => {
-    console.log(rows)
     notify()
 
     // Cleanup function
