@@ -50,7 +50,7 @@ const rows = [
 ];
 
 
-export default function FormFail() {
+export default function FormSuccess() {
   const location = useLocation();
   const jsonData = location.state && location.state.data;
   console.log(jsonData)
@@ -125,6 +125,17 @@ export default function FormFail() {
                     <Tooltip  title={jsonData['author']} arrow>
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
                         {jsonData['author']}
+                      </div>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
+
+                <TableRow>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Impact Factor:</TableCell>
+                  <TableCell>
+                    <Tooltip  title={jsonData['impact_factor']} arrow>
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                        {jsonData['impact_factor']}
                       </div>
                     </Tooltip>
                   </TableCell>
