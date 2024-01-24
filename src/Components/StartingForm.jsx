@@ -19,14 +19,13 @@ import Checkbox from '@mui/material/Checkbox';
 
 export default function StartingForm() {
   const [data, setData] = useState(null);
-  const [group, setGroup] = React.useState('AAA');
+  const groups = ['Lab X', 'Lab Y', 'Lab Z'];
+  const [selectedGroups, setSelectedGroups] = useState([]);
   const [doi, setDoi] = useState('');
   const [project, setProject] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [isValidDoi, setIsValidDoi] = useState(true);
   const [isValidProject, setIsValidProject] = useState('');
-  const groups = ['Lab X', 'Lab Y', 'Lab Z'];
-  const [selectedGroups, setSelectedGroups] = useState([]);
   const [selectedGroupFirst, setSelectedGroupFirst] = useState([]);
   const [selectedGroupOther, setSelectedGroupOther] = useState([]);
   const [selectedGroupCorresp, setSelectedGroupCorresp] = useState([]);
