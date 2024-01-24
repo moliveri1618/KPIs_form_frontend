@@ -19,6 +19,7 @@ import Checkbox from '@mui/material/Checkbox';
 
 export default function StartingForm() {
   const [data, setData] = useState(null);
+  const [group, setGroup] = React.useState('AAA');
   const [doi, setDoi] = useState('');
   const [project, setProject] = useState('');
   const [isValid, setIsValid] = useState(false);
@@ -41,60 +42,50 @@ export default function StartingForm() {
     return doiPattern.test(doi);
   };
 
-  // const handleChange = (event) => {
-  //   console.log(event.target.value)
-  //   setIsValidGroup(event.target.value)
-  //   setSelectedGroups(event.target.value);
-  //   setGroup(event.target.value);
-  //   validateForm(event.target.value, doi, project);
-
-  // };
+  const handleChange = (event) => {
+    setSelectedGroups(event.target.value);
+    setGroup(event.target.value);
+    validateForm(event.target.value, doi, project);
+  };
 
   const handleDoiChange = (event) => {
     setDoi(event.target.value);
     setIsValidDoi(isValidDOI(event.target.value));
-    validateForm(event.target.value, project);
+    validateForm(group, event.target.value, project);
   };
 
   const handleProjectChange = (event) => {
     setProject(event.target.value);
-    setIsValidProject(event.target.value);
-    validateForm(doi, event.target.value);
+    setIsValidProject(isValidDOI(event.target.value));
+    validateForm(group, doi, event.target.value);
   };
 
-  const validateForm = (doiValue, projectValue) => {
-    const isValidForm = doiValue.trim() !== ''  && projectValue.trim() !== '';
+  const validateForm = (groupValue, doiValue, projectValue) => {
+    if (groupValue !== 'AAA') {
+      groupValue = groupValue.join(', ');
+    } 
+    const isValidForm = groupValue.trim() !== '' && doiValue.trim() !== ''  && projectValue.trim() !== '';
     setIsValid(isValidForm);
+    setIsValidProject(isValidForm);
   };
 
   const handleCheckboxChange = (value, group) => {
     switch (group) {
       case 'first':
-        if (selectedGroupFirst === value) {
-            setRenderValue('')
-          } else {
-            setRenderValue(String(value) +' (First)')
-        }
+        console.log(value)
+        setRenderValue(String(value) +' (First)')
         setSelectedGroupFirst(value);
         setSelectedGroupCorresp(null); // Unselect other groups
         setSelectedGroupOther(null);
-        break
+        break;
       case 'corresp':
-        if (selectedGroupCorresp === value) {
-            setRenderValue('')
-          } else {
-            setRenderValue(String(value) +' (Corresponding)')
-        }
+        setRenderValue(String(value) +' (Corresponding)')
         setSelectedGroupCorresp(value);
         setSelectedGroupFirst(null); // Unselect other groups
         setSelectedGroupOther(null);
         break;
       case 'other':
-        if (selectedGroupOther === value) {
-            setRenderValue('')
-          } else {
-            setRenderValue(String(value) +' (Other)')
-        }
+        setRenderValue(String(value) + ' (Other)')
         setSelectedGroupOther(value);
         setSelectedGroupFirst(null); // Unselect other groups
         setSelectedGroupCorresp(null);
@@ -141,16 +132,18 @@ export default function StartingForm() {
   // };
 
   const handleApiTest = async (event) => {
+    console.log(flag)
     event.preventDefault();
+    let timeoutReached = false;
     const timeoutId = setTimeout(() => {
-
+      console.log('Timeout completed!'); // Change the message after the timeout
     }, 1000000);
-
-    if (isValid) {
+    if (isValid && isValidDoi && isValidProject) {
       setFlag(1);
       let api = ''
       try {
           api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/stoca?DOI=${doi}`
+          console.log(api)
           axios.post(api)
             .then(response => {
               // The promise has resolved, and you can access the response data here
@@ -175,11 +168,13 @@ export default function StartingForm() {
     //To address this, you should use the useEffect hook to observe changes in the state and 
     //perform actions after the state has been updated. Here's an example of how you can modify your code:
 
+    console.log(data);
     if (data !== null) {
       if (data === 'No DOIs found') {
         var url = `/KPIs_form_frontend/fail?DOI=${doi}`;
         navigate(url);
       } else {
+        console.log(data)
         var url = `/KPIs_form_frontend/success`;
         navigate(url, { state: { data } });
       }
@@ -228,7 +223,7 @@ export default function StartingForm() {
               multiple
               value={selectedGroups}
               label="Group"
-              // onChange={handleChange}
+              onChange={handleChange}
               renderValue={() => renderValue}
             >
               <MenuItem value="">
