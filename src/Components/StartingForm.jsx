@@ -40,8 +40,7 @@ export default function StartingForm() {
   };
 
   const handleChange = (event) => {
-    setSelectedGroups(event.target.value);
-    setGroup(event.target.value);
+    setSelectedGroups(event.target.value)
   };
 
   const handleDoiChange = (event) => {
@@ -90,7 +89,6 @@ export default function StartingForm() {
   const handleApiTest = async (event) => {
     event.preventDefault();
     const timeoutId = setTimeout(() => {
-
     }, 1000000);
     if (isValid && isValidDoi && isValidProject) {
       setFlag(1);
@@ -171,7 +169,6 @@ export default function StartingForm() {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              multiple
               value={selectedGroups}
               label="Group"
               onChange={handleChange}
