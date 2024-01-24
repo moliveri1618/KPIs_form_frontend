@@ -56,7 +56,6 @@ export default function StartingForm() {
   };
 
   const validateForm = (selectedGroups, doiValue, projectValue) => {
-    console.log(selectedGroups)
     const isValidForm = selectedGroups.length > 0 && doiValue.trim() !== ''  && projectValue.trim() !== '';
     setIsValid(isValidForm);
     setIsValidProject(isValidForm);
