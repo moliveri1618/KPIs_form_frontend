@@ -45,26 +45,22 @@ export default function StartingForm() {
   const handleChange = (event) => {
     setSelectedGroups(event.target.value);
     setGroup(event.target.value);
-    validateForm(event.target.value, doi, project);
   };
 
   const handleDoiChange = (event) => {
     setDoi(event.target.value);
     setIsValidDoi(isValidDOI(event.target.value));
-    validateForm(group, event.target.value, project);
+    validateForm(event.target.value, project);
   };
 
   const handleProjectChange = (event) => {
     setProject(event.target.value);
     setIsValidProject(isValidDOI(event.target.value));
-    validateForm(group, doi, event.target.value);
+    validateForm(doi, event.target.value);
   };
 
-  const validateForm = (groupValue, doiValue, projectValue) => {
-    if (groupValue !== 'AAA') {
-      groupValue = groupValue.join(', ');
-    } 
-    const isValidForm = groupValue.trim() !== '' && doiValue.trim() !== ''  && projectValue.trim() !== '';
+  const validateForm = (doiValue, projectValue) => {
+    const isValidForm = doiValue.trim() !== ''  && projectValue.trim() !== '';
     setIsValid(isValidForm);
     setIsValidProject(isValidForm);
   };
@@ -290,7 +286,7 @@ export default function StartingForm() {
         </div>
         <div style={{ display: 'flex', justifyContent: 'right', width: '83.5vw' }}>
           {flag === 0 && (
-            <Link to="/home">
+            <Link>
               <Button type="submit" variant="contained" color="primary" onClick={handleApiTest} style={{ width: '15%' }}>
                 Submit
               </Button>
