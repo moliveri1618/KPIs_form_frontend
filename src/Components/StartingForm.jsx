@@ -41,22 +41,24 @@ export default function StartingForm() {
 
   const handleChange = (event) => {
     setSelectedGroups(event.target.value)
+    validateForm(event.target.value, doi, project);
   };
 
   const handleDoiChange = (event) => {
     setDoi(event.target.value);
     setIsValidDoi(isValidDOI(event.target.value));
-    validateForm(event.target.value, project);
+    validateForm(selectedGroups, event.target.value, project);
   };
 
   const handleProjectChange = (event) => {
     setProject(event.target.value);
     setIsValidProject(isValidDOI(event.target.value));
-    validateForm(doi, event.target.value);
+    validateForm(selectedGroups, doi, event.target.value);
   };
 
-  const validateForm = (doiValue, projectValue) => {
-    const isValidForm = doiValue.trim() !== ''  && projectValue.trim() !== '';
+  const validateForm = (selectedGroups, doiValue, projectValue) => {
+    console.log(selectedGroups)
+    const isValidForm = selectedGroups.length > 0 && doiValue.trim() !== ''  && projectValue.trim() !== '';
     setIsValid(isValidForm);
     setIsValidProject(isValidForm);
   };
