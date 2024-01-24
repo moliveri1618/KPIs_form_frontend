@@ -214,7 +214,7 @@ export default function StartingForm() {
           helperText={
               <>
                   <Typography variant="body2" component="span">
-                      Example:
+                      e.g.:
                   </Typography>
                   {' '}
                   <Typography variant="body2" component="span" style={{ fontWeight: 'bold' }}>
@@ -232,7 +232,7 @@ export default function StartingForm() {
           helperText={
               <>
                   <Typography variant="body2" component="span">
-                    Project(s) associated with this KPI. Enter the project LabOrders codes, separated by commas, e.g.: <i>P-123, PI-456</i>
+                    Project(s) associated with this KPI. Enter the project LabOrders codes, separated by commas, e.g.: <i><strong>P-123</strong>, <strong>PI-456</strong></i>
                   </Typography>
               </>
           }/>
