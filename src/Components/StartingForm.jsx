@@ -195,33 +195,6 @@ export default function StartingForm() {
 
   };
 
-  const handleApiTest2 = async (event) => {
-    event.preventDefault();
-    let timeoutReached = false;
-    const timeoutId = setTimeout(() => {
-      console.log('Timeout completed!'); // Change the message after the timeout
-    }, 1000000);
-    if (isValid && isValidDoi) {
-      let api = ''
-      try {
-          api = 'http://127.0.0.1:8000/yo'
-          api = 'https://mauri1618.pythonanywhere.com/yo'
-          console.log(api)
-          axios.post(api)
-            .then(response => {
-              // The promise has resolved, and you can access the response data here
-              console.log(response)
-            })
-            .catch(error => {
-              console.error(error);
-            });
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    }
-
-  };
-
   useEffect(() => {
     
     //The issue here might be related to the asynchronous nature of the axios.post call. 
