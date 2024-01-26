@@ -5,17 +5,17 @@ import FormSuccess from './Components/FormSuccess'
 import React, {useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-
+import SPLoader from './Components/SpinnerLoader';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/KPIs_form_frontend" element={<StartingForm/>} />
-        <Route path="/KPIs_form_frontend/fail" element={<FormFail/>} />
-        <Route path="/KPIs_form_frontend/success" element={<FormSuccess/>} />
-      </Routes>
-    </Router>
+      <Router>
+        <Routes>
+          <Route path="/KPIs_form_frontend" element={<StartingForm />} />
+          <Route path="/KPIs_form_frontend/fail" element={<FormFail />} />
+          <Route path="/KPIs_form_frontend/success" element={<FormSuccess />} />
+        </Routes>
+      </Router>
   );
 }
 
