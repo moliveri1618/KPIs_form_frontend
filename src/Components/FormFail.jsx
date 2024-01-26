@@ -226,31 +226,12 @@ export default function FormFail() {
                       width: '100vw',  
                       justifyContent: 'center',
                       paddingTop: '40px', 
-                      paddingBottom: '20px'}}> 
-          <TextField id="b" label="Volume" type="number" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangeVolume} required/>
-          <TextField id="c" label="ISSN" type="number" style={{ width: '26%', height: '40px',margin: '0'}} onChange={handleChangeISSN} required/>
-          <TextField id="d" label="Url" type="search" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangeUrl} required/>
-        </div>
-        <div style={{ display: 'flex', 
-                      gap: '10px',  
-                      width: '100vw',  
-                      justifyContent: 'center',
-                      paddingTop: '40px', 
-                      paddingBottom: '20px'}}> 
-          <TextField id="e" label="Number" type="number" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangeNumber} required/>
-          <TextField id="f" label="Journal" type="search" style={{ width: '26%', height: '40px',margin: '0'}} onChange={handleChangeJournal} required/>
-          <TextField id="g" label="Publisher" type="search" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangePublisher} required/>
-        </div>
-        <div style={{ display: 'flex', 
-                      gap: '10px',  
-                      width: '100vw',  
-                      justifyContent: 'center',
-                      paddingTop: '40px', 
                       paddingBottom: '60px'}}> 
-          <TextField id="h" label="Pages" type="number" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangePages} required/>
-          <TextField id="i" label="Year" type="number" style={{ width: '26%', height: '40px',margin: '0'}} onChange={handleChangeYear} required/>
-          <TextField id="l" label="Month" type="number" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangeMonth} required/>
+          <TextField id="b" label="Volume" type="number" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangeVolume}/>
+          <TextField id="c" label="Pages" type="number" style={{ width: '26%', height: '40px',margin: '0'}} onChange={handleChangeISSN}/>
+          <TextField id="d" label="Year" type="search" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangeUrl}/>
         </div>
+
         <div style={{ display: 'flex', justifyContent: 'right', width: '83vw' }}>
           <Link to="/KPIs_form_frontend">
             <Button variant="contained" color="primary" style={{ width: '15%' }}>

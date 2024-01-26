@@ -130,17 +130,6 @@ export default function FormSuccess() {
                 </TableRow>
 
                 <TableRow>
-                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Impact Factor:</TableCell>
-                  <TableCell>
-                    <Tooltip  title={jsonData['impact_factor']} arrow>
-                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                        {jsonData['impact_factor']}
-                      </div>
-                    </Tooltip>
-                  </TableCell>
-                </TableRow>
-
-                <TableRow>
                   <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Year:</TableCell>
                   <TableCell>
                     <Tooltip  title={jsonData['year']} arrow>
@@ -179,6 +168,17 @@ export default function FormSuccess() {
                     <Tooltip  title={jsonData['pages']} arrow>
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
                         {jsonData['pages']}
+                      </div>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
+
+                <TableRow>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Impact Factor:</TableCell>
+                  <TableCell>
+                    <Tooltip  title={jsonData['impact_factor']} arrow>
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                        {jsonData['impact_factor']}
                       </div>
                     </Tooltip>
                   </TableCell>
