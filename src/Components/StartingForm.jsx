@@ -61,30 +61,99 @@ export default function StartingForm() {
     setIsValidProject(isValidForm);
   };
 
-  const handleCheckboxChange = (value, group) => {
-    switch (group) {
-      case 'first':
-        setRenderValue(String(value) +' (First)')
-        setSelectedGroupFirst(value);
-        setSelectedGroupCorresp(null); // Unselect other groups
-        setSelectedGroupOther(null);
-        break;
-      case 'corresp':
-        setRenderValue(String(value) +' (Corresponding)')
-        setSelectedGroupCorresp(value);
-        setSelectedGroupFirst(null); // Unselect other groups
-        setSelectedGroupOther(null);
-        break;
-      case 'other':
-        setRenderValue(String(value) + ' (Other)')
-        setSelectedGroupOther(value);
-        setSelectedGroupFirst(null); // Unselect other groups
-        setSelectedGroupCorresp(null);
-        break;
-      default:
-        break;
-    }
+
+    const handleCheckboxChangeFirst = (value) => {
+    // Check if the group is already selected
+    const isSelected = selectedGroupFirst.includes(value);
+
+    // If selected, remove from the array; otherwise, add to the array
+    setSelectedGroupFirst((prevSelectedGroups) =>
+      isSelected
+        ? prevSelectedGroups.filter((group) => group !== value)
+        : [...prevSelectedGroups, value]
+    );
   };
+
+  const handleCheckboxChangeOther = (value) => {
+    // Check if the group is already selected
+    const isSelected = selectedGroupOther.includes(value);
+
+    // If selected, remove from the array; otherwise, add to the array
+    setSelectedGroupOther((prevSelectedGroups) =>
+      isSelected
+        ? prevSelectedGroups.filter((group) => group !== value)
+        : [...prevSelectedGroups, value]
+    );
+  };
+
+  const handleCheckboxChangeCorresp = (value) => {
+    // Check if the group is already selected
+    const isSelected = selectedGroupCorresp.includes(value);
+
+    // If selected, remove from the array; otherwise, add to the array
+    setSelectedGroupCorresp((prevSelectedGroups) =>
+      isSelected
+        ? prevSelectedGroups.filter((group) => group !== value)
+        : [...prevSelectedGroups, value]
+    );
+  };
+
+
+
+
+
+  // const handleCheckboxChange = (value, group) => {
+  //   switch (group) {
+  //     case 'first':
+  //       setRenderValue(String(value) +' (First)')
+  //       setSelectedGroupFirst(value);
+  //       setSelectedGroupCorresp(null); // Unselect other groups
+  //       setSelectedGroupOther(null);
+  //       break;
+  //     case 'corresp':
+  //       setRenderValue(String(value) +' (Corresponding)')
+  //       setSelectedGroupCorresp(value);
+  //       setSelectedGroupFirst(null); // Unselect other groups
+  //       setSelectedGroupOther(null);
+  //       break;
+  //     case 'other':
+  //       setRenderValue(String(value) + ' (Other)')
+  //       setSelectedGroupOther(value);
+  //       setSelectedGroupFirst(null); // Unselect other groups
+  //       setSelectedGroupCorresp(null);
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // };
+
+  
+
+
+  // const handleCheckboxChange = (value, group) => {
+  //   switch (group) {
+  //     case 'first':
+  //       setRenderValue((prev) => prev.concat(`${value} (First)`));
+  //       setSelectedGroupFirst((prev) => [...prev, value]);
+  //       setSelectedGroupCorresp((prev) => prev.filter((item) => item !== value));
+  //       setSelectedGroupOther((prev) => prev.filter((item) => item !== value));
+  //       break;
+  //     case 'corresp':
+  //       setRenderValue((prev) => prev.concat(`${value} (Corresponding)`));
+  //       setSelectedGroupCorresp((prev) => [...prev, value]);
+  //       setSelectedGroupFirst((prev) => prev.filter((item) => item !== value));
+  //       setSelectedGroupOther((prev) => prev.filter((item) => item !== value));
+  //       break;
+  //     case 'other':
+  //       setRenderValue((prev) => prev.concat(`${value} (Other)`));
+  //       setSelectedGroupOther((prev) => [...prev, value]);
+  //       setSelectedGroupFirst((prev) => prev.filter((item) => item !== value));
+  //       setSelectedGroupCorresp((prev) => prev.filter((item) => item !== value));
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // };
 
   const handleApiTest = async (event) => {
     event.preventDefault();
@@ -172,7 +241,11 @@ export default function StartingForm() {
               value={selectedGroups}
               label="Group"
               onChange={handleChange}
-              renderValue={() => renderValue}
+              renderValue={() => {
+                console.log('renderValue called');
+                return '';
+              }}
+              multiple
             >
               <MenuItem value="">
                 <em> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -184,21 +257,18 @@ export default function StartingForm() {
             {groups.map((value) => (
               <MenuItem key={value} value={value}>
               <span style={{ marginRight: '75px' }}>{value}</span>
-              <Checkbox
-                style={{ marginRight: '95px', transform: 'scale(1.2)'}}
-                checked={selectedGroupFirst === value}
-                onChange={() => handleCheckboxChange(value, 'first')}
-              />
-              <Checkbox
-                style={{ marginRight: '100px', transform: 'scale(1.2)'}}
-                checked={selectedGroupCorresp === value}
-                onChange={() => handleCheckboxChange(value, 'corresp')}
-              />
-              <Checkbox
-                style={{ transform: 'scale(1.2)'}}
-                checked={selectedGroupOther === value}
-                onChange={() => handleCheckboxChange(value, 'other')}
-              />
+                <Checkbox style={{ marginRight: '95px' }}
+                  checked={selectedGroupFirst.includes(value)}
+                  onChange={() => handleCheckboxChangeFirst(value)}
+                />
+                <Checkbox style={{ marginRight: '105px' }}
+                  checked={selectedGroupCorresp.includes(value)}
+                  onChange={() => handleCheckboxChangeCorresp(value)}
+                />
+                <Checkbox
+                  checked={selectedGroupOther.includes(value)}
+                  onChange={() => handleCheckboxChangeOther(value)}
+                />
               </MenuItem>
             ))}
             </Select>
