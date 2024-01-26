@@ -185,16 +185,17 @@ export default function StartingForm() {
               <MenuItem key={value} value={value}>
               <span style={{ marginRight: '75px' }}>{value}</span>
               <Checkbox
-                style={{ marginRight: '95px' }}
+                style={{ marginRight: '95px', transform: 'scale(1.2)'}}
                 checked={selectedGroupFirst === value}
                 onChange={() => handleCheckboxChange(value, 'first')}
               />
               <Checkbox
-                style={{ marginRight: '105px' }}
+                style={{ marginRight: '100px', transform: 'scale(1.2)'}}
                 checked={selectedGroupCorresp === value}
                 onChange={() => handleCheckboxChange(value, 'corresp')}
               />
               <Checkbox
+                style={{ transform: 'scale(1.2)'}}
                 checked={selectedGroupOther === value}
                 onChange={() => handleCheckboxChange(value, 'other')}
               />
