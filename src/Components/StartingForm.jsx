@@ -64,7 +64,7 @@ export default function StartingForm() {
 
   const handleCheckboxChangeFirst = (value) => {
     const isSelected = selectedGroupFirst.includes(value);
-
+    setRenderValue('Groups Selected')
     //add or substract rendervalues
     // let newRenderValue = renderValue + value;
     // let oldRenderValue = renderValue.slice(0, renderValue.length - value.length);
@@ -83,7 +83,7 @@ export default function StartingForm() {
 
   const handleCheckboxChangeOther = (value) => {
     const isSelected = selectedGroupOther.includes(value);
-
+    setRenderValue('Groups Selected')
     //add or substract rendervalues
     // let newRenderValue = renderValue + value;
     // let oldRenderValue = renderValue.slice(0, renderValue.length - value.length);
@@ -104,7 +104,7 @@ export default function StartingForm() {
   const handleCheckboxChangeCorresp = (value) => {
     // Check if the group is already selected
     const isSelected = selectedGroupCorresp.includes(value);
-
+    setRenderValue('Groups Selected')
     // If selected, remove from the array; otherwise, add to the array
     setSelectedGroupCorresp((prevSelectedGroups) =>
       isSelected

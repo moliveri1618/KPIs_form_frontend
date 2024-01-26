@@ -91,7 +91,9 @@ export default function FormSuccess() {
         noValidate
         autoComplete="off"
       >
-        <img src={logos} alt="logo" width="150" height="80" style={{ float: 'left', marginRight: '1450px'}} />
+        <Link to="/KPIs_form_frontend">
+          <img src={logos} alt="logo" width="150" height="80" style={{ float: 'left', marginRight: '1450px', paddingTop: '40px'  }} />
+        </Link>        
         <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
           <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
             Publication Details
