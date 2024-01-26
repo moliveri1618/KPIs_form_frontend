@@ -62,28 +62,43 @@ export default function StartingForm() {
   };
 
 
-    const handleCheckboxChangeFirst = (value) => {
-    // Check if the group is already selected
+  const handleCheckboxChangeFirst = (value) => {
     const isSelected = selectedGroupFirst.includes(value);
 
+    //add or substract rendervalues
+    // let newRenderValue = renderValue + value;
+    // let oldRenderValue = renderValue.slice(0, renderValue.length - value.length);
+
     // If selected, remove from the array; otherwise, add to the array
-    setSelectedGroupFirst((prevSelectedGroups) =>
+      setSelectedGroupFirst((prevSelectedGroups) =>
       isSelected
-        ? prevSelectedGroups.filter((group) => group !== value)
-        : [...prevSelectedGroups, value]
+        ? (console.log(renderValue),
+          //setRenderValue(oldRenderValue),
+          prevSelectedGroups.filter((group) => group !== value))
+        : (console.log(renderValue),
+          //setRenderValue(newRenderValue),
+          [...prevSelectedGroups, value])
     );
   };
 
   const handleCheckboxChangeOther = (value) => {
-    // Check if the group is already selected
     const isSelected = selectedGroupOther.includes(value);
+
+    //add or substract rendervalues
+    // let newRenderValue = renderValue + value;
+    // let oldRenderValue = renderValue.slice(0, renderValue.length - value.length);
 
     // If selected, remove from the array; otherwise, add to the array
     setSelectedGroupOther((prevSelectedGroups) =>
       isSelected
-        ? prevSelectedGroups.filter((group) => group !== value)
-        : [...prevSelectedGroups, value]
-    );
+        ? (console.log(renderValue),
+          //setRenderValue(oldRenderValue),
+          prevSelectedGroups.filter((group) => group !== value))
+        : (console.log(renderValue),
+          //setRenderValue(newRenderValue),
+          [...prevSelectedGroups, value])
+      );
+
   };
 
   const handleCheckboxChangeCorresp = (value) => {
@@ -238,12 +253,12 @@ export default function StartingForm() {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
+              displayEmpty
               value={selectedGroups}
               label="Group"
               onChange={handleChange}
               renderValue={() => {
-                console.log('renderValue called');
-                return '';
+                return renderValue;
               }}
               multiple
             >
