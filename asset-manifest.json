@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/KPIs_form_frontend/static/css/main.a4838356.css",
-    "main.js": "/KPIs_form_frontend/static/js/main.22cd61a3.js",
+    "main.js": "/KPIs_form_frontend/static/js/main.d5cbc0fc.js",
     "static/js/787.22edae46.chunk.js": "/KPIs_form_frontend/static/js/787.22edae46.chunk.js",
     "static/media/SP_Loader_2.gif": "/KPIs_form_frontend/static/media/SP_Loader_2.db7192c325112ac9fc2b.gif",
     "static/media/ibet_logo.png": "/KPIs_form_frontend/static/media/ibet_logo.e727b0a44a3804fa5b56.png",
     "index.html": "/KPIs_form_frontend/index.html",
     "main.a4838356.css.map": "/KPIs_form_frontend/static/css/main.a4838356.css.map",
-    "main.22cd61a3.js.map": "/KPIs_form_frontend/static/js/main.22cd61a3.js.map",
+    "main.d5cbc0fc.js.map": "/KPIs_form_frontend/static/js/main.d5cbc0fc.js.map",
     "787.22edae46.chunk.js.map": "/KPIs_form_frontend/static/js/787.22edae46.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a4838356.css",
-    "static/js/main.22cd61a3.js"
+    "static/js/main.d5cbc0fc.js"
   ]
 }
