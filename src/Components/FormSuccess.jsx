@@ -54,6 +54,7 @@ export default function FormSuccess() {
   const location = useLocation();
   const jsonData = location.state && location.state.data;
   const selectedGroups = location.state && location.state.selectedGroups;
+  const doi = location.state && location.state.doi;
 
   const notify = () => {
     toast.success('The information for this paper are successfully saved into the database 😍', {
@@ -233,13 +234,13 @@ export default function FormSuccess() {
 
                 <TableRow>
                   <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>DOI:</TableCell>
-                  <TableCell>
-                    <Tooltip  title={selectedGroups} arrow>
-                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                        {jsonData['article_type']}
-                      </div>
-                    </Tooltip>
-                  </TableCell>
+                    <TableCell>
+                      <Tooltip  title={selectedGroups} arrow>
+                        <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                          {doi}
+                        </div>
+                      </Tooltip>
+                    </TableCell>
                 </TableRow>
                 
               </TableBody>
