@@ -199,7 +199,7 @@ export default function FormSuccess() {
                 </TableRow>
 
                 <TableRow>
-                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Selected Groups:</TableCell>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Research Groups:</TableCell>
                   <TableCell>
                     <Tooltip  title={selectedGroups} arrow>
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
@@ -231,27 +231,16 @@ export default function FormSuccess() {
                   </TableCell>
                 </TableRow>
 
-                {/* <TableRow>
-                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>ISSN:</TableCell>
+                <TableRow>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>DOI:</TableCell>
                   <TableCell>
-                    <Tooltip  title={jsonData['ISSN']} arrow>
+                    <Tooltip  title={selectedGroups} arrow>
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                        {jsonData['ISSN']}
+                        {jsonData['article_type']}
                       </div>
                     </Tooltip>
                   </TableCell>
-                </TableRow> */}
-
-                {/* <TableRow>
-                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Url:</TableCell>
-                  <TableCell>
-                    <Tooltip  title={jsonData['url']} arrow>
-                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                        {jsonData['url']}
-                      </div>
-                    </Tooltip>
-                  </TableCell>
-                </TableRow> */}
+                </TableRow>
                 
               </TableBody>
             </Table>

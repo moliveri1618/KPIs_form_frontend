@@ -48,12 +48,6 @@ export default function StartingForm() {
     validateForm(selectedGroups, event.target.value, project);
   };
 
-  // const handleProjectChange = (event) => {
-  //   setProject(event.target.value);
-  //   setIsValidProject(isValidDOI(event.target.value));
-  //   validateForm(selectedGroups, doi, event.target.value);
-  // };
-
   const validateForm = (selectedGroups, doiValue) => {
     const isValidForm = selectedGroups.length > 0 && doiValue.trim() !== '';
     setIsValid(isValidForm);
@@ -64,9 +58,6 @@ export default function StartingForm() {
   const handleCheckboxChangeFirst = (value) => {
     const isSelected = selectedGroupFirst.includes(value);
     setRenderValue('Groups Selected')
-    //add or substract rendervalues
-    // let newRenderValue = renderValue + value;
-    // let oldRenderValue = renderValue.slice(0, renderValue.length - value.length);
 
     // If selected, remove from the array; otherwise, add to the array
       setSelectedGroupFirst((prevSelectedGroups) =>
@@ -83,9 +74,6 @@ export default function StartingForm() {
   const handleCheckboxChangeOther = (value) => {
     const isSelected = selectedGroupOther.includes(value);
     setRenderValue('Groups Selected')
-    //add or substract rendervalues
-    // let newRenderValue = renderValue + value;
-    // let oldRenderValue = renderValue.slice(0, renderValue.length - value.length);
 
     // If selected, remove from the array; otherwise, add to the array
     setSelectedGroupOther((prevSelectedGroups) =>
@@ -111,63 +99,6 @@ export default function StartingForm() {
         : [...prevSelectedGroups, value]
     );
   };
-
-
-
-
-
-  // const handleCheckboxChange = (value, group) => {
-  //   switch (group) {
-  //     case 'first':
-  //       setRenderValue(String(value) +' (First)')
-  //       setSelectedGroupFirst(value);
-  //       setSelectedGroupCorresp(null); // Unselect other groups
-  //       setSelectedGroupOther(null);
-  //       break;
-  //     case 'corresp':
-  //       setRenderValue(String(value) +' (Corresponding)')
-  //       setSelectedGroupCorresp(value);
-  //       setSelectedGroupFirst(null); // Unselect other groups
-  //       setSelectedGroupOther(null);
-  //       break;
-  //     case 'other':
-  //       setRenderValue(String(value) + ' (Other)')
-  //       setSelectedGroupOther(value);
-  //       setSelectedGroupFirst(null); // Unselect other groups
-  //       setSelectedGroupCorresp(null);
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // };
-
-  
-
-
-  // const handleCheckboxChange = (value, group) => {
-  //   switch (group) {
-  //     case 'first':
-  //       setRenderValue((prev) => prev.concat(`${value} (First)`));
-  //       setSelectedGroupFirst((prev) => [...prev, value]);
-  //       setSelectedGroupCorresp((prev) => prev.filter((item) => item !== value));
-  //       setSelectedGroupOther((prev) => prev.filter((item) => item !== value));
-  //       break;
-  //     case 'corresp':
-  //       setRenderValue((prev) => prev.concat(`${value} (Corresponding)`));
-  //       setSelectedGroupCorresp((prev) => [...prev, value]);
-  //       setSelectedGroupFirst((prev) => prev.filter((item) => item !== value));
-  //       setSelectedGroupOther((prev) => prev.filter((item) => item !== value));
-  //       break;
-  //     case 'other':
-  //       setRenderValue((prev) => prev.concat(`${value} (Other)`));
-  //       setSelectedGroupOther((prev) => [...prev, value]);
-  //       setSelectedGroupFirst((prev) => prev.filter((item) => item !== value));
-  //       setSelectedGroupCorresp((prev) => prev.filter((item) => item !== value));
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // };
 
   const handleApiTest = async (event) => {
     event.preventDefault();
@@ -233,8 +164,6 @@ export default function StartingForm() {
         This is a simple interface to test our new script to retrieve paper details based on the DOI alone. This script will be integrated into a new approach to collect iBET's scientific KPIs to save time that is best used doing actual research.<br /><br />
         Thanks for testing! Any feedback is welcome. Please send an email to Pedro Cruz (pedro.cruz@ibet.pt), Ines Isidro (iaisidro@ibet.pt) and Mauro Oliveri (mauro.oliveri@ibet.pt) or reach out to any of us directly.
         </Alert>
-        {/* <div style={{ marginBottom: '5px', fontWeight: 'bold', fontStyle: 'italic', borderBottom: '2px solid black'  }}>"This is a simple interface to test our new script to retrieve paper details based on the DOI alone. This script will be integrated into a new approach to collect iBET's scientific KPIs to save time that is best used doing actual research.</div>
-        <div style={{ marginBottom: '50px', fontWeight: 'bold', fontStyle: 'italic', borderBottom: '2px solid black'  }}>"Thanks for testing! Any feedback is welcome. Please send an email to Pedro Cruz, Ines Isidro and Mauro Oliveri or reach out to any of us directly.</div> */}
         <img src={logos} alt="logo" width="150" height="80" style={{ float: 'left', marginRight: '1450px', paddingTop: '40px'  }} />
         <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
           <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
