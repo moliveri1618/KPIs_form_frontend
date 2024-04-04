@@ -197,7 +197,7 @@ export default function FormSuccess() {
                   </TableCell>
                 </TableRow>
 
-                <TableRow>
+                {/* <TableRow>
                   <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>ISSN:</TableCell>
                   <TableCell>
                     <Tooltip  title={jsonData['ISSN']} arrow>
@@ -206,7 +206,7 @@ export default function FormSuccess() {
                       </div>
                     </Tooltip>
                   </TableCell>
-                </TableRow>
+                </TableRow> */}
 
                 {/* <TableRow>
                   <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Url:</TableCell>
