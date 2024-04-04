@@ -288,14 +288,19 @@ export default function StartingForm() {
                   checked={selectedGroupFirst.includes(value)}
                   onChange={() => handleCheckboxChangeFirst(value)}
                 />
-                <Checkbox style={{ width: '250px' }}
-                  checked={selectedGroupCorresp.includes(value)}
-                  onChange={() => handleCheckboxChangeCorresp(value)}
-                />
-                <Checkbox style={{ width: '20px' }}
-                  checked={selectedGroupOther.includes(value)}
-                  onChange={() => handleCheckboxChangeOther(value)}
-                />
+                <div style={{ paddingLeft: '100px' }}>
+                  <Checkbox 
+                    checked={selectedGroupCorresp.includes(value)}
+                    onChange={() => handleCheckboxChangeCorresp(value)}
+                  />
+                </div>
+                <div style={{ paddingLeft: '100px' }}>
+                  <Checkbox 
+                    checked={selectedGroupOther.includes(value)}
+                    onChange={() => handleCheckboxChangeOther(value)}
+                  />
+                </div>
+
               </MenuItem>
             ))}
             </Select>
