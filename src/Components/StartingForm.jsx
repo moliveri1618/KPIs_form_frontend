@@ -33,8 +33,9 @@ export default function StartingForm() {
   const [renderValue, setRenderValue] = useState(''); // Use state for flag
   
   const isValidDOI = (doi) => {
+    const trimmedDOI = doi.trim(); // Trim leading and trailing spaces
     const doiPattern = /^10\.\d{4,9}\/[-._;()/:A-Z0-9]+$/i;
-    return doiPattern.test(doi);
+    return doiPattern.test(trimmedDOI);
   };
 
   const handleChange = (event) => {
@@ -108,7 +109,8 @@ export default function StartingForm() {
       setFlag(1);
       let api = ''
       try {
-          api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/stoca?DOI=${doi}`
+          const trimmedDOI = doi.trim();
+          api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/stoca?DOI=${trimmedDOI}`
           axios.post(api)
             .then(response => {
               // The promise has resolved, and you can access the response data here
