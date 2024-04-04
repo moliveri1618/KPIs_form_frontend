@@ -53,6 +53,7 @@ const rows = [
 export default function FormSuccess() {
   const location = useLocation();
   const jsonData = location.state && location.state.data;
+  const selectedGroups = location.state && location.state.selectedGroups;
 
   const notify = () => {
     toast.success('The information for this paper are successfully saved into the database 😍', {
@@ -192,6 +193,39 @@ export default function FormSuccess() {
                     <Tooltip  title={jsonData['publisher']} arrow>
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
                         {jsonData['publisher']}
+                      </div>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
+
+                <TableRow>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Selected Groups:</TableCell>
+                  <TableCell>
+                    <Tooltip  title={selectedGroups} arrow>
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                        {selectedGroups.join(', ')}
+                      </div>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
+
+                <TableRow>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Citation Count:</TableCell>
+                  <TableCell>
+                    <Tooltip  title={selectedGroups} arrow>
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                        {jsonData['citation_count']}
+                      </div>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
+
+                <TableRow>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Article Type:</TableCell>
+                  <TableCell>
+                    <Tooltip  title={selectedGroups} arrow>
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                        {jsonData['article_type']}
                       </div>
                     </Tooltip>
                   </TableCell>

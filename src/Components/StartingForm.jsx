@@ -14,12 +14,10 @@ import logos from './Images/ibet_logo.png'
 import SPLoader from './SpinnerLoader';
 import Copyright from './CopyRight';
 import Alert from '@mui/material/Alert';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
 export default function StartingForm() {
   const [data, setData] = useState(null);
-  //const groups = ['Lab X', 'Lab Y', 'Lab Z'];
   const groups = ["Advanced Cell Models Lab", "Cell-Based Vaccines Development Lab", "Cell Line Development & Molecular Virology Lab", "Downstream Process Development Lab", "Stem Cell Bioengineering Lab", "Translational Immunology Lab", "TCA Science and Services (others)", "Engineering Cellular Applications Lab", "Cell Bioprocesses Lab", "Novartis Pharma Lab", "Sanofi Satellite Lab", "Bayer Pharma Lab", "Merck Healthcare Lab", "Molecular Biophysics Lab", "Analytical Services Unit", "Mass Spectrometry Unit", "Late-Stage R&D and Bioproduction Unit", "Food Safety & Microbiology Lab", "Natural Bioactives and Nutraceuticals Area", "Membrane Processes Lab", "R&D Major Projects (others)", "Biosystems and Data Science Group"];
   const [selectedGroups, setSelectedGroups] = useState([]);
   const [doi, setDoi] = useState('');
@@ -210,7 +208,7 @@ export default function StartingForm() {
         navigate(url);
       } else {
         var url = `/KPIs_form_frontend/success`;
-        navigate(url, { state: { data } });
+        navigate(url, { state: { data:data, selectedGroups:selectedGroups } });
       }
     }
 
