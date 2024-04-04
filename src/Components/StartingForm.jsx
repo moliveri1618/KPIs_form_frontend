@@ -19,7 +19,8 @@ import Checkbox from '@mui/material/Checkbox';
 
 export default function StartingForm() {
   const [data, setData] = useState(null);
-  const groups = ['Lab X', 'Lab Y', 'Lab Z'];
+  //const groups = ['Lab X', 'Lab Y', 'Lab Z'];
+  const groups = ["Advanced Cell Models Lab", "Cell-Based Vaccines Development Lab", "Cell Line Development & Molecular Virology Lab", "Downstream Process Development Lab", "Stem Cell Bioengineering Lab", "Translational Immunology Lab", "TCA Science and Services (others)", "Engineering Cellular Applications Lab", "Cell Bioprocesses Lab", "Novartis Pharma Lab", "Sanofi Satellite Lab", "Bayer Pharma Lab", "Merck Healthcare Lab", "Molecular Biophysics Lab", "Analytical Services Unit", "Mass Spectrometry Unit", "Late-Stage R&D and Bioproduction Unit", "Food Safety & Microbiology Lab", "Natural Bioactives and Nutraceuticals Area", "Membrane Processes Lab", "R&D Major Projects (others)", "Biosystems and Data Science Group"];
   const [selectedGroups, setSelectedGroups] = useState([]);
   const [doi, setDoi] = useState('');
   const [project, setProject] = useState('');
@@ -263,24 +264,35 @@ export default function StartingForm() {
               multiple
             >
               <MenuItem value="">
-                <em> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                     First &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-                     Corresponding &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-                     Other
-                </em>
+                <div style={{ borderBottom: '1px solid #808080', paddingBottom: '10px' }}>
+                  <em> 
+                      <strong>Labs Name</strong> 
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <strong>First</strong>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                      <strong>Corresponding</strong>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                      <strong>Other</strong>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                  </em>
+                </div>
               </MenuItem>
             {groups.map((value) => (
               <MenuItem key={value} value={value}>
-              <span style={{ marginRight: '75px' }}>{value}</span>
-                <Checkbox style={{ marginRight: '95px' }}
+              <span style={{ width: '455px' }}>{value}</span>
+                <Checkbox 
                   checked={selectedGroupFirst.includes(value)}
                   onChange={() => handleCheckboxChangeFirst(value)}
                 />
-                <Checkbox style={{ marginRight: '105px' }}
+                <Checkbox style={{ width: '250px' }}
                   checked={selectedGroupCorresp.includes(value)}
                   onChange={() => handleCheckboxChangeCorresp(value)}
                 />
-                <Checkbox
+                <Checkbox style={{ width: '20px' }}
                   checked={selectedGroupOther.includes(value)}
                   onChange={() => handleCheckboxChangeOther(value)}
                 />
