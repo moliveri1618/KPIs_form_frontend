@@ -49,14 +49,14 @@ export default function StartingForm() {
     validateForm(selectedGroups, event.target.value, project);
   };
 
-  const handleProjectChange = (event) => {
-    setProject(event.target.value);
-    setIsValidProject(isValidDOI(event.target.value));
-    validateForm(selectedGroups, doi, event.target.value);
-  };
+  // const handleProjectChange = (event) => {
+  //   setProject(event.target.value);
+  //   setIsValidProject(isValidDOI(event.target.value));
+  //   validateForm(selectedGroups, doi, event.target.value);
+  // };
 
-  const validateForm = (selectedGroups, doiValue, projectValue) => {
-    const isValidForm = selectedGroups.length > 0 && doiValue.trim() !== ''  && projectValue.trim() !== '';
+  const validateForm = (selectedGroups, doiValue) => {
+    const isValidForm = selectedGroups.length > 0 && doiValue.trim() !== '';
     setIsValid(isValidForm);
     setIsValidProject(isValidForm);
   };
@@ -309,11 +309,11 @@ export default function StartingForm() {
           }/>
           <TextField 
           id="outlined-search" 
-          label="Project *" 
+          label="Project" 
           type="search" 
           style={{ width: '27%', height: '40px',margin: '0'}} 
           value={project} 
-          onChange={handleProjectChange}
+          // onChange={handleProjectChange}
           helperText={
               <>
                   <Typography variant="body2" component="span">
