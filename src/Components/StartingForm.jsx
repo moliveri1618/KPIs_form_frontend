@@ -38,20 +38,12 @@ export default function StartingForm() {
 
   const handleChange = (event) => {
     setSelectedGroups(event.target.value)
-    validateForm(event.target.value, doi);
   };
 
   const handleDoiChange = (event) => {
     setDoi(event.target.value);
     setIsValidDoi(isValidDOI(event.target.value));
-    validateForm(selectedGroups, event.target.value);
   };
-
-  const validateForm = (selectedGroups, doiValue) => {
-    const isValidForm = selectedGroups.length > 0 && doiValue.trim() !== '';
-    setIsValid(isValidForm);
-  };
-
 
   const handleCheckboxChangeFirst = (value) => {
     const isSelected = selectedGroupFirst.includes(value);
@@ -102,7 +94,7 @@ export default function StartingForm() {
     event.preventDefault();
     const timeoutId = setTimeout(() => {
     }, 1000000);
-    if (isValid && isValidDoi) {
+    if (selectedGroups.length>0 && isValidDoi) {
       setFlag(1);
       let api = ''
       try {
@@ -110,7 +102,6 @@ export default function StartingForm() {
           api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/stoca?DOI=${trimmedDOI}`
           axios.post(api)
             .then(response => {
-              // The promise has resolved, and you can access the response data here
               setData(response.data['response']);
             })
             .catch(error => {
