@@ -29,6 +29,8 @@ export default function StartingForm() {
   const navigate = useNavigate();
   const [flag, setFlag] = useState(0); // Use state for flag
   const [renderValue, setRenderValue] = useState(''); // Use state for flag
+  const [isValidRedirect, setIsValidRedirect] = useState(false);
+
   
   const isValidDOI = (doi) => {
     const trimmedDOI = doi.trim(); // Trim leading and trailing spaces
@@ -133,8 +135,33 @@ export default function StartingForm() {
       }
     }
 
+    const validRedirectFlag  = localStorage.getItem('validRedirect');
+    console.log(validRedirectFlag )
+    
+    if (validRedirectFlag) {
+      setIsValidRedirect(true);
+      localStorage.removeItem('validRedirect');
+    } 
+
   }, [data]); // Dependency array ensures this effect runs only when 'data' changes
 
+  if (!isValidRedirect) {
+    return (
+      <Alert 
+        severity="error"  
+        style={{ 
+          textAlign: 'center', 
+          marginTop: '0px', // Adds a top margin, adjust as needed
+        }}
+      >
+        <Typography variant="h6" component="div" style={{ fontSize: '1.25rem' }}>
+          Error: This page can't be accessible directly.
+        </Typography>
+      </Alert>
+    );
+    
+
+  }
 
   return (
     <>
