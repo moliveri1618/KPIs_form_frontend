@@ -21,10 +21,8 @@ export default function StartingForm() {
   const groups = ["Advanced Cell Models Lab", "Cell-Based Vaccines Development Lab", "Cell Line Development & Molecular Virology Lab", "Downstream Process Development Lab", "Stem Cell Bioengineering Lab", "Translational Immunology Lab", "TCA Science and Services (others)", "Engineering Cellular Applications Lab", "Cell Bioprocesses Lab", "Novartis Pharma Lab", "Sanofi Satellite Lab", "Bayer Pharma Lab", "Merck Healthcare Lab", "Molecular Biophysics Lab", "Analytical Services Unit", "Mass Spectrometry Unit", "Late-Stage R&D and Bioproduction Unit", "Food Safety & Microbiology Lab", "Natural Bioactives and Nutraceuticals Area", "Membrane Processes Lab", "R&D Major Projects (others)", "Biosystems and Data Science Group"];
   const [selectedGroups, setSelectedGroups] = useState([]);
   const [doi, setDoi] = useState('');
-  const [project, setProject] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [isValidDoi, setIsValidDoi] = useState(true);
-  const [isValidProject, setIsValidProject] = useState('');
   const [selectedGroupFirst, setSelectedGroupFirst] = useState([]);
   const [selectedGroupOther, setSelectedGroupOther] = useState([]);
   const [selectedGroupCorresp, setSelectedGroupCorresp] = useState([]);
@@ -40,19 +38,18 @@ export default function StartingForm() {
 
   const handleChange = (event) => {
     setSelectedGroups(event.target.value)
-    validateForm(event.target.value, doi, project);
+    validateForm(event.target.value, doi);
   };
 
   const handleDoiChange = (event) => {
     setDoi(event.target.value);
     setIsValidDoi(isValidDOI(event.target.value));
-    validateForm(selectedGroups, event.target.value, project);
+    validateForm(selectedGroups, event.target.value);
   };
 
   const validateForm = (selectedGroups, doiValue) => {
     const isValidForm = selectedGroups.length > 0 && doiValue.trim() !== '';
     setIsValid(isValidForm);
-    setIsValidProject(isValidForm);
   };
 
 
@@ -105,7 +102,7 @@ export default function StartingForm() {
     event.preventDefault();
     const timeoutId = setTimeout(() => {
     }, 1000000);
-    if (isValid && isValidDoi && isValidProject) {
+    if (isValid && isValidDoi) {
       setFlag(1);
       let api = ''
       try {
@@ -258,8 +255,6 @@ export default function StartingForm() {
           label="Project" 
           type="search" 
           style={{ width: '27%', height: '40px',margin: '0'}} 
-          value={project} 
-          // onChange={handleProjectChange}
           helperText={
               <>
                   <Typography variant="body2" component="span">
@@ -267,6 +262,7 @@ export default function StartingForm() {
                   </Typography>
               </>
           }/>
+
         </div>
         <div style={{ display: 'flex', justifyContent: 'right', width: '83.5vw' }}>
           {flag === 0 && (
