@@ -56,6 +56,21 @@ export default function FormSuccess() {
   const selectedGroups = location.state && location.state.selectedGroups;
   const doi = location.state && location.state.doi;
 
+  const splitGroups = (groups) => {
+    const corresp = {}, other = {}, first = {};
+    Object.entries(groups || {}).forEach(([group, properties]) => {
+      if (properties.corresp) corresp[group] = true;
+      if (properties.other) other[group] = true;
+      if (properties.first) first[group] = true;
+    });
+    return { corresp, other, first };
+  };
+  
+  const { corresp, other, first } = splitGroups(selectedGroups);
+  console.log("corresp:", Object.keys(corresp).join(", "));
+  console.log("other:", Object.keys(other).join(", "));
+  console.log("first:", Object.keys(first).join(", "));
+
   const notify = () => {
     toast.success('The information for this paper are successfully saved into the database 😍', {
       position: "top-right",
@@ -200,11 +215,33 @@ export default function FormSuccess() {
                 </TableRow>
 
                 <TableRow>
-                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Research Groups:</TableCell>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Research Groups (<span style={{ fontStyle: 'italic' }}>First</span>):</TableCell>
                   <TableCell>
-                    <Tooltip  title={selectedGroups} arrow>
+                    <Tooltip arrow>
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                        {selectedGroups.join(', ')}
+                        { Object.keys(first).join(", ")}
+                      </div>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
+
+                <TableRow>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Research Groups (<span style={{ fontStyle: 'italic' }}>Corresp</span>):</TableCell>
+                  <TableCell>
+                    <Tooltip arrow>
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                        { Object.keys(corresp).join(", ")}
+                      </div>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
+
+                <TableRow>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Research Groups (<span style={{ fontStyle: 'italic' }}>Other</span>):</TableCell>
+                  <TableCell>
+                    <Tooltip arrow>
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                        { Object.keys(other).join(", ")}
                       </div>
                     </Tooltip>
                   </TableCell>
@@ -213,7 +250,7 @@ export default function FormSuccess() {
                 <TableRow>
                   <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Citation Count:</TableCell>
                   <TableCell>
-                    <Tooltip  title={selectedGroups} arrow>
+                    <Tooltip arrow>
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
                         {jsonData['citation_count']}
                       </div>
@@ -224,7 +261,7 @@ export default function FormSuccess() {
                 <TableRow>
                   <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Article Type:</TableCell>
                   <TableCell>
-                    <Tooltip  title={selectedGroups} arrow>
+                    <Tooltip arrow>
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
                         {jsonData['article_type']}
                       </div>
@@ -235,7 +272,7 @@ export default function FormSuccess() {
                 <TableRow>
                   <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>DOI:</TableCell>
                     <TableCell>
-                      <Tooltip  title={selectedGroups} arrow>
+                      <Tooltip arrow>
                         <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
                           {doi}
                         </div>
