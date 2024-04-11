@@ -32,24 +32,11 @@ export default function StartingForm() {
   const check_token_validity = (token) => {
     console.log(token)
     let api = ''
-    // try {
-    //   api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/check_the_cookie`
-    //   axios.post(api, { token: token })
-    //     .then(response => {
-    //       console.log(response.data['cookie'])
-    //     })
-    //     .catch(error => {
-    //       console.error(error);
-    //     });
-    
-    // } catch (error) {
-    //   console.error('Error fetching data:', error);
-    // }
     try {
-      api = 'http://127.0.0.1:8000/cookie_cookie'
+      api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/check_token/`
       axios.post(api, { token: token })
         .then(response => {
-          console.log(response)
+          console.log(response.data['response'])
         })
         .catch(error => {
           console.error(error);
