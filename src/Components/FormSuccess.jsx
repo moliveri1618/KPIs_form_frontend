@@ -66,11 +66,21 @@ export default function FormSuccess() {
     });
     return { corresp, other, first };
   };
-  
+
   const { corresp, other, first } = splitGroups(selectedGroups);
-  console.log("corresp:", Object.keys(corresp).join(", "));
-  console.log("other:", Object.keys(other).join(", "));
-  console.log("first:", Object.keys(first).join(", "));
+
+  // Function to reformat the names
+  const reformatNames = (namesStr) => {
+    if (!namesStr) return '';
+    const namesList = namesStr.split(" and ");
+    const reorderedNames = namesList.map(name => {
+      const [lastName, firstName] = name.split(', ');
+      return `${firstName} ${lastName}`;
+    });
+    return reorderedNames.join(", ");
+  };
+  
+  const reformattedNames = reformatNames(jsonData['author']);
 
   const notify = () => {
     toast.success('The information for this paper are successfully saved into the database 😍', {
@@ -141,9 +151,9 @@ export default function FormSuccess() {
                 <TableRow>
                   <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Authors:</TableCell>
                   <TableCell>
-                    <Tooltip  title={jsonData['author']} arrow>
+                    <Tooltip  arrow>
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                        {jsonData['author']}
+                        {reformattedNames}
                       </div>
                     </Tooltip>
                   </TableCell>
@@ -243,6 +253,17 @@ export default function FormSuccess() {
                     <Tooltip arrow>
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
                         { Object.keys(other).join(", ")}
+                      </div>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
+
+                <TableRow>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Project(s):</TableCell>
+                  <TableCell>
+                    <Tooltip arrow>
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                        {projectCodes}
                       </div>
                     </Tooltip>
                   </TableCell>
