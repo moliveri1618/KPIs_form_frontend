@@ -82,6 +82,7 @@ export default function StartingForm() {
         navigate(url);
       } else {
         var url = `/KPIs_form_frontend/success`;
+        console.log(selectedGroups)
         navigate(url, { state: { data:data, selectedGroups:selectedGroups, doi: doi} });
       }
     }
@@ -154,7 +155,7 @@ export default function StartingForm() {
                       }}>
               Select Groups
             </Button>
-            <MyDialog isOpen={open} handleClose={handleClose} />
+            <MyDialog isOpen={open} handleClose={handleClose} onSelectionChangeDialog={setSelectedGroups}/>
           </div>
           <TextField 
           id="outlined-search" 

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, {useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import SimpleTable from './table';
 
-export default function MyDialog({ isOpen, handleClose }) {
+export default function MyDialog({ isOpen, handleClose, onSelectionChangeDialog }) {
   const [selectedItems, setSelectedItems] = useState([]);
   
   const handleSave = () => {
@@ -22,10 +22,14 @@ export default function MyDialog({ isOpen, handleClose }) {
         }
         return acc;
       }, {});
-
+    setSelectedItems(filteredItems)
     console.log(filteredItems);
     handleClose(); 
   };
+
+  useEffect(() => {
+    onSelectionChangeDialog(selectedItems);
+  }, [selectedItems, onSelectionChangeDialog]);
 
   return (
     <Dialog
