@@ -11,9 +11,14 @@ import SPLoader from './SpinnerLoader';
 import Copyright from './CopyRight';
 import Alert from '@mui/material/Alert';
 import MyDialog from './dialog';
+import { useLocation  } from 'react-router-dom';
 
 
 export default function StartingForm() {
+  const location = useLocation();
+  const queryString = location.search;
+  const queryParams = new URLSearchParams(queryString);
+  const token = queryParams.get('token');
   const [data, setData] = useState(null);
   const [selectedGroups, setSelectedGroups] = useState([]);
   const [doi, setDoi] = useState('');
@@ -24,6 +29,23 @@ export default function StartingForm() {
   const [textDialog, setTextDialog] = useState('Select Groups');
   const [projectCodes, setProjectCodes] = useState('');
 
+  const check_token_validity = (token) => {
+    let api = ''
+    try {
+      api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/check_the_cookie`
+      axios.get(api)
+        .then(response => {
+          console.log(response.data['cookie'])
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+  check_token_validity(token)
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -37,7 +59,6 @@ export default function StartingForm() {
     setOpen(false);
   };
 
-  
   const isValidDOI = (doi) => {
     const trimmedDOI = doi.trim(); // Trim leading and trailing spaces
     const doiPattern = /^10\.\d{4,9}\/[-._;()/:A-Z0-9]+$/i;
@@ -91,15 +112,6 @@ export default function StartingForm() {
         navigate(url, { state: { data:data, selectedGroups:selectedGroups, doi: doi, projectCodes:projectCodes} });
       }
     }
-
-    // const validRedirectFlag  = localStorage.getItem('validRedirect');
-    // console.log(validRedirectFlag )
-    
-    // if (validRedirectFlag) {
-    //   setIsValidRedirect(true);
-    //   localStorage.removeItem('validRedirect');
-    // } 
-
   }, [data]); // Dependency array ensures this effect runs only when 'data' changes
 
   // if (!isValidRedirect) {

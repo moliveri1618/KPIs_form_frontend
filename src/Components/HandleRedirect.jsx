@@ -2,12 +2,13 @@ import { useEffect } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 
 function HandleRedirect() {
+  let { token } = useParams();
+  console.log(token);
   
-  useEffect(() => {
-    localStorage.setItem('validRedirect', 'true');
-  }, []);
+  // useEffect(() => {
+  //   localStorage.setItem('validRedirect', 'true');
+  // }, []);
   
-  // Redirect to /KPIs_form_frontend without changing the URL visibly
   return <Navigate to="/KPIs_form_frontend" replace />;
 }
 
