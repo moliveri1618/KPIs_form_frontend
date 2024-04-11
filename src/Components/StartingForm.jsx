@@ -30,12 +30,26 @@ export default function StartingForm() {
   const [projectCodes, setProjectCodes] = useState('');
 
   const check_token_validity = (token) => {
+    console.log(token)
     let api = ''
+    // try {
+    //   api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/check_the_cookie`
+    //   axios.post(api, { token: token })
+    //     .then(response => {
+    //       console.log(response.data['cookie'])
+    //     })
+    //     .catch(error => {
+    //       console.error(error);
+    //     });
+    
+    // } catch (error) {
+    //   console.error('Error fetching data:', error);
+    // }
     try {
-      api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/check_the_cookie`
-      axios.get(api)
+      api = 'http://127.0.0.1:8000/cookie_cookie'
+      axios.post(api, { token: token })
         .then(response => {
-          console.log(response.data['cookie'])
+          console.log(response)
         })
         .catch(error => {
           console.error(error);
@@ -45,14 +59,12 @@ export default function StartingForm() {
       console.error('Error fetching data:', error);
     }
   }
-  check_token_validity(token)
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
-
     if (Object.keys(selectedGroups).length>0) {
       setTextDialog('Groups Selected')
     }
@@ -113,6 +125,10 @@ export default function StartingForm() {
       }
     }
   }, [data]); // Dependency array ensures this effect runs only when 'data' changes
+
+  useEffect(() => {
+    check_token_validity(token);
+  }, []); 
 
   // if (!isValidRedirect) {
   //   return (
