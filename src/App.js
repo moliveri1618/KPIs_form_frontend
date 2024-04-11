@@ -8,14 +8,15 @@ import { ToastContainer, toast } from 'react-toastify';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import SPLoader from './Components/SpinnerLoader';
 
-//link from sharepoint: http://localhost:3000/KPIs_form_frontend/asdfg1234
+//link from sharepoint: http://localhost:3000/KPIs_form_frontend/asdfg1234dfkljgh546hodfkljgh54458459dfklhklfgholedrghdlLHLSHFL
+                        //http://127.0.0.1:8000/hahaha
 //homepage:             http://localhost:3000/KPIs_form_frontend
 
 function App() {
   return (
       <Router>
         <Routes>
-          <Route path="/KPIs_form_frontend/asdfg1234" element={<HandleRedirect />} />
+          {/* <Route path="/KPIs_form_frontend/asdfg1234dfkljgh546hodfkljgh54458459dfklhklfgholedrghdlLHLSHFL" element={<HandleRedirect />} /> */}
           <Route path="/KPIs_form_frontend" element={<StartingForm />} />
           <Route path="/KPIs_form_frontend/fail" element={<FormFail />} />
           <Route path="/KPIs_form_frontend/success" element={<FormSuccess />} />
