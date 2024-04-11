@@ -4,35 +4,23 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import axios from 'axios';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import logos from './Images/ibet_logo.png'
 import SPLoader from './SpinnerLoader';
 import Copyright from './CopyRight';
 import Alert from '@mui/material/Alert';
-import Checkbox from '@mui/material/Checkbox';
 import MyDialog from './dialog';
 
 
 
 export default function StartingForm() {
   const [data, setData] = useState(null);
-  const groups = ["Advanced Cell Models Lab", "Cell-Based Vaccines Development Lab", "Cell Line Development & Molecular Virology Lab", "Downstream Process Development Lab", "Stem Cell Bioengineering Lab", "Translational Immunology Lab", "TCA Science and Services (others)", "Engineering Cellular Applications Lab", "Cell Bioprocesses Lab", "Novartis Pharma Lab", "Sanofi Satellite Lab", "Bayer Pharma Lab", "Merck Healthcare Lab", "Molecular Biophysics Lab", "Analytical Services Unit", "Mass Spectrometry Unit", "Late-Stage R&D and Bioproduction Unit", "Food Safety & Microbiology Lab", "Natural Bioactives and Nutraceuticals Area", "Membrane Processes Lab", "R&D Major Projects (others)", "Biosystems and Data Science Group"];
   const [selectedGroups, setSelectedGroups] = useState([]);
   const [doi, setDoi] = useState('');
-  const [isValid, setIsValid] = useState(false);
   const [isValidDoi, setIsValidDoi] = useState(true);
-  const [selectedGroupFirst, setSelectedGroupFirst] = useState([]);
-  const [selectedGroupOther, setSelectedGroupOther] = useState([]);
-  const [selectedGroupCorresp, setSelectedGroupCorresp] = useState([]);
   const navigate = useNavigate();
   const [flag, setFlag] = useState(0); // Use state for flag
-  const [renderValue, setRenderValue] = useState(''); // Use state for flag
-  const [isValidRedirect, setIsValidRedirect] = useState(false);
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -50,66 +38,16 @@ export default function StartingForm() {
     return doiPattern.test(trimmedDOI);
   };
 
-  // const handleChange = (event) => {
-  //   setSelectedGroups(event.target.value)
-  //   console.log(event.target.value)
-  // };
-
   const handleDoiChange = (event) => {
     setDoi(event.target.value);
     setIsValidDoi(isValidDOI(event.target.value));
   };
 
-  // const handleCheckboxChangeFirst = (value) => {
-  //   const isSelected = selectedGroupFirst.includes(value);
-  //   setRenderValue('Groups Selected')
-
-  //   // If selected, remove from the array; otherwise, add to the array
-  //   setSelectedGroupFirst((prevSelectedGroups) =>
-  //     isSelected
-  //       ? (console.log(renderValue),
-  //         //setRenderValue(oldRenderValue),
-  //         prevSelectedGroups.filter((group) => group !== value))
-  //       : (console.log(renderValue),
-  //         //setRenderValue(newRenderValue),
-  //         [...prevSelectedGroups, value])
-  //   );
-  // };
-
-  // const handleCheckboxChangeOther = (value) => {
-  //   const isSelected = selectedGroupOther.includes(value);
-  //   setRenderValue('Groups Selected')
-
-  //   // If selected, remove from the array; otherwise, add to the array
-  //   setSelectedGroupOther((prevSelectedGroups) =>
-  //     isSelected
-  //       ? (console.log(renderValue),
-  //         //setRenderValue(oldRenderValue),
-  //         prevSelectedGroups.filter((group) => group !== value))
-  //       : (console.log(renderValue),
-  //         //setRenderValue(newRenderValue),
-  //         [...prevSelectedGroups, value])
-  //     );
-
-  // };
-
-  // const handleCheckboxChangeCorresp = (value) => {
-  //   // Check if the group is already selected
-  //   const isSelected = selectedGroupCorresp.includes(value);
-  //   setRenderValue('Groups Selected')
-  //   // If selected, remove from the array; otherwise, add to the array
-  //   setSelectedGroupCorresp((prevSelectedGroups) =>
-  //     isSelected
-  //       ? prevSelectedGroups.filter((group) => group !== value)
-  //       : [...prevSelectedGroups, value]
-  //   );
-  // };
-
   const handleApiTest = async (event) => {
     event.preventDefault();
     const timeoutId = setTimeout(() => {
     }, 1000000);
-    if (selectedGroups.length>0 && isValidDoi) {
+    if (isValidDoi) {
       setFlag(1);
       let api = ''
       try {
@@ -204,68 +142,6 @@ export default function StartingForm() {
                       justifyContent: 'center',
                       paddingTop: '40px', 
                       paddingBottom: '60px'}}> 
-          {/* <FormControl fullWidth style={{ width: '27%' }}>
-          <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
-              Open dialog
-            </Button>
-            <MyDialog isOpen={open} handleClose={handleClose} />
-          </div>
-            <InputLabel id="demo-simple-select-label">Groups *</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              displayEmpty
-              value={selectedGroups}
-              label="Group"
-              onChange={handleChange}
-              renderValue={() => {
-                return renderValue;
-              }}
-              multiple
-            >
-              <MenuItem value="">
-                <div style={{ borderBottom: '1px solid #808080', paddingBottom: '10px' }}>
-                  <em> 
-                      <strong>Labs Name</strong> 
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <strong>First</strong>
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-                      <strong>Corresponding</strong>
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-                      <strong>Other</strong>
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-                  </em>
-                </div>
-              </MenuItem>
-            {groups.map((value) => (
-              <MenuItem key={value} value={value}>
-              <span style={{ width: '455px' }}>{value}</span>
-                <Checkbox 
-                  checked={selectedGroupFirst.includes(value)}
-                  onChange={() => handleCheckboxChangeFirst(value)}
-                />
-                <div style={{ paddingLeft: '100px' }}>
-                  <Checkbox 
-                    checked={selectedGroupCorresp.includes(value)}
-                    onChange={() => handleCheckboxChangeCorresp(value)}
-                  />
-                </div>
-                <div style={{ paddingLeft: '100px' }}>
-                  <Checkbox 
-                    checked={selectedGroupOther.includes(value)}
-                    onChange={() => handleCheckboxChangeOther(value)}
-                  />
-                </div>
-
-              </MenuItem>
-            ))}
-            </Select>
-          </FormControl> */}
           <div>
             <Button variant="outlined" onClick={handleClickOpen}  
                     style={{ 

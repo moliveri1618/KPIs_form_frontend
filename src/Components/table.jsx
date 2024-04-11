@@ -27,8 +27,6 @@ const rows = [
 
 function SimpleTable ({ onSelectionChange })  {
   const [selected, setSelected] = useState({});
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [page, setPage] = useState(0);
 
   useEffect(() => {
     onSelectionChange(selected);
@@ -43,10 +41,6 @@ function SimpleTable ({ onSelectionChange })  {
       },
     }));
   };
-
-//   useEffect(() => {
-//     console.log('Selected state changed:', selected);
-//   }, [selected]); 
 
   return (
     <>
