@@ -55,6 +55,7 @@ export default function FormSuccess() {
   const jsonData = location.state && location.state.data;
   const selectedGroups = location.state && location.state.selectedGroups;
   const doi = location.state && location.state.doi;
+  const projectCodes = location.state && location.state.projectCodes;
 
   const splitGroups = (groups) => {
     const corresp = {}, other = {}, first = {};

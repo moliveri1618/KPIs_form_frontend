@@ -13,16 +13,17 @@ import Alert from '@mui/material/Alert';
 import MyDialog from './dialog';
 
 
-
 export default function StartingForm() {
   const [data, setData] = useState(null);
   const [selectedGroups, setSelectedGroups] = useState([]);
   const [doi, setDoi] = useState('');
   const [isValidDoi, setIsValidDoi] = useState(true);
   const navigate = useNavigate();
-  const [flag, setFlag] = useState(0); // Use state for flag
+  const [flag, setFlag] = useState(0); 
   const [open, setOpen] = useState(false);
   const [textDialog, setTextDialog] = useState('Select Groups');
+  const [projectCodes, setProjectCodes] = useState('');
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -87,7 +88,7 @@ export default function StartingForm() {
         navigate(url);
       } else {
         var url = `/KPIs_form_frontend/success`;
-        navigate(url, { state: { data:data, selectedGroups:selectedGroups, doi: doi} });
+        navigate(url, { state: { data:data, selectedGroups:selectedGroups, doi: doi, projectCodes:projectCodes} });
       }
     }
 
@@ -171,28 +172,29 @@ export default function StartingForm() {
           error={!isValidDoi}
           helperText={
               <>
-                  <Typography variant="body2" component="span">
-                      e.g.:
-                  </Typography>
-                  {' '}
-                  <Typography variant="body2" component="span" style={{ fontWeight: 'bold' }}>
-                      10.1016/j.carbpol.2016.01.046
-                  </Typography>
+                <Typography variant="body2" component="span">
+                    e.g.:
+                </Typography>
+                {' '}
+                <Typography variant="body2" component="span" style={{ fontWeight: 'bold' }}>
+                    10.1016/j.carbpol.2016.01.046
+                </Typography>
               </>
           }/>
           <TextField 
           id="outlined-search" 
-          label="Project" 
+          label="Project(s)" 
           type="search" 
           style={{ width: '27%', height: '40px',margin: '0'}} 
+          value={projectCodes} 
+          onChange={(e) => setProjectCodes(e.target.value)} 
           helperText={
               <>
-                  <Typography variant="body2" component="span">
-                    Project(s) associated with this KPI. Enter the project LabOrders codes, separated by commas, e.g.: <i><strong>P-123</strong>, <strong>PI-456</strong></i>
-                  </Typography>
+                <Typography variant="body2" component="span">
+                  Project(s) associated with this KPI. Enter the project LabOrders codes, separated by commas, e.g.: <i><strong>P-123</strong>, <strong>PI-456</strong></i>
+                </Typography>
               </>
           }/>
-
         </div>
         <div style={{ display: 'flex', justifyContent: 'right', width: '83.5vw' }}>
           {flag === 0 && (
