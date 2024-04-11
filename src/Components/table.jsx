@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TablePagination, Checkbox  } from '@material-ui/core';
 
 
@@ -25,18 +25,28 @@ const rows = [
   { labs_name: "Biosystems and Data Science Group", first: 'Jon', corresp: 'Snow', other: 35 },
 ];
 
-const SimpleTable = () => {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+function SimpleTable ({ onSelectionChange })  {
+  const [selected, setSelected] = useState({});
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [page, setPage] = useState(0);
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+  useEffect(() => {
+    onSelectionChange(selected);
+  }, [selected, onSelectionChange]);
+
+  const handleCheckboxChange = (labName, type) => {
+    setSelected(prevSelected => ({
+      ...prevSelected,
+      [labName]: {
+        ...prevSelected[labName],
+        [type]: !prevSelected[labName]?.[type],
+      },
+    }));
   };
 
-  const handleChangeRowsPerPage = event => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+//   useEffect(() => {
+//     console.log('Selected state changed:', selected);
+//   }, [selected]); 
 
   return (
     <>
@@ -56,9 +66,24 @@ const SimpleTable = () => {
                 <TableCell component="th" scope="row">
                   {row.labs_name} 
                 </TableCell>
-                <TableCell align="center"><Checkbox /></TableCell>
-                <TableCell align="center"><Checkbox /></TableCell>
-                <TableCell align="center"><Checkbox /></TableCell>
+                <TableCell align="center">
+                    <Checkbox
+                        checked={selected[row.labs_name]?.first || false}
+                        onChange={() => handleCheckboxChange(row.labs_name, 'first')}
+                    />
+                </TableCell>
+                <TableCell align="center">
+                    <Checkbox
+                        checked={selected[row.labs_name]?.corresp || false}
+                        onChange={() => handleCheckboxChange(row.labs_name, 'corresp')}
+                    />
+                </TableCell>
+                <TableCell align="center">
+                    <Checkbox 
+                        checked={selected[row.labs_name]?.other || false}
+                        onChange={() => handleCheckboxChange(row.labs_name, 'other')}
+                    />
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
