@@ -15,6 +15,9 @@ import SPLoader from './SpinnerLoader';
 import Copyright from './CopyRight';
 import Alert from '@mui/material/Alert';
 import Checkbox from '@mui/material/Checkbox';
+import MyDialog from './dialog';
+
+
 
 export default function StartingForm() {
   const [data, setData] = useState(null);
@@ -30,6 +33,15 @@ export default function StartingForm() {
   const [flag, setFlag] = useState(0); // Use state for flag
   const [renderValue, setRenderValue] = useState(''); // Use state for flag
   const [isValidRedirect, setIsValidRedirect] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   
   const isValidDOI = (doi) => {
@@ -38,59 +50,60 @@ export default function StartingForm() {
     return doiPattern.test(trimmedDOI);
   };
 
-  const handleChange = (event) => {
-    setSelectedGroups(event.target.value)
-  };
+  // const handleChange = (event) => {
+  //   setSelectedGroups(event.target.value)
+  //   console.log(event.target.value)
+  // };
 
   const handleDoiChange = (event) => {
     setDoi(event.target.value);
     setIsValidDoi(isValidDOI(event.target.value));
   };
 
-  const handleCheckboxChangeFirst = (value) => {
-    const isSelected = selectedGroupFirst.includes(value);
-    setRenderValue('Groups Selected')
+  // const handleCheckboxChangeFirst = (value) => {
+  //   const isSelected = selectedGroupFirst.includes(value);
+  //   setRenderValue('Groups Selected')
 
-    // If selected, remove from the array; otherwise, add to the array
-      setSelectedGroupFirst((prevSelectedGroups) =>
-      isSelected
-        ? (console.log(renderValue),
-          //setRenderValue(oldRenderValue),
-          prevSelectedGroups.filter((group) => group !== value))
-        : (console.log(renderValue),
-          //setRenderValue(newRenderValue),
-          [...prevSelectedGroups, value])
-    );
-  };
+  //   // If selected, remove from the array; otherwise, add to the array
+  //   setSelectedGroupFirst((prevSelectedGroups) =>
+  //     isSelected
+  //       ? (console.log(renderValue),
+  //         //setRenderValue(oldRenderValue),
+  //         prevSelectedGroups.filter((group) => group !== value))
+  //       : (console.log(renderValue),
+  //         //setRenderValue(newRenderValue),
+  //         [...prevSelectedGroups, value])
+  //   );
+  // };
 
-  const handleCheckboxChangeOther = (value) => {
-    const isSelected = selectedGroupOther.includes(value);
-    setRenderValue('Groups Selected')
+  // const handleCheckboxChangeOther = (value) => {
+  //   const isSelected = selectedGroupOther.includes(value);
+  //   setRenderValue('Groups Selected')
 
-    // If selected, remove from the array; otherwise, add to the array
-    setSelectedGroupOther((prevSelectedGroups) =>
-      isSelected
-        ? (console.log(renderValue),
-          //setRenderValue(oldRenderValue),
-          prevSelectedGroups.filter((group) => group !== value))
-        : (console.log(renderValue),
-          //setRenderValue(newRenderValue),
-          [...prevSelectedGroups, value])
-      );
+  //   // If selected, remove from the array; otherwise, add to the array
+  //   setSelectedGroupOther((prevSelectedGroups) =>
+  //     isSelected
+  //       ? (console.log(renderValue),
+  //         //setRenderValue(oldRenderValue),
+  //         prevSelectedGroups.filter((group) => group !== value))
+  //       : (console.log(renderValue),
+  //         //setRenderValue(newRenderValue),
+  //         [...prevSelectedGroups, value])
+  //     );
 
-  };
+  // };
 
-  const handleCheckboxChangeCorresp = (value) => {
-    // Check if the group is already selected
-    const isSelected = selectedGroupCorresp.includes(value);
-    setRenderValue('Groups Selected')
-    // If selected, remove from the array; otherwise, add to the array
-    setSelectedGroupCorresp((prevSelectedGroups) =>
-      isSelected
-        ? prevSelectedGroups.filter((group) => group !== value)
-        : [...prevSelectedGroups, value]
-    );
-  };
+  // const handleCheckboxChangeCorresp = (value) => {
+  //   // Check if the group is already selected
+  //   const isSelected = selectedGroupCorresp.includes(value);
+  //   setRenderValue('Groups Selected')
+  //   // If selected, remove from the array; otherwise, add to the array
+  //   setSelectedGroupCorresp((prevSelectedGroups) =>
+  //     isSelected
+  //       ? prevSelectedGroups.filter((group) => group !== value)
+  //       : [...prevSelectedGroups, value]
+  //   );
+  // };
 
   const handleApiTest = async (event) => {
     event.preventDefault();
@@ -135,13 +148,13 @@ export default function StartingForm() {
       }
     }
 
-    const validRedirectFlag  = localStorage.getItem('validRedirect');
-    console.log(validRedirectFlag )
+    // const validRedirectFlag  = localStorage.getItem('validRedirect');
+    // console.log(validRedirectFlag )
     
-    if (validRedirectFlag) {
-      setIsValidRedirect(true);
-      localStorage.removeItem('validRedirect');
-    } 
+    // if (validRedirectFlag) {
+    //   setIsValidRedirect(true);
+    //   localStorage.removeItem('validRedirect');
+    // } 
 
   }, [data]); // Dependency array ensures this effect runs only when 'data' changes
 
@@ -191,7 +204,13 @@ export default function StartingForm() {
                       justifyContent: 'center',
                       paddingTop: '40px', 
                       paddingBottom: '60px'}}> 
-          <FormControl fullWidth style={{ width: '27%' }}>
+          {/* <FormControl fullWidth style={{ width: '27%' }}>
+          <div>
+            <Button variant="outlined" onClick={handleClickOpen}>
+              Open dialog
+            </Button>
+            <MyDialog isOpen={open} handleClose={handleClose} />
+          </div>
             <InputLabel id="demo-simple-select-label">Groups *</InputLabel>
             <Select
               labelId="demo-simple-select-label"
@@ -246,7 +265,21 @@ export default function StartingForm() {
               </MenuItem>
             ))}
             </Select>
-          </FormControl>
+          </FormControl> */}
+          <div>
+            <Button variant="outlined" onClick={handleClickOpen}  
+                    style={{ 
+                      height: '56px', 
+                      margin: '0',
+                      width: '550px',
+                      padding: '0px 14px',
+                      color: 'rgba(0, 0, 0, 0.87)',
+                      borderColor: 'rgba(0, 0, 0, 0.23)'
+                      }}>
+              Select Groups
+            </Button>
+            <MyDialog isOpen={open} handleClose={handleClose} />
+          </div>
           <TextField 
           id="outlined-search" 
           label="DOI *" 
@@ -283,7 +316,7 @@ export default function StartingForm() {
         <div style={{ display: 'flex', justifyContent: 'right', width: '83.5vw' }}>
           {flag === 0 && (
             <Link>
-              <Button type="submit" variant="contained" color="primary" onClick={handleApiTest} style={{ width: '15%' }}>
+              <Button type="submit" variant="contained" color="primary" onClick={handleApiTest} style={{ width: '15%', marginTop:'20px' }}>
                 Submit
               </Button>
             </Link>
