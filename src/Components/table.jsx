@@ -64,18 +64,27 @@ function SimpleTable ({ onSelectionChange })  {
                     <Checkbox
                         checked={selected[row.labs_name]?.first || false}
                         onChange={() => handleCheckboxChange(row.labs_name, 'first')}
+                        style={{
+                            color: selected[row.labs_name]?.first ? "#007bff" : undefined,
+                        }}
                     />
                 </TableCell>
                 <TableCell align="center">
                     <Checkbox
                         checked={selected[row.labs_name]?.corresp || false}
                         onChange={() => handleCheckboxChange(row.labs_name, 'corresp')}
+                        style={{
+                            color: selected[row.labs_name]?.first ? "#007bff" : undefined,
+                        }}
                     />
                 </TableCell>
                 <TableCell align="center">
                     <Checkbox 
                         checked={selected[row.labs_name]?.other || false}
                         onChange={() => handleCheckboxChange(row.labs_name, 'other')}
+                        style={{
+                            color: selected[row.labs_name]?.first ? "#007bff" : undefined,
+                        }}
                     />
                 </TableCell>
               </TableRow>

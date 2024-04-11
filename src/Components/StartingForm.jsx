@@ -22,12 +22,17 @@ export default function StartingForm() {
   const navigate = useNavigate();
   const [flag, setFlag] = useState(0); // Use state for flag
   const [open, setOpen] = useState(false);
+  const [textDialog, setTextDialog] = useState('Select Groups');
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
+
+    if (Object.keys(selectedGroups).length>0) {
+      setTextDialog('Groups Selected')
+    }
     setOpen(false);
   };
 
@@ -153,7 +158,7 @@ export default function StartingForm() {
                       color: 'rgba(0, 0, 0, 0.87)',
                       borderColor: 'rgba(0, 0, 0, 0.23)'
                       }}>
-              Select Groups
+              {textDialog}
             </Button>
             <MyDialog isOpen={open} handleClose={handleClose} onSelectionChangeDialog={setSelectedGroups}/>
           </div>
