@@ -28,18 +28,17 @@ export default function StartingForm() {
   const [open, setOpen] = useState(false);
   const [textDialog, setTextDialog] = useState('Select Groups');
   const [projectCodes, setProjectCodes] = useState('');
-  const [isSubscribed, setIsSubscribed] = useState(true);
-  const [isValidRedirect, setIsValidRedirect] = useState('');
+  const [isValidRedirect, setIsValidRedirect] = useState(true);
 
   const check_token_validity = async (token) => {
     //console.log(token);
     const api = `http://${process.env.REACT_APP_API_URL_DEV}/check_token/`;
     try {
         const response = await axios.post(api, { token: token });
-        console.log(response.data['status']); 
+        //console.log(response.data['status']); 
         return response.data['status'];        
     } catch (error) {
-        console.error('Error fetching data:', error);
+        //console.error('Error fetching data:', error);
         return null;  
     }
   }
@@ -114,19 +113,19 @@ export default function StartingForm() {
     
     check_token_validity(token).then(status => {
         setIsValidRedirect(status);
-        console.log(status); // This will log the actual status ("False" in this case)
+        //console.log(status); 
     }).catch(error => {
-        console.error('Error validating token:', error);
+        //console.error('Error validating token:', error);
     });
   }, []);
 
-  if (isValidRedirect == 'False') {
+  if (!isValidRedirect) {
     return (
       <Alert 
         severity="error"  
         style={{ 
           textAlign: 'center', 
-          marginTop: '0px', // Adds a top margin, adjust as needed
+          marginTop: '0px', 
         }}
       >
         <Typography variant="h6" component="div" style={{ fontSize: '1.25rem' }}>
@@ -136,7 +135,7 @@ export default function StartingForm() {
     );
   }
 
-  if (isValidRedirect == 'True') {
+  if (isValidRedirect) {
     return (
       <>
         <Box

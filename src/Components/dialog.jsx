@@ -23,7 +23,7 @@ export default function MyDialog({ isOpen, handleClose, onSelectionChangeDialog 
         return acc;
       }, {});
     setSelectedItems(filteredItems)
-    console.log(filteredItems);
+    //console.log(filteredItems);
     handleClose(); 
   };
 
