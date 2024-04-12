@@ -100,14 +100,7 @@ export default function FormFail() {
       res['ISSN'] = issn
       res['url'] = url
 
-      let api = ''
       try {
-        // if (process.env.NODE_ENV !== 'production') {
-        //   api = 'http://' + process.env.REACT_APP_API_URL_DEV + '/manual_submission'
-        // } else {
-        //   api = 'http://' + process.env.REACT_APP_API_URL_PROD + '/manual_submission'
-        // }
-        //const response = axios.post(api)
         submit_success()
         setbuttonDisabled(true)
       } catch (error) {
@@ -132,7 +125,7 @@ export default function FormFail() {
     };
   }, []); 
 
-  if (doi != '') {
+  if (doi !== '') {
     return (
       <>
         <Box

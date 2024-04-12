@@ -2,11 +2,8 @@ import './App.css';
 import StartingForm from './Components/StartingForm';
 import FormFail from './Components/FormFail'
 import FormSuccess from './Components/FormSuccess'
-import HandleRedirect from './Components/HandleRedirect';
-import React, {useEffect } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import SPLoader from './Components/SpinnerLoader';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 //link from sharepoint: http://localhost:3000/KPIs_form_frontend/asdfg1234dfkljgh546hodfkljgh54458459dfklhklfgholedrghdlLHLSHFL
                         //http://127.0.0.1:8000/redirect/

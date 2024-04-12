@@ -1,7 +1,6 @@
-import React, {useState, useEffect } from 'react';
+import React, {useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
@@ -12,42 +11,10 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Copyright from './CopyRight';
 import logos from './Images/ibet_logo.png'
-
-
-function createData(
-  title,
-  volume,
-  ISSN,
-  url,
-  number,
-  journal,
-  publisher,
-  author,
-  year,
-  month,
-  pages
-) {
-  return { title, volume, ISSN, url, number,journal, publisher, author, year, month, pages };
-}
-
-const rows = [
-  createData('Combination of Zinc Oxide Photocatalysis with Membrane Filtration for Surface Water Disinfection', 
-  12,
-  2305-5934, 
-  'http://dx.doi.org/10.3390/foods12071383', 
-  7, 
-  'foods', 
-  'MDPI AG', 
-  'Mecha, Elsa and Alves, Mara Lisa and Bento da Silva, Andreia and Pereira, Ana Bárbara and Rubiales, Diego and Vaz Patto, Maria Carlota and Bronze, Maria Rosário', 
-  2023, 
-  'mar', 
-  1395)
-];
 
 
 export default function FormSuccess() {
