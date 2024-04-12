@@ -16,93 +16,41 @@ export default function FormFail() {
   const [volume, setVolume] = useState('');
   const [issn, setISSN] = useState('');
   const [url, setUrl] = useState('');
-  const [number, setNumber] = useState('');
-  const [journal, setJournal] = useState('');
-  const [publisher, setPublisher] = useState('');
-  const [pages, setPages] = useState('');
-  const [year, setYear] = useState('');
-  const [month, setMonth] = useState('');
-  let res = {}
-
+  const [doi, setDoi] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [buttonDisabled, setbuttonDisabled] = useState(false);
+  let res = {}
 
   const handleChangeTitle = (event) => {
     setTitle(event.target.value);
-    validateForm(event.target.value, author, volume, issn, url, number, journal, publisher, pages, year, month);
+    validateForm(event.target.value, author, volume, issn, url);
   };
 
   const handleChangeAuthor= (event) => {
     setAuthor(event.target.value);
-    validateForm(title, event.target.value, volume, issn, url, number, journal, publisher, pages, year, month);
+    validateForm(title, event.target.value, volume, issn, url);
   };
 
   const handleChangeVolume = (event) => {
     setVolume(event.target.value);
-    validateForm(title, author, event.target.value, issn, url, number, journal, publisher, pages, year, month);
+    validateForm(title, author, event.target.value, issn, url);
   };
   
   const handleChangeISSN = (event) => {
     setISSN(event.target.value);
-    validateForm(title, author, volume, event.target.value, url, number, journal, publisher, pages, year, month);
+    validateForm(title, author, volume, event.target.value, url);
 
   };
   
   const handleChangeUrl = (event) => {
     setUrl(event.target.value);
-    validateForm(title, author, volume, issn, event.target.value, number, journal, publisher, pages, year, month);
+    validateForm(title, author, volume, issn, event.target.value);
 
   };
   
-  const handleChangeNumber = (event) => {
-    setNumber(event.target.value);
-    validateForm(title, author, volume, issn, url, event.target.value, journal, publisher, pages, year, month);
 
-  };
-  
-  const handleChangeJournal = (event) => {
-    setJournal(event.target.value);
-    validateForm(title, author, volume, issn, url, number, event.target.value, publisher, pages, year, month);
-
-  };
-  
-  const handleChangePublisher = (event) => {
-    setPublisher(event.target.value);
-    validateForm(title, author, volume, issn, url, number, journal, event.target.value, pages, year, month);
-
-  };
-  
-  const handleChangePages = (event) => {
-    setPages(event.target.value);
-    validateForm(title, author, volume, issn, url, number, journal, publisher, event.target.value, year, month);
-
-  };
-  
-  const handleChangeYear = (event) => {
-    setYear(event.target.value);
-    validateForm(title, author, volume, issn, url, number, journal, publisher, pages, event.target.value, month);
-
-  };
-  
-  const handleChangeMonth = (event) => {
-    setMonth(event.target.value);
-        validateForm(title, author, volume, issn, url, number, journal, publisher, pages, year, event.target.value);
-
-  };
-
-  const validateForm = (titleValue, 
-                        authorValue,
-                        volumeValue,
-                        issnValue,
-                        urlValue,
-                        numberValue,
-                        journalValue,
-                        publisherValue,
-                        pagesValue,
-                        yearValue,
-                        monthValue
-                        ) => {
-    const isValidForm = titleValue.trim() !== '' && authorValue.trim() !== '' && volumeValue.trim() !== '' && issnValue.trim() !== '' && urlValue.trim() !== '' && numberValue.trim() !== '' && journalValue.trim() !== '' && publisherValue.trim() !== '' && pagesValue.trim() !== '' && yearValue.trim() !== '' && monthValue.trim() !== '';
+  const validateForm = (titleValue, authorValue,volumeValue,issnValue,urlValue,) => {
+    const isValidForm = titleValue.trim() !== '' && authorValue.trim() !== '' && volumeValue.trim() !== '' && issnValue.trim() !== '' && urlValue.trim();
     setIsValid(isValidForm);
   };
 
@@ -151,12 +99,6 @@ export default function FormFail() {
       res['volume'] = volume
       res['ISSN'] = issn
       res['url'] = url
-      res['number'] = number
-      res['journal'] = journal
-      res['publisher'] = publisher
-      res['pages'] = pages
-      res['year'] = year
-      res['month'] = month
 
       let api = ''
       try {
@@ -168,7 +110,6 @@ export default function FormFail() {
         //const response = axios.post(api)
         submit_success()
         setbuttonDisabled(true)
-        // add dialog pop up saying: 
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -176,90 +117,92 @@ export default function FormFail() {
   };
 
   useEffect(() => {
+
     // Get doi from url
     const url = window.location.href;
     const doiMatch = url.match(/DOI=([^&]+)/);
-    let doi = ''
+    console.log(doiMatch)
     if (doiMatch && doiMatch[1]) {
-      doi = doiMatch[1];
+      setDoi(doiMatch[1]);
     }
     notify(doi)
 
-    // Cleanup function
     return () => {
-      toast.dismiss(); // Dismiss any existing toasts when the component unmounts
+      toast.dismiss(); 
     };
   }, []); 
 
-
-  return (
-    <>
-      <Box
-        component="form"
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          '& .MuiTextField-root': { m: 1, width: '25ch' },
-        }}
-        noValidate
-        autoComplete="off"
-      >
-        <Link to="/KPIs_form_frontend">
-          <img src={logos} alt="logo" width="150" height="80" style={{ float: 'left', marginRight: '1450px', paddingTop: '40px'  }} />
-        </Link>   
-        <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
-          <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
-            Add Publication Details
-          </Typography>
-        </div>
-        <div style={{ display: 'flex', 
-                      gap: '10px',  
-                      width: '100vw',  
-                      justifyContent: 'center',
-                      paddingTop: '40px', 
-                      paddingBottom: '20px'}}> 
-          <TextField id="a" label="Title" type="search" style={{ width: '40%', height: '40px',margin: '0'}} onChange={handleChangeTitle} required/>
-          <TextField id="a" label="Author" type="search" style={{ width: '40%', height: '40px',margin: '0'}} onChange={handleChangeAuthor} required/>
-        </div>
-        <div style={{ display: 'flex', 
-                      gap: '10px',  
-                      width: '100vw',  
-                      justifyContent: 'center',
-                      paddingTop: '40px', 
-                      paddingBottom: '60px'}}> 
-          <TextField id="b" label="Volume" type="number" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangeVolume}/>
-          <TextField id="c" label="Pages" type="number" style={{ width: '26%', height: '40px',margin: '0'}} onChange={handleChangeISSN}/>
-          <TextField id="d" label="Year" type="search" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangeUrl}/>
-        </div>
-
-        <div style={{ display: 'flex', justifyContent: 'right', width: '83vw' }}>
+  if (doi != '') {
+    return (
+      <>
+        <Box
+          component="form"
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            '& .MuiTextField-root': { m: 1, width: '25ch' },
+          }}
+          noValidate
+          autoComplete="off"
+        >
           <Link to="/KPIs_form_frontend">
-            <Button variant="contained" color="primary" style={{ width: '15%' }}>
-              Back
-            </Button>
-          </Link>
-          <Link>
-            <Button variant="contained" color="primary" onClick={handleApiTest} disabled={buttonDisabled} style={{ width: '15%' }}>
-              Submit
-            </Button>
-          </Link>
-          <ToastContainer
-            position="top-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="colored"
-            />
-        </div>
-      </Box>
-      <Copyright sx={{ mt: 5 }} />
-    </>
-  );
+            <img src={logos} alt="logo" width="150" height="80" style={{ float: 'left', marginRight: '1450px', paddingTop: '40px'  }} />
+          </Link>   
+          <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
+            <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
+              Add Publication Details
+            </Typography>
+          </div>
+          <div style={{ display: 'flex', 
+                        gap: '10px',  
+                        width: '100vw',  
+                        justifyContent: 'center',
+                        paddingTop: '40px', 
+                        paddingBottom: '20px'}}> 
+            <TextField id="a" label="Title" type="search" style={{ width: '40%', height: '40px',margin: '0'}} onChange={handleChangeTitle} required/>
+            <TextField id="a" label="Author" type="search" style={{ width: '40%', height: '40px',margin: '0'}} onChange={handleChangeAuthor} required/>
+          </div>
+          <div style={{ display: 'flex', 
+                        gap: '10px',  
+                        width: '100vw',  
+                        justifyContent: 'center',
+                        paddingTop: '40px', 
+                        paddingBottom: '60px'}}> 
+            <TextField id="b" label="Volume" type="number" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangeVolume}/>
+            <TextField id="c" label="Pages" type="number" style={{ width: '26%', height: '40px',margin: '0'}} onChange={handleChangeISSN}/>
+            <TextField id="d" label="Year" type="search" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangeUrl}/>
+          </div>
+  
+          <div style={{ display: 'flex', justifyContent: 'right', width: '83vw' }}>
+            <Link to="/KPIs_form_frontend">
+              <Button variant="contained" color="primary" style={{ width: '15%' }}>
+                Back
+              </Button>
+            </Link>
+            <Link>
+              <Button variant="contained" color="primary" onClick={handleApiTest} disabled={buttonDisabled} style={{ width: '15%' }}>
+                Submit
+              </Button>
+            </Link>
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="colored"
+              />
+          </div>
+        </Box>
+        <Copyright sx={{ mt: 5 }} />
+      </>
+    );
+  }
+ 
 }
