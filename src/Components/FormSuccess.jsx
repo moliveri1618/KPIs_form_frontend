@@ -17,7 +17,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Copyright from './CopyRight';
 import logos from './Images/ibet_logo.png'
-
+import axios from 'axios';
 
 function createData(
   title,
@@ -97,6 +97,26 @@ export default function FormSuccess() {
 
   useEffect(() => {
     notify()
+
+    try {
+      const trimmedDOI = doi.trim();
+      let api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/doi_post/`
+    
+      axios.post(api, jsonData, {
+        headers: {
+          'Content-Type': 'application/json'
+        }})
+        .then(response => {
+          console.log('Response:', response);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+        
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+
 
     // Cleanup function
     return () => {
