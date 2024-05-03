@@ -88,7 +88,7 @@ export default function StartingForm() {
         navigate(url);
       } else {
         var url = `/KPIs_form_frontend/success`;
-        navigate(url, { state: { data:data, selectedGroups:selectedGroups, doi: doi, projectCodes:projectCodes} });
+        navigate(url, { state: { data:data, selectedGroups:selectedGroups, projectCodes:projectCodes} });
       }
     }
 

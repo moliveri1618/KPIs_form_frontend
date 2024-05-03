@@ -54,7 +54,6 @@ export default function FormSuccess() {
   const location = useLocation();
   const jsonData = location.state && location.state.data;
   const selectedGroups = location.state && location.state.selectedGroups;
-  const doi = location.state && location.state.doi;
   const projectCodes = location.state && location.state.projectCodes;
 
   const splitGroups = (groups) => {
@@ -99,7 +98,6 @@ export default function FormSuccess() {
     notify()
 
     try {
-      const trimmedDOI = doi.trim();
       let api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/doi_post/`
 
       jsonData['research_groups_first'] = Object.keys(first).join(", ")
@@ -321,7 +319,7 @@ export default function FormSuccess() {
                     <TableCell>
                       <Tooltip arrow>
                         <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                          {doi}
+                          {jsonData['url']}
                         </div>
                       </Tooltip>
                     </TableCell>
