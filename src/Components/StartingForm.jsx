@@ -58,8 +58,7 @@ export default function StartingForm() {
       let api = ''
       try {
           api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/stoca?DOI=${doi}`
-          //api = 'https://' + process.env.REACT_APP_API_URL_DEV + `/stoca?DOI=${doi}`
-          console.log(api)
+          //api = 'http://' + process.env.REACT_APP_API_URL_PROD + `/stoca?DOI=${doi}`
           axios.post(api)
             .then(response => {
               setData(response.data['response']);
