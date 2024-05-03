@@ -116,8 +116,8 @@ export default function FormFail() {
       res['url'] = doi
 
       try {
-        //let api = 'http://' + process.env.REACT_APP_API_URL_PROD + `/doi_post/`
-        let api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/doi_post/`
+        let api = 'http://' + process.env.REACT_APP_API_URL_PROD + `/doi_post/`
+        //let api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/doi_post/`
         console.log(res)
         axios.post(api, res, {
           headers: {
