@@ -8,7 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Copyright from './CopyRight';
 import logos from './Images/ibet_logo.png'
-
+import axios from 'axios';
 
 export default function FormFail() {
   const [title, setTitle] = useState('');
@@ -16,6 +16,7 @@ export default function FormFail() {
   const [volume, setVolume] = useState('');
   const [pages, setPages] = useState('');
   const [year, setYear] = useState('');
+  const [doi, setDoi] = useState(''); // Initially, doi is an empty string
   let res = {}
 
   const [isValid, setIsValid] = useState(false);
@@ -103,6 +104,34 @@ export default function FormFail() {
       res['volume'] = volume
       res['pages'] = pages
       res['year'] = year
+      res['journal'] = "N/A"
+      res['impact_factor'] = 0
+      res['publisher'] = "N/A"
+      res['research_groups_first'] = "N/A"
+      res['research_groups_corresp'] = "N/A"
+      res['research_groups_other'] = "N/A"
+      res['projects'] = "N/A"
+      res['citation_count'] = 0
+      res['article_type'] = "N/A"
+      res['url'] = doi
+
+      try {
+        let api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/doi_post/`
+        console.log(res)
+        axios.post(api, res, {
+          headers: {
+            'Content-Type': 'application/json'
+          }})
+          .then(response => {
+            console.log('Response:', response);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+          
+      } catch (error) {
+          console.error('Error fetching data:', error);
+      }
 
       let api = ''
       try {
@@ -128,6 +157,7 @@ export default function FormFail() {
     let doi = ''
     if (doiMatch && doiMatch[1]) {
       doi = doiMatch[1];
+      setDoi(doiMatch[1]);
     }
     notify(doi)
 
@@ -177,7 +207,7 @@ export default function FormFail() {
                       paddingBottom: '60px'}}> 
           <TextField id="b" label="Volume" type="number" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangeVolume}/>
           <TextField id="c" label="Pages" type="number" style={{ width: '26%', height: '40px',margin: '0'}} onChange={handleChangePages}/>
-          <TextField id="d" label="Year" type="search" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangeYear}/>
+          <TextField id="d" label="Year" type="number" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangeYear}/>
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'right', width: '83vw' }}>
