@@ -66,8 +66,8 @@ export default function FormSuccess() {
     notify()
 
     try {
-      let api = 'http://' + process.env.REACT_APP_API_URL_PROD + `/doi_post/`
-      //let api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/doi_post/`
+      let api = 'http://' + '172.17.231.51:8080' + `/doi_post/`
+      //let api = 'http://' + '127.0.0.1:8000' + `/doi_post/`
 
       jsonData['research_groups_first'] = Object.keys(first).join(", ")
       jsonData['research_groups_other'] = Object.keys(other).join(", ")
