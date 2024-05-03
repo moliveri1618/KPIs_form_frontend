@@ -1,7 +1,6 @@
-import React, {useState, useEffect } from 'react';
+import React, {useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
@@ -12,47 +11,43 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Copyright from './CopyRight';
 import logos from './Images/ibet_logo.png'
-
-
-function createData(
-  title,
-  volume,
-  ISSN,
-  url,
-  number,
-  journal,
-  publisher,
-  author,
-  year,
-  month,
-  pages
-) {
-  return { title, volume, ISSN, url, number,journal, publisher, author, year, month, pages };
-}
-
-const rows = [
-  createData('Combination of Zinc Oxide Photocatalysis with Membrane Filtration for Surface Water Disinfection', 
-  12,
-  2305-5934, 
-  'http://dx.doi.org/10.3390/foods12071383', 
-  7, 
-  'foods', 
-  'MDPI AG', 
-  'Mecha, Elsa and Alves, Mara Lisa and Bento da Silva, Andreia and Pereira, Ana Bárbara and Rubiales, Diego and Vaz Patto, Maria Carlota and Bronze, Maria Rosário', 
-  2023, 
-  'mar', 
-  1395)
-];
+import axios from 'axios';
 
 
 export default function FormSuccess() {
   const location = useLocation();
   const jsonData = location.state && location.state.data;
+  const selectedGroups = location.state && location.state.selectedGroups;
+  const projectCodes = location.state && location.state.projectCodes;
+
+  const splitGroups = (groups) => {
+    const corresp = {}, other = {}, first = {};
+    Object.entries(groups || {}).forEach(([group, properties]) => {
+      if (properties.corresp) corresp[group] = true;
+      if (properties.other) other[group] = true;
+      if (properties.first) first[group] = true;
+    });
+    return { corresp, other, first };
+  };
+
+  const { corresp, other, first } = splitGroups(selectedGroups);
+
+  // Function to reformat the names
+  const reformatNames = (namesStr) => {
+    if (!namesStr) return '';
+    const namesList = namesStr.split(" and ");
+    const reorderedNames = namesList.map(name => {
+      const [lastName, firstName] = name.split(', ');
+      return `${firstName} ${lastName}`;
+    });
+    return reorderedNames.join(", ");
+  };
+  
+  const reformattedNames = reformatNames(jsonData['author']);
 
   const notify = () => {
     toast.success('The information for this paper are successfully saved into the database 😍', {
@@ -69,6 +64,30 @@ export default function FormSuccess() {
 
   useEffect(() => {
     notify()
+
+    try {
+      let api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/doi_post/`
+
+      jsonData['research_groups_first'] = Object.keys(first).join(", ")
+      jsonData['research_groups_other'] = Object.keys(other).join(", ")
+      jsonData['research_groups_corresp'] = Object.keys(corresp).join(", ")
+      jsonData['projects'] = projectCodes
+    
+      axios.post(api, jsonData, {
+        headers: {
+          'Content-Type': 'application/json'
+        }})
+        .then(response => {
+          console.log('Response:', response);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+        
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+
 
     // Cleanup function
     return () => {
@@ -123,9 +142,9 @@ export default function FormSuccess() {
                 <TableRow>
                   <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Authors:</TableCell>
                   <TableCell>
-                    <Tooltip  title={jsonData['author']} arrow>
+                    <Tooltip  arrow>
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                        {jsonData['author']}
+                        {reformattedNames}
                       </div>
                     </Tooltip>
                   </TableCell>
@@ -198,26 +217,81 @@ export default function FormSuccess() {
                 </TableRow>
 
                 <TableRow>
-                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>ISSN:</TableCell>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Research Groups (<span style={{ fontStyle: 'italic' }}>First</span>):</TableCell>
                   <TableCell>
-                    <Tooltip  title={jsonData['ISSN']} arrow>
+                    <Tooltip arrow>
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                        {jsonData['ISSN']}
+                        { Object.keys(first).join(", ")}
                       </div>
                     </Tooltip>
                   </TableCell>
                 </TableRow>
 
-                {/* <TableRow>
-                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Url:</TableCell>
+                <TableRow>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Research Groups (<span style={{ fontStyle: 'italic' }}>Corresp</span>):</TableCell>
                   <TableCell>
-                    <Tooltip  title={jsonData['url']} arrow>
+                    <Tooltip arrow>
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                        {jsonData['url']}
+                        { Object.keys(corresp).join(", ")}
                       </div>
                     </Tooltip>
                   </TableCell>
-                </TableRow> */}
+                </TableRow>
+
+                <TableRow>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Research Groups (<span style={{ fontStyle: 'italic' }}>Other</span>):</TableCell>
+                  <TableCell>
+                    <Tooltip arrow>
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                        { Object.keys(other).join(", ")}
+                      </div>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
+
+                <TableRow>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Project(s):</TableCell>
+                  <TableCell>
+                    <Tooltip arrow>
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                        {projectCodes}
+                      </div>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
+
+                <TableRow>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Citation Count:</TableCell>
+                  <TableCell>
+                    <Tooltip arrow>
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                        {jsonData['citation_count']}
+                      </div>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
+
+                <TableRow>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Article Type:</TableCell>
+                  <TableCell>
+                    <Tooltip arrow>
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                        {jsonData['article_type']}
+                      </div>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
+
+                <TableRow>
+                  <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>DOI:</TableCell>
+                    <TableCell>
+                      <Tooltip arrow>
+                        <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                          {jsonData['url']}
+                        </div>
+                      </Tooltip>
+                    </TableCell>
+                </TableRow>
                 
               </TableBody>
             </Table>

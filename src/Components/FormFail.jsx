@@ -8,20 +8,15 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Copyright from './CopyRight';
 import logos from './Images/ibet_logo.png'
-
+import axios from 'axios';
 
 export default function FormFail() {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [volume, setVolume] = useState('');
-  const [issn, setISSN] = useState('');
-  const [url, setUrl] = useState('');
-  const [number, setNumber] = useState('');
-  const [journal, setJournal] = useState('');
-  const [publisher, setPublisher] = useState('');
   const [pages, setPages] = useState('');
   const [year, setYear] = useState('');
-  const [month, setMonth] = useState('');
+  const [doi, setDoi] = useState(''); // Initially, doi is an empty string
   let res = {}
 
   const [isValid, setIsValid] = useState(false);
@@ -29,80 +24,38 @@ export default function FormFail() {
 
   const handleChangeTitle = (event) => {
     setTitle(event.target.value);
-    validateForm(event.target.value, author, volume, issn, url, number, journal, publisher, pages, year, month);
+    validateForm(event.target.value, author, volume, pages, year);
   };
 
   const handleChangeAuthor= (event) => {
     setAuthor(event.target.value);
-    validateForm(title, event.target.value, volume, issn, url, number, journal, publisher, pages, year, month);
+    validateForm(title, event.target.value, volume, pages, year);
   };
 
   const handleChangeVolume = (event) => {
     setVolume(event.target.value);
-    validateForm(title, author, event.target.value, issn, url, number, journal, publisher, pages, year, month);
-  };
-  
-  const handleChangeISSN = (event) => {
-    setISSN(event.target.value);
-    validateForm(title, author, volume, event.target.value, url, number, journal, publisher, pages, year, month);
-
-  };
-  
-  const handleChangeUrl = (event) => {
-    setUrl(event.target.value);
-    validateForm(title, author, volume, issn, event.target.value, number, journal, publisher, pages, year, month);
-
-  };
-  
-  const handleChangeNumber = (event) => {
-    setNumber(event.target.value);
-    validateForm(title, author, volume, issn, url, event.target.value, journal, publisher, pages, year, month);
-
-  };
-  
-  const handleChangeJournal = (event) => {
-    setJournal(event.target.value);
-    validateForm(title, author, volume, issn, url, number, event.target.value, publisher, pages, year, month);
-
-  };
-  
-  const handleChangePublisher = (event) => {
-    setPublisher(event.target.value);
-    validateForm(title, author, volume, issn, url, number, journal, event.target.value, pages, year, month);
-
+    validateForm(title, author, event.target.value, pages, year);
   };
   
   const handleChangePages = (event) => {
     setPages(event.target.value);
-    validateForm(title, author, volume, issn, url, number, journal, publisher, event.target.value, year, month);
+    validateForm(title, author, volume, year);
 
   };
   
   const handleChangeYear = (event) => {
     setYear(event.target.value);
-    validateForm(title, author, volume, issn, url, number, journal, publisher, pages, event.target.value, month);
-
-  };
-  
-  const handleChangeMonth = (event) => {
-    setMonth(event.target.value);
-        validateForm(title, author, volume, issn, url, number, journal, publisher, pages, year, event.target.value);
+    validateForm(title, author, volume, pages, event.target.value);
 
   };
 
   const validateForm = (titleValue, 
                         authorValue,
                         volumeValue,
-                        issnValue,
-                        urlValue,
-                        numberValue,
-                        journalValue,
-                        publisherValue,
                         pagesValue,
                         yearValue,
-                        monthValue
                         ) => {
-    const isValidForm = titleValue.trim() !== '' && authorValue.trim() !== '' && volumeValue.trim() !== '' && issnValue.trim() !== '' && urlValue.trim() !== '' && numberValue.trim() !== '' && journalValue.trim() !== '' && publisherValue.trim() !== '' && pagesValue.trim() !== '' && yearValue.trim() !== '' && monthValue.trim() !== '';
+    const isValidForm = titleValue.trim() !== '' && authorValue.trim() !== '' && volumeValue.trim() !== '' && pagesValue.trim() !== '' && yearValue.trim() !== '';
     setIsValid(isValidForm);
   };
 
@@ -149,14 +102,36 @@ export default function FormFail() {
       res['title'] = title
       res['author'] = author
       res['volume'] = volume
-      res['ISSN'] = issn
-      res['url'] = url
-      res['number'] = number
-      res['journal'] = journal
-      res['publisher'] = publisher
       res['pages'] = pages
       res['year'] = year
-      res['month'] = month
+      res['journal'] = "N/A"
+      res['impact_factor'] = 0
+      res['publisher'] = "N/A"
+      res['research_groups_first'] = "N/A"
+      res['research_groups_corresp'] = "N/A"
+      res['research_groups_other'] = "N/A"
+      res['projects'] = "N/A"
+      res['citation_count'] = 0
+      res['article_type'] = "N/A"
+      res['url'] = doi
+
+      try {
+        let api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/doi_post/`
+        console.log(res)
+        axios.post(api, res, {
+          headers: {
+            'Content-Type': 'application/json'
+          }})
+          .then(response => {
+            console.log('Response:', response);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+          
+      } catch (error) {
+          console.error('Error fetching data:', error);
+      }
 
       let api = ''
       try {
@@ -182,6 +157,7 @@ export default function FormFail() {
     let doi = ''
     if (doiMatch && doiMatch[1]) {
       doi = doiMatch[1];
+      setDoi(doiMatch[1]);
     }
     notify(doi)
 
@@ -230,8 +206,8 @@ export default function FormFail() {
                       paddingTop: '40px', 
                       paddingBottom: '60px'}}> 
           <TextField id="b" label="Volume" type="number" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangeVolume}/>
-          <TextField id="c" label="Pages" type="number" style={{ width: '26%', height: '40px',margin: '0'}} onChange={handleChangeISSN}/>
-          <TextField id="d" label="Year" type="search" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangeUrl}/>
+          <TextField id="c" label="Pages" type="number" style={{ width: '26%', height: '40px',margin: '0'}} onChange={handleChangePages}/>
+          <TextField id="d" label="Year" type="number" style={{ width: '26.5%', height: '40px',margin: '0'}} onChange={handleChangeYear}/>
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'right', width: '83vw' }}>
