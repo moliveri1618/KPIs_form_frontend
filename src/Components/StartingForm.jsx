@@ -57,7 +57,7 @@ export default function StartingForm() {
       setFlag(1);
       let api = ''
       try {
-          api = 'https://' + process.env.REACT_APP_API_URL_PROD + `/stoca?DOI=${doi}`
+          api = 'https://' + process.env.REACT_APP_API_URL_DEV + `/stoca?DOI=${doi}`
           console.log(api)
           axios.post(api)
             .then(response => {
