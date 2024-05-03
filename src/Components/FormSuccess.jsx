@@ -101,6 +101,11 @@ export default function FormSuccess() {
     try {
       const trimmedDOI = doi.trim();
       let api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/doi_post/`
+
+      jsonData['research_groups_first'] = Object.keys(first).join(", ")
+      jsonData['research_groups_other'] = Object.keys(other).join(", ")
+      jsonData['research_groups_corresp'] = Object.keys(corresp).join(", ")
+      jsonData['projects'] = projectCodes
     
       axios.post(api, jsonData, {
         headers: {
@@ -113,9 +118,9 @@ export default function FormSuccess() {
           console.error(error);
         });
         
-      } catch (error) {
+    } catch (error) {
         console.error('Error fetching data:', error);
-      }
+    }
 
 
     // Cleanup function
