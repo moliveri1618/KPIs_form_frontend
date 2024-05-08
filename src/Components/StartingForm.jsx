@@ -23,7 +23,10 @@ export default function StartingForm() {
   const [open, setOpen] = useState(false);
   const [textDialog, setTextDialog] = useState('Select Groups');
   const [projectCodes, setProjectCodes] = useState('');
-
+  const [showSelectedGroups, setShowSelectedGroups] = useState(0);
+  const [corresp, setCorresp] = useState('');
+  const [other, setOther] = useState('');
+  const [first, setFirst] = useState('');
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -31,8 +34,31 @@ export default function StartingForm() {
 
   const handleClose = () => {
 
+    const splitGroups = (groups) => {
+
+      // Initialize the objects
+      const corresp = {};
+      const other = {};
+      const first = {};
+
+      Object.entries(groups || {}).forEach(([group, properties]) => {
+        if (properties.corresp) corresp[group] = true;
+        if (properties.other) other[group] = true;
+        if (properties.first) first[group] = true;
+      });
+      return { corresp, other, first };
+    };
+    const { corresp, other, first } = splitGroups(selectedGroups);
+
+    // Set state based on the split groups
+    setCorresp(Object.keys(corresp).join(', '));
+    setOther(Object.keys(other).join(', '));
+    setFirst(Object.keys(first).join(', '));
+
+    
     if (Object.keys(selectedGroups).length>0) {
       setTextDialog('Groups Selected')
+      setShowSelectedGroups(1)
     }
     setOpen(false);
   };
@@ -78,7 +104,7 @@ export default function StartingForm() {
     
     //The issue here might be related to the asynchronous nature of the axios.post call. 
     //When you call console.log(data) immediately after setData(response.data['response']), 
-    //the state update might not have been completed yet, and data may still be null.
+    //the  update might not have been completed yet, and data may still be null.
     //To address this, you should use the useEffect hook to observe changes in the state and 
     //perform actions after the state has been updated. Here's an example of how you can modify your code:
 
@@ -108,10 +134,9 @@ export default function StartingForm() {
         noValidate
         autoComplete="off"
       >
-        <Alert severity="info"  style={{ textAlign: 'center'}}>
-        This is a simple interface to test our new script to retrieve paper details based on the DOI alone. This script will be integrated into a new approach to collect iBET's scientific KPIs to save time that is best used doing actual research.<br /><br />
-        Thanks for testing! Any feedback is welcome. Please send an email to Pedro Cruz (pedro.cruz@ibet.pt), Ines Isidro (iaisidro@ibet.pt) and Mauro Oliveri (mauro.oliveri@ibet.pt) or reach out to any of us directly.
-        </Alert>
+        {/* <Alert severity="info"  style={{ textAlign: 'center'}}>
+        Please send an email to Pedro Cruz (pedro.cruz@ibet.pt), Ines Isidro (iaisidro@ibet.pt) and Mauro Oliveri (mauro.oliveri@ibet.pt) or reach out to any of us directly.
+        </Alert> */}
         <img src={logos} alt="logo" width="150" height="80" style={{ float: 'left', marginRight: '1450px', paddingTop: '40px'  }} />
         <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
           <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
@@ -125,18 +150,51 @@ export default function StartingForm() {
                       paddingTop: '40px', 
                       paddingBottom: '60px'}}> 
           <div>
-            <Button variant="outlined" onClick={handleClickOpen}  
-                    style={{ 
-                      height: '56px', 
-                      margin: '0',
-                      width: '550px',
-                      padding: '0px 14px',
-                      color: 'rgba(0, 0, 0, 0.87)',
-                      borderColor: 'rgba(0, 0, 0, 0.23)'
-                      }}>
-              {textDialog}
-            </Button>
-            <MyDialog isOpen={open} handleClose={handleClose} onSelectionChangeDialog={setSelectedGroups}/>
+            <Box display="flex" flexDirection="column" alignItems="center">
+              <Button variant="outlined" onClick={handleClickOpen}  
+                      style={{ 
+                        height: '56px', 
+                        margin: '0',
+                        width: '550px',
+                        padding: '0px 14px',
+                        color: 'rgba(0, 0, 0, 0.87)',
+                        borderColor: 'rgba(0, 0, 0, 0.23)',
+                        }}>
+                {textDialog}
+              </Button>
+              <MyDialog isOpen={open} handleClose={handleClose} onSelectionChangeDialog={setSelectedGroups}/>
+              {showSelectedGroups === 1 && (
+              <Typography variant="body2" component="span">
+                <span style={{ fontWeight: 'bold' }}>Corresp:</span>
+                <br></br>
+                {corresp.split(',').map((lab, index) => (
+                  <span key={index}>
+                    {index > 0 && <br />}
+                    {lab.trim()}
+                  </span>
+                ))}
+                <br></br>
+                <span style={{ fontWeight: 'bold' }}>First:</span>
+                <br></br>
+                {corresp.split(',').map((lab, index) => (
+                  <span key={index}>
+                    {index > 0 && <br />}
+                    {lab.trim()}
+                  </span>
+                ))}
+                <br></br>
+                <span style={{ fontWeight: 'bold' }}>Other:</span>
+                <br></br>
+                {corresp.split(',').map((lab, index) => (
+                  <span key={index}  style={{ marginTop:'50px' }}>
+                    {index > 0 && <br />}
+                    {lab.trim()}
+                  </span>
+                ))}
+                <br></br>
+              </Typography>
+              )}
+            </Box>
           </div>
           <TextField 
           id="outlined-search" 

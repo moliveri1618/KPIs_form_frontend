@@ -194,7 +194,7 @@ export default function FormSuccess() {
                   </TableCell>
                 </TableRow>
 
-                <TableRow>
+                {/* <TableRow>
                   <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Impact Factor:</TableCell>
                   <TableCell>
                     <Tooltip  title={jsonData['impact_factor']} arrow>
@@ -203,7 +203,7 @@ export default function FormSuccess() {
                       </div>
                     </Tooltip>
                   </TableCell>
-                </TableRow>
+                </TableRow> */}
 
                 <TableRow>
                   <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Publisher:</TableCell>
