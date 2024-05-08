@@ -49,8 +49,8 @@ export default function FormSuccess() {
   
   const reformattedNames = reformatNames(jsonData['author']);
 
-  const notify = () => {
-    toast.success('The information for this paper are successfully saved into the database 😍', {
+  const notify = (message) => {
+    toast.success(message, {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -63,7 +63,6 @@ export default function FormSuccess() {
   }
 
   useEffect(() => {
-    notify()
 
     try {
       let api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/doi_post/`
@@ -79,9 +78,16 @@ export default function FormSuccess() {
         }})
         .then(response => {
           console.log('Response:', response);
+          console.log(response['data'])
+          notify('The information for this paper are successfully saved into the database 😍')
         })
         .catch(error => {
           console.error(error);
+          console.log(error['response']['data']['doi'])
+          if (error['response']['data']['doi'][0] === 'do is with this doi already exists.') {
+            console.log('hahaha')
+            notify('This DOi is already inserted into the database')
+          }
         });
         
     } catch (error) {
