@@ -150,7 +150,7 @@ export default function StartingForm() {
                       paddingTop: '40px', 
                       paddingBottom: '60px'}}> 
           <div>
-            <Box display="flex" flexDirection="column" alignItems="center">
+            <Box display="flex" flexDirection="column" alignItems="left">
               <Button variant="outlined" onClick={handleClickOpen}  
                       style={{ 
                         height: '56px', 
@@ -164,7 +164,7 @@ export default function StartingForm() {
               </Button>
               <MyDialog isOpen={open} handleClose={handleClose} onSelectionChangeDialog={setSelectedGroups}/>
               {showSelectedGroups === 1 && (
-                <Typography variant="body2" component="span">
+                <Typography variant="body2" component="span" style={{ paddingLeft: '15px'}}>
                   {first.length > 0 && (
                     <>
                       <span style={{ fontWeight: 'bold'}}>First:</span>
@@ -172,7 +172,7 @@ export default function StartingForm() {
                       {first.split(',').map((lab, index) => (
                         <span key={index}>
                           {index > 0 && <br />}
-                          {lab.trim()}
+                          &nbsp;&nbsp;&nbsp;&nbsp; <span style={{ fontWeight: 'bold', color: 'red' }}>»</span> {lab.trim()}
                         </span>
                       ))}
                       <br></br>
@@ -185,7 +185,7 @@ export default function StartingForm() {
                       {corresp.split(',').map((lab, index) => (
                         <span key={index}>
                           {index > 0 && <br />}
-                          {lab.trim()}
+                          &nbsp;&nbsp;&nbsp;&nbsp; <span style={{ fontWeight: 'bold', color: 'red' }}>»</span> {lab.trim()}
                         </span>
                       ))}
                       <br></br>
@@ -198,7 +198,7 @@ export default function StartingForm() {
                       {other.split(',').map((lab, index) => (
                         <span key={index}>
                           {index > 0 && <br />}
-                          {lab.trim()}
+                          &nbsp;&nbsp;&nbsp;&nbsp; <span style={{ fontWeight: 'bold', color: 'red' }}>»</span> {lab.trim()}
                         </span>
                       ))}
                       <br></br>
