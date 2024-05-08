@@ -238,8 +238,12 @@ export default function StartingForm() {
               <>
                 <Typography variant="body2" component="span">
                   Project(s) associated with this KPI. Enter the project LabOrders codes, separated by commas, e.g.: <i><strong>P-123</strong>, <strong>PI-456</strong></i>
+                </Typography><br></br><br></br>
+                <Typography variant="body2" component="span" fontStyle="italic" fontWeight="bold">
+                  * This field is mandatory for iBETXplore projects
                 </Typography>
               </>
+              // This field is mandatory for iBETXplore projects
           }/>
         </div>
         <div style={{ display: 'flex', justifyContent: 'right', width: '83.5vw' }}>
