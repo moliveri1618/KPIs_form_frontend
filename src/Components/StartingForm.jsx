@@ -165,33 +165,45 @@ export default function StartingForm() {
               <MyDialog isOpen={open} handleClose={handleClose} onSelectionChangeDialog={setSelectedGroups}/>
               {showSelectedGroups === 1 && (
               <Typography variant="body2" component="span">
-                <span style={{ fontWeight: 'bold' }}>Corresp:</span>
-                <br></br>
-                {corresp.split(',').map((lab, index) => (
-                  <span key={index}>
-                    {index > 0 && <br />}
-                    {lab.trim()}
-                  </span>
-                ))}
-                <br></br>
-                <span style={{ fontWeight: 'bold' }}>First:</span>
-                <br></br>
-                {corresp.split(',').map((lab, index) => (
-                  <span key={index}>
-                    {index > 0 && <br />}
-                    {lab.trim()}
-                  </span>
-                ))}
-                <br></br>
-                <span style={{ fontWeight: 'bold' }}>Other:</span>
-                <br></br>
-                {corresp.split(',').map((lab, index) => (
-                  <span key={index}  style={{ marginTop:'50px' }}>
-                    {index > 0 && <br />}
-                    {lab.trim()}
-                  </span>
-                ))}
-                <br></br>
+                {first.length > 0 && (
+                  <>
+                    <span style={{ fontWeight: 'bold' }}>First:</span>
+                    <br></br>
+                    {first.split(',').map((lab, index) => (
+                      <span key={index}>
+                        {index > 0 && <br />}
+                        {lab.trim()}
+                      </span>
+                    ))}
+                    <br></br>
+                  </>
+                )}
+                {corresp.length > 0 && (
+                  <>
+                    <span style={{ fontWeight: 'bold' }}>Corresp:</span>
+                    <br></br>
+                    {corresp.split(',').map((lab, index) => (
+                      <span key={index}>
+                        {index > 0 && <br />}
+                        {lab.trim()}
+                      </span>
+                    ))}
+                    <br></br>
+                  </>
+                )}
+                {other.length > 0 && (
+                  <>
+                    <span style={{ fontWeight: 'bold' }}>Other:</span>
+                    <br></br>
+                    {other.split(',').map((lab, index) => (
+                      <span key={index}>
+                        {index > 0 && <br />}
+                        {lab.trim()}
+                      </span>
+                    ))}
+                    <br></br>
+                  </>
+                )}
               </Typography>
               )}
             </Box>
