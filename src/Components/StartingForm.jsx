@@ -167,7 +167,7 @@ export default function StartingForm() {
                 <Typography variant="body2" component="span">
                   {first.length > 0 && (
                     <>
-                      <span style={{ fontWeight: 'bold' }}>First:</span>
+                      <span style={{ fontWeight: 'bold'}}>First:</span>
                       <br></br>
                       {first.split(',').map((lab, index) => (
                         <span key={index}>
