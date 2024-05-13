@@ -23,6 +23,7 @@ export default function FormSuccess() {
   const jsonData = location.state && location.state.data;
   const selectedGroups = location.state && location.state.selectedGroups;
   const projectCodes = location.state && location.state.projectCodes;
+  const userName = location.state && location.state.userName;
 
   const splitGroups = (groups) => {
     const corresp = {}, other = {}, first = {};
@@ -104,6 +105,10 @@ export default function FormSuccess() {
 
   return (
     <>
+      <Typography component="h2" variant="h5" style={{ textAlign: 'right', marginRight: '50px', marginTop: '30px' }}>
+        <span style={{ marginRight: '80px', marginTop: '20px', display: 'inline-block', fontStyle: 'italic', fontFamily: 'Georgia' }}> Hello, {userName} </span>
+        <img src={logos} alt="logo" width="150" height="80" style={{ float: 'left', marginLeft: '50px' }} />
+      </Typography>
       <Box
         component="form"
         sx={{
@@ -115,10 +120,7 @@ export default function FormSuccess() {
         }}
         noValidate
         autoComplete="off"
-      >
-        <Link to="/KPIs_form_frontend">
-          <img src={logos} alt="logo" width="150" height="80" style={{ float: 'left', marginRight: '1450px', paddingTop: '40px'  }} />
-        </Link>        
+      >       
         <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
           <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
             Add papers to iBET KPIs

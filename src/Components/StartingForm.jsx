@@ -9,9 +9,8 @@ import { Link } from 'react-router-dom';
 import logos from './Images/ibet_logo.png'
 import SPLoader from './SpinnerLoader';
 import Copyright from './CopyRight';
-import Alert from '@mui/material/Alert';
 import MyDialog from './dialog';
-
+import { useLocation } from 'react-router-dom';
 
 export default function StartingForm() {
   const [data, setData] = useState(null);
@@ -27,13 +26,14 @@ export default function StartingForm() {
   const [corresp, setCorresp] = useState('');
   const [other, setOther] = useState('');
   const [first, setFirst] = useState('');
+  const location = useLocation();
+  const userName = location.state && location.state.userName;
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
-
     const splitGroups = (groups) => {
 
       // Initialize the objects
@@ -114,14 +114,18 @@ export default function StartingForm() {
         navigate(url);
       } else {
         var url = `/KPIs_form_frontend/success`;
-        navigate(url, { state: { data:data, selectedGroups:selectedGroups, projectCodes:projectCodes} });
+        navigate(url, { state: { data:data, selectedGroups:selectedGroups, projectCodes:projectCodes, userName: userName} });
       }
     }
 
   }, [data]); // Dependency array ensures this effect runs only when 'data' changes
 
   return (
-    <>
+    <>        
+      <Typography component="h2" variant="h5" style={{ textAlign: 'right', marginRight: '50px', marginTop: '30px' }}>
+        <span style={{ marginRight: '80px', marginTop: '20px', display: 'inline-block', fontStyle: 'italic', fontFamily: 'Georgia' }}> Hello, {userName} </span>
+        <img src={logos} alt="logo" width="150" height="80" style={{ float: 'left', marginLeft: '50px' }} />
+      </Typography>
       <Box
         component="form"
         sx={{
@@ -134,10 +138,6 @@ export default function StartingForm() {
         noValidate
         autoComplete="off"
       >
-        {/* <Alert severity="info"  style={{ textAlign: 'center'}}>
-        Please send an email to Pedro Cruz (pedro.cruz@ibet.pt), Ines Isidro (iaisidro@ibet.pt) and Mauro Oliveri (mauro.oliveri@ibet.pt) or reach out to any of us directly.
-        </Alert> */}
-        <img src={logos} alt="logo" width="150" height="80" style={{ float: 'left', marginRight: '1450px', paddingTop: '40px'  }} />
         <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
           <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
             Add papers to iBET KPIs

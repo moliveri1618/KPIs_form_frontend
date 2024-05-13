@@ -19,7 +19,6 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { HiOutlineCheck } from "react-icons/hi2";
-import SPLoader from './SpinnerLoader';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
@@ -28,6 +27,7 @@ export default function SignInSide() {
 
   const navigate = useNavigate();
   const [flagSuccess, setFlagSuccess] = useState(0); 
+  const [userName, setUserName] = useState('');
   const notify = (message) => {
     toast.error('Error: ' + message, {
       position: "top-right",
@@ -60,13 +60,14 @@ export default function SignInSide() {
         api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/check_pws_ms_AD/`
         axios.post(api, userData)
           .then(response => {
-            console.log(response.statusText);
+
             if (response.statusText === 'OK') {
               setFlagSuccess(1)
+              setUserName(response.data['name'] + ' ' + response.data['surname'])
 
               setTimeout(() => {
                 var url = `/KPIs_form_frontend/start`;
-                navigate(url);
+                navigate(url, { state: { userName:userName } });
               }, 1500); // 3000 milliseconds = 3 seconds
           
             } 
