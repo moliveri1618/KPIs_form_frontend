@@ -13,12 +13,32 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Copyright from './CopyRight';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 export default function SignInSide() {
+
+  const navigate = useNavigate();
+  
+  const notify = (message) => {
+    toast.error('Error: ' + message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      });
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -26,10 +46,40 @@ export default function SignInSide() {
       email: data.get('email'),
       password: data.get('password'),
     });
+
+    // Prepare the JSON data
+    const userData = {
+      email: data.get('email'),
+      password: data.get('password')
+    };
+
+    let api = ''
+    try {
+        api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/check_pws_ms_AD/`
+        axios.post(api, userData)
+          .then(response => {
+            console.log(response.statusText);
+            if (response.statusText === 'OK') {
+              var url = `/KPIs_form_frontend/start`;
+              navigate(url);
+            } else {
+              //notify('The information for this paper are successfully saved into the database 😍')
+            }
+          })
+          .catch(error => {
+            console.error(error.response.data['message']);
+            console.log('heer')
+            notify(error.response.data['message'])
+          });
+      
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   };
 
   return (
     <ThemeProvider theme={defaultTheme}>
+      <ToastContainer /> {/* Add this line */}
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
