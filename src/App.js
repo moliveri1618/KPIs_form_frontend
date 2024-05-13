@@ -12,6 +12,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/KPIs_form_frontend" element={<SignInSide />} />
+          <Route path="/KPIs_form_frontend/start" element={<StartingForm />} />
           <Route path="/KPIs_form_frontend/fail" element={<FormFail />} />
           <Route path="/KPIs_form_frontend/success" element={<FormSuccess />} />
         </Routes>
