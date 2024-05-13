@@ -19,6 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { HiOutlineCheck } from "react-icons/hi2";
+import SPLoader from './SpinnerLoader';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
