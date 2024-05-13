@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -17,7 +18,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { HiOutlineCheck } from "react-icons/hi2";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
@@ -25,7 +26,7 @@ const defaultTheme = createTheme();
 export default function SignInSide() {
 
   const navigate = useNavigate();
-  
+  const [flagSuccess, setFlagSuccess] = useState(0); 
   const notify = (message) => {
     toast.error('Error: ' + message, {
       position: "top-right",
@@ -60,11 +61,14 @@ export default function SignInSide() {
           .then(response => {
             console.log(response.statusText);
             if (response.statusText === 'OK') {
-              var url = `/KPIs_form_frontend/start`;
-              navigate(url);
-            } else {
-              //notify('The information for this paper are successfully saved into the database 😍')
-            }
+              setFlagSuccess(1)
+
+              setTimeout(() => {
+                var url = `/KPIs_form_frontend/start`;
+                navigate(url);
+              }, 2000); // 3000 milliseconds = 3 seconds
+          
+            } 
           })
           .catch(error => {
             console.error(error.response.data['message']);
@@ -137,14 +141,26 @@ export default function SignInSide() {
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Sign In
-              </Button>
+              {flagSuccess === 0 && (
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Sign In
+                </Button>
+              )}
+              {flagSuccess === 1 && (
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  <HiOutlineCheck style={{ fontSize: '22px' }}/>
+                </Button>
+              )}
               <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
