@@ -249,7 +249,7 @@ export default function StartingForm() {
         <div style={{ display: 'flex', justifyContent: 'right', width: '83.5vw' }}>
           {flag === 0 && (
             <Link>
-              <Button type="submit" variant="contained" color="primary" onClick={handleApiTest} style={{ width: '15%', marginTop:'20px' }}>
+              <Button type="submit" variant="contained" color="primary" onClick={handleApiTest} style={{ width: '15%', marginTop:'50px' }}>
                 Submit
               </Button>
             </Link>
