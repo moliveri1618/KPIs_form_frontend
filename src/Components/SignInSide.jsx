@@ -4,8 +4,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
@@ -23,11 +21,47 @@ import { HiOutlineCheck } from "react-icons/hi2";
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
+const allowed_users = {
+  Ana_simplicio: 'anas@ibet.pt',
+  Patricia_Gomes_Alves: 'palves@ibet.pt',
+  Ana_Batista: 'abatista@ibet.pt',
+  Nadia_Duarte: 'nadia.duarte@ibet.pt',
+  Pedro_Cruz: 'pedro_cruz@ibet.pt',
+  Teresa_Crespo: 'tcrespo@ibet.pt',
+  Pedro_Matias: 'matias@ibet.pt',
+  Rosario_Bronze: 'mbronze@ibet.pt',
+  Vanessa_Pereira: 'vanessap@ibet.pt',
+  Joao_Crespo: 'joao.crespo@itqb.unl.pt',
+  Daniel_Simao: 'dsimao@ibet.pt',
+  Tiago_Bandeiras: 'tiago.bandeiras@ibet.pt',
+  Paula_Alves: 'alves@ibet.pt',
+  Ines_Isidro: 'iaisidro@ibet.pt',
+  Ana_Coroadinha: 'avalente@ibet.pt',
+  Manuel_Carrondo: 'mjtc@ibet.pt',
+  Teresa_Serra: 'tserra@ibet.pt',
+  Cristina_Peixoto: 'peixoto@ibet.pt',
+  Catarina_Brito: 'anabrito@ibet.pt',
+  Antonio_Roldao: 'aroldao@ibet.pt',
+  Margarida_serra: 'mserra@ibet.pt',
+  Mauro_oliveri: 'mauro.oliveri@ibet.pt'
+};
+
 export default function SignInSide() {
 
   const navigate = useNavigate();
   const [flagSuccess, setFlagSuccess] = useState(0); 
   const [userName, setUserName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+  const isFormValid = email !== '' && password !== '';
+
   const notify = (message) => {
     toast.error('Error: ' + message, {
       position: "top-right",
@@ -55,31 +89,37 @@ export default function SignInSide() {
       password: data.get('password')
     };
 
-    let api = ''
-    try {
-        api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/check_pws_ms_AD/`
-        axios.post(api, userData)
-          .then(response => {
+    // Check if email from userData is in allowed_users
+    const emailExists = Object.values(allowed_users).includes(userData.email);
+    if (emailExists) {
+      let api = ''
+      try {
+          api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/check_pws_ms_AD/`
+          axios.post(api, userData)
+            .then(response => {
 
-            if (response.statusText === 'OK') {
-              setFlagSuccess(1)
-              setUserName(response.data['name'] + ' ' + response.data['surname'])
+              if (response.statusText === 'OK') {
+                setFlagSuccess(1)
+                setUserName(response.data['name'] + ' ' + response.data['surname'])
 
-              setTimeout(() => {
-                var url = `/KPIs_form_frontend/start`;
-                navigate(url, { state: { userName:userName } });
-              }, 1500); // 3000 milliseconds = 3 seconds
-          
-            } 
-          })
-          .catch(error => {
-            console.error(error.response.data['message']);
-            console.log('heer')
-            notify(error.response.data['message'])
-          });
-      
-    } catch (error) {
-      console.error('Error fetching data:', error);
+                setTimeout(() => {
+                  var url = `/KPIs_form_frontend/start`;
+                  navigate(url, { state: { userName:userName } });
+                }, 1500); // 3000 milliseconds = 3 seconds
+            
+              } 
+            })
+            .catch(error => {
+              console.error(error.response.data['message']);
+              console.log('heer')
+              notify(error.response.data['message'])
+            });
+        
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    } else {
+      notify('Access not authorized: Email is not allowed')
     }
   };
 
@@ -128,6 +168,8 @@ export default function SignInSide() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                value={email}
+                onChange={handleEmailChange}
               />
               <TextField
                 margin="normal"
@@ -138,16 +180,19 @@ export default function SignInSide() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={password}
+                onChange={handlePasswordChange}
               />
-              <FormControlLabel
+              {/* <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
-              />
+              /> */}
               {flagSuccess === 0 && (
                 <Button
                   type="submit"
                   fullWidth
                   variant="contained"
+                  disabled={!isFormValid}
                   sx={{ mt: 3, mb: 2 }}
                 >
                   Sign In
