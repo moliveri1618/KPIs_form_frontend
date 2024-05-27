@@ -23,6 +23,7 @@ export default function FormSuccess() {
   const jsonData = location.state && location.state.data;
   const selectedGroups = location.state && location.state.selectedGroups;
   const projectCodes = location.state && location.state.projectCodes;
+  const userName = location.state && location.state.userName;
 
   const splitGroups = (groups) => {
     const corresp = {}, other = {}, first = {};
@@ -49,8 +50,8 @@ export default function FormSuccess() {
   
   const reformattedNames = reformatNames(jsonData['author']);
 
-  const notify = () => {
-    toast.success('The information for this paper are successfully saved into the database 😍', {
+  const notify = (message) => {
+    toast.success(message, {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -63,7 +64,6 @@ export default function FormSuccess() {
   }
 
   useEffect(() => {
-    notify()
 
     try {
       let api = 'http://' + '172.17.231.51:8080' + `/doi_post/`
@@ -80,9 +80,16 @@ export default function FormSuccess() {
         }})
         .then(response => {
           console.log('Response:', response);
+          console.log(response['data'])
+          notify('The information for this paper are successfully saved into the database 😍')
         })
         .catch(error => {
           console.error(error);
+          console.log(error['response']['data']['doi'])
+          if (error['response']['data']['doi'][0] === 'do is with this doi already exists.') {
+            console.log('hahaha')
+            notify('This DOi is already inserted into the database')
+          }
         });
         
     } catch (error) {
@@ -99,6 +106,10 @@ export default function FormSuccess() {
 
   return (
     <>
+      <Typography component="h2" variant="h5" style={{ textAlign: 'right', marginRight: '50px', marginTop: '30px' }}>
+        <span style={{ marginRight: '80px', marginTop: '20px', display: 'inline-block', fontStyle: 'italic', fontFamily: 'Georgia' }}> Hello, {userName} </span>
+        <img src={logos} alt="logo" width="150" height="80" style={{ float: 'left', marginLeft: '50px' }} />
+      </Typography>
       <Box
         component="form"
         sx={{
@@ -110,13 +121,10 @@ export default function FormSuccess() {
         }}
         noValidate
         autoComplete="off"
-      >
-        <Link to="/KPIs_form_frontend">
-          <img src={logos} alt="logo" width="150" height="80" style={{ float: 'left', marginRight: '1450px', paddingTop: '40px'  }} />
-        </Link>        
+      >       
         <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
           <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
-            Publication Details
+            Add papers to iBET KPIs
           </Typography>
         </div>
 
@@ -195,7 +203,7 @@ export default function FormSuccess() {
                   </TableCell>
                 </TableRow>
 
-                <TableRow>
+                {/* <TableRow>
                   <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Impact Factor:</TableCell>
                   <TableCell>
                     <Tooltip  title={jsonData['impact_factor']} arrow>
@@ -204,7 +212,7 @@ export default function FormSuccess() {
                       </div>
                     </Tooltip>
                   </TableCell>
-                </TableRow>
+                </TableRow> */}
 
                 <TableRow>
                   <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Publisher:</TableCell>

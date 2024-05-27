@@ -1,5 +1,6 @@
 import './App.css';
 import StartingForm from './Components/StartingForm';
+import SignInSide from './Components/SignInSide';
 import FormFail from './Components/FormFail'
 import FormSuccess from './Components/FormSuccess'
 import React from 'react';
@@ -10,7 +11,8 @@ function App() {
   return (
       <Router>
         <Routes>
-          <Route path="/KPIs_form_frontend" element={<StartingForm />} />
+          <Route path="/KPIs_form_frontend" element={<SignInSide />} />
+          <Route path="/KPIs_form_frontend/start" element={<StartingForm />} />
           <Route path="/KPIs_form_frontend/fail" element={<FormFail />} />
           <Route path="/KPIs_form_frontend/success" element={<FormSuccess />} />
         </Routes>

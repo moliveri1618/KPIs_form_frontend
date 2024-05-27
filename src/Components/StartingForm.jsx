@@ -9,9 +9,8 @@ import { Link } from 'react-router-dom';
 import logos from './Images/ibet_logo.png'
 import SPLoader from './SpinnerLoader';
 import Copyright from './CopyRight';
-import Alert from '@mui/material/Alert';
 import MyDialog from './dialog';
-
+import { useLocation } from 'react-router-dom';
 
 export default function StartingForm() {
   const [data, setData] = useState(null);
@@ -23,16 +22,43 @@ export default function StartingForm() {
   const [open, setOpen] = useState(false);
   const [textDialog, setTextDialog] = useState('Select Groups');
   const [projectCodes, setProjectCodes] = useState('');
-
+  const [showSelectedGroups, setShowSelectedGroups] = useState(0);
+  const [corresp, setCorresp] = useState('');
+  const [other, setOther] = useState('');
+  const [first, setFirst] = useState('');
+  const location = useLocation();
+  const userName = location.state && location.state.userName;
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
+    const splitGroups = (groups) => {
 
+      // Initialize the objects
+      const corresp = {};
+      const other = {};
+      const first = {};
+
+      Object.entries(groups || {}).forEach(([group, properties]) => {
+        if (properties.corresp) corresp[group] = true;
+        if (properties.other) other[group] = true;
+        if (properties.first) first[group] = true;
+      });
+      return { corresp, other, first };
+    };
+    const { corresp, other, first } = splitGroups(selectedGroups);
+
+    // Set state based on the split groups
+    setCorresp(Object.keys(corresp).join(', '));
+    setOther(Object.keys(other).join(', '));
+    setFirst(Object.keys(first).join(', '));
+
+    
     if (Object.keys(selectedGroups).length>0) {
       setTextDialog('Groups Selected')
+      setShowSelectedGroups(1)
     }
     setOpen(false);
   };
@@ -77,7 +103,7 @@ export default function StartingForm() {
     
     //The issue here might be related to the asynchronous nature of the axios.post call. 
     //When you call console.log(data) immediately after setData(response.data['response']), 
-    //the state update might not have been completed yet, and data may still be null.
+    //the  update might not have been completed yet, and data may still be null.
     //To address this, you should use the useEffect hook to observe changes in the state and 
     //perform actions after the state has been updated. Here's an example of how you can modify your code:
 
@@ -87,14 +113,18 @@ export default function StartingForm() {
         navigate(url);
       } else {
         var url = `/KPIs_form_frontend/success`;
-        navigate(url, { state: { data:data, selectedGroups:selectedGroups, projectCodes:projectCodes} });
+        navigate(url, { state: { data:data, selectedGroups:selectedGroups, projectCodes:projectCodes, userName: userName} });
       }
     }
 
   }, [data]); // Dependency array ensures this effect runs only when 'data' changes
 
   return (
-    <>
+    <>        
+      <Typography component="h2" variant="h5" style={{ textAlign: 'right', marginRight: '50px', marginTop: '30px' }}>
+        <span style={{ marginRight: '80px', marginTop: '20px', display: 'inline-block', fontStyle: 'italic', fontFamily: 'Georgia' }}> Hello, {userName} </span>
+        <img src={logos} alt="logo" width="150" height="80" style={{ float: 'left', marginLeft: '50px' }} />
+      </Typography>
       <Box
         component="form"
         sx={{
@@ -107,14 +137,9 @@ export default function StartingForm() {
         noValidate
         autoComplete="off"
       >
-        <Alert severity="info"  style={{ textAlign: 'center'}}>
-        This is a simple interface to test our new script to retrieve paper details based on the DOI alone. This script will be integrated into a new approach to collect iBET's scientific KPIs to save time that is best used doing actual research.<br /><br />
-        Thanks for testing! Any feedback is welcome. Please send an email to Pedro Cruz (pedro.cruz@ibet.pt), Ines Isidro (iaisidro@ibet.pt) and Mauro Oliveri (mauro.oliveri@ibet.pt) or reach out to any of us directly.
-        </Alert>
-        <img src={logos} alt="logo" width="150" height="80" style={{ float: 'left', marginRight: '1450px', paddingTop: '40px'  }} />
         <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
           <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
-            Add Publication
+            Add papers to iBET KPIs
           </Typography>
         </div>
         <div style={{ display: 'flex', 
@@ -124,18 +149,63 @@ export default function StartingForm() {
                       paddingTop: '40px', 
                       paddingBottom: '60px'}}> 
           <div>
-            <Button variant="outlined" onClick={handleClickOpen}  
-                    style={{ 
-                      height: '56px', 
-                      margin: '0',
-                      width: '550px',
-                      padding: '0px 14px',
-                      color: 'rgba(0, 0, 0, 0.87)',
-                      borderColor: 'rgba(0, 0, 0, 0.23)'
-                      }}>
-              {textDialog}
-            </Button>
-            <MyDialog isOpen={open} handleClose={handleClose} onSelectionChangeDialog={setSelectedGroups}/>
+            <Box display="flex" flexDirection="column" alignItems="left">
+              <Button variant="outlined" onClick={handleClickOpen}  
+                      style={{ 
+                        height: '56px', 
+                        margin: '0',
+                        width: '550px',
+                        padding: '0px 14px',
+                        color: 'rgba(0, 0, 0, 0.87)',
+                        borderColor: 'rgba(0, 0, 0, 0.23)',
+                        }}>
+                  {textDialog}
+              </Button>
+              <MyDialog isOpen={open} handleClose={handleClose} onSelectionChangeDialog={setSelectedGroups}/>
+              {showSelectedGroups === 1 && (
+                <Typography variant="body2" component="span" style={{ paddingLeft: '15px'}}>
+                  {first.length > 0 && (
+                    <>
+                      <span style={{ fontWeight: 'bold'}}>First:</span>
+                      <br></br>
+                      {first.split(',').map((lab, index) => (
+                        <span key={index}>
+                          {index > 0 && <br />}
+                          &nbsp;&nbsp;&nbsp;&nbsp; <span style={{ fontWeight: 'bold', color: 'red' }}>»</span> {lab.trim()}
+                        </span>
+                      ))}
+                      <br></br>
+                    </>
+                  )}
+                  {corresp.length > 0 && (
+                    <>
+                      <span style={{ fontWeight: 'bold' }}>Corresp:</span>
+                      <br></br>
+                      {corresp.split(',').map((lab, index) => (
+                        <span key={index}>
+                          {index > 0 && <br />}
+                          &nbsp;&nbsp;&nbsp;&nbsp; <span style={{ fontWeight: 'bold', color: 'red' }}>»</span> {lab.trim()}
+                        </span>
+                      ))}
+                      <br></br>
+                    </>
+                  )}
+                  {other.length > 0 && (
+                    <>
+                      <span style={{ fontWeight: 'bold' }}>Other:</span>
+                      <br></br>
+                      {other.split(',').map((lab, index) => (
+                        <span key={index}>
+                          {index > 0 && <br />}
+                          &nbsp;&nbsp;&nbsp;&nbsp; <span style={{ fontWeight: 'bold', color: 'red' }}>»</span> {lab.trim()}
+                        </span>
+                      ))}
+                      <br></br>
+                    </>
+                  )}
+                </Typography>
+              )}
+            </Box>
           </div>
           <TextField 
           id="outlined-search" 
@@ -167,14 +237,18 @@ export default function StartingForm() {
               <>
                 <Typography variant="body2" component="span">
                   Project(s) associated with this KPI. Enter the project LabOrders codes, separated by commas, e.g.: <i><strong>P-123</strong>, <strong>PI-456</strong></i>
+                </Typography><br></br><br></br>
+                <Typography variant="body2" component="span" fontStyle="italic" fontWeight="bold">
+                  * This field is mandatory for iBETXplore projects
                 </Typography>
               </>
+              // This field is mandatory for iBETXplore projects
           }/>
         </div>
         <div style={{ display: 'flex', justifyContent: 'right', width: '83.5vw' }}>
           {flag === 0 && (
             <Link>
-              <Button type="submit" variant="contained" color="primary" onClick={handleApiTest} style={{ width: '15%', marginTop:'20px' }}>
+              <Button type="submit" variant="contained" color="primary" onClick={handleApiTest} style={{ width: '15%', marginTop:'50px' }}>
                 Submit
               </Button>
             </Link>
