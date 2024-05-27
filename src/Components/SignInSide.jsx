@@ -95,7 +95,8 @@ export default function SignInSide() {
     if (emailExists) {
       let api = ''
       try {
-          api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/check_pws_ms_AD/`
+          //api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/check_pws_ms_AD/`
+          api = 'http://' + '172.17.231.51:8080' + `/check_pws_ms_AD/`
           axios.post(api, userData)
             .then(response => {
 
