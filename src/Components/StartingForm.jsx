@@ -147,7 +147,7 @@ export default function StartingForm() {
         autoComplete="off"
       >
         <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
-          <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
+          <Typography component="h1" variant="h3" style={{ fontFamily: 'Arial, sans-serif', fontWeight: 400 }}>
             Add paper to iBET KPIs
           </Typography>
         </div>
@@ -255,7 +255,7 @@ export default function StartingForm() {
         <div style={{ display: 'flex', justifyContent: 'right', width: '83.5vw' }}>
           {flag === 0 && (
             <Link>
-              <Button type="submit" variant="contained" color="primary" onClick={handleApiTest} style={{ width: '100%', marginTop:'50px' }}>
+              <Button type="submit" variant="contained" color="primary" onClick={handleApiTest} style={{ width: '100%', marginTop:'35px' }}>
                 Search DOI
               </Button>
             </Link>
