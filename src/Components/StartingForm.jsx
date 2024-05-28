@@ -11,16 +11,22 @@ import SPLoader from './SpinnerLoader';
 import Copyright from './CopyRight';
 import MyDialog from './dialog';
 import { useLocation } from 'react-router-dom';
+import Avatar from '@mui/material/Avatar';
+import { deepOrange } from '@mui/material/colors';
+
 
 export default function StartingForm() {
   const [data, setData] = useState(null);
   const [selectedGroups, setSelectedGroups] = useState([]);
   const [doi, setDoi] = useState('');
+  const [isSelectedselectGroups, setIsSelectedselectGroups] = useState('');
+  const [isSelectedDoi, setIsSelectedDoi] = useState('');
   const [isValidDoi, setIsValidDoi] = useState(true);
+  const isFormValid = isSelectedDoi === true && isSelectedselectGroups !== '';
   const navigate = useNavigate();
   const [flag, setFlag] = useState(0); 
   const [open, setOpen] = useState(false);
-  const [textDialog, setTextDialog] = useState('Select Groups');
+  const [textDialog, setTextDialog] = useState('Select Groups *');
   const [projectCodes, setProjectCodes] = useState('');
   const [showSelectedGroups, setShowSelectedGroups] = useState(0);
   const [corresp, setCorresp] = useState('');
@@ -28,12 +34,22 @@ export default function StartingForm() {
   const [first, setFirst] = useState('');
   const location = useLocation();
   const userName = location.state && location.state.userName;
+  const userSurname = location.state && location.state.userSurname;
+
+
+  const handleDoiChange = (event) => {
+    console.log(event.target.value)
+    setDoi(event.target.value);
+    setIsValidDoi(isValidDOI(event.target.value));
+    setIsSelectedDoi(isValidDOI(event.target.value))
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
+    setIsSelectedselectGroups('selected');
     const splitGroups = (groups) => {
 
       // Initialize the objects
@@ -70,16 +86,11 @@ export default function StartingForm() {
     return doiPattern.test(trimmedDOI);
   };
 
-  const handleDoiChange = (event) => {
-    setDoi(event.target.value);
-    setIsValidDoi(isValidDOI(event.target.value));
-  };
-
   const handleApiTest = async (event) => {
     event.preventDefault();
     const timeoutId = setTimeout(() => {
     }, 1000000);
-    if (isValidDoi) {
+    if (isFormValid) {
       setFlag(1);
       let api = ''
       try {
@@ -110,10 +121,10 @@ export default function StartingForm() {
     if (data !== null) {
       if (data === 'No DOIs found') {
         var url = `/KPIs_form_frontend/fail?DOI=${doi}`;
-        navigate(url);
+        navigate(url, { state: { data:data, selectedGroups:selectedGroups, projectCodes:projectCodes, userName: userName, userSurname: userSurname}});
       } else {
         var url = `/KPIs_form_frontend/success`;
-        navigate(url, { state: { data:data, selectedGroups:selectedGroups, projectCodes:projectCodes, userName: userName} });
+        navigate(url, { state: { data:data, selectedGroups:selectedGroups, projectCodes:projectCodes, userName: userName, userSurname: userSurname}});
       }
     }
 
@@ -122,7 +133,11 @@ export default function StartingForm() {
   return (
     <>        
       <Typography component="h2" variant="h5" style={{ textAlign: 'right', marginRight: '50px', marginTop: '30px' }}>
-        <span style={{ marginRight: '80px', marginTop: '20px', display: 'inline-block', fontStyle: 'italic', fontFamily: 'Georgia' }}> Hello, {userName} </span>
+        <span style={{ marginRight: '30px', marginTop: '20px', display: 'inline-block', fontStyle: 'italic', fontFamily: 'Georgia' }}> 
+          <Avatar sx={{ bgcolor: deepOrange[700],  width: 55, height: 55 }}>
+            {userName[0] + userSurname[0]}
+          </Avatar> 
+        </span>
         <img src={logos} alt="logo" width="150" height="80" style={{ float: 'left', marginLeft: '50px' }} />
       </Typography>
       <Box
@@ -138,8 +153,8 @@ export default function StartingForm() {
         autoComplete="off"
       >
         <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
-          <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
-            Add papers to iBET KPIs
+          <Typography component="h1" variant="h3" style={{ fontFamily: 'Arial, sans-serif', fontWeight: 400 }}>
+            Add paper to iBET KPIs
           </Typography>
         </div>
         <div style={{ display: 'flex', 
@@ -147,18 +162,23 @@ export default function StartingForm() {
                       width: '100vw',  
                       justifyContent: 'center',
                       paddingTop: '40px', 
-                      paddingBottom: '60px'}}> 
+                      paddingBottom: '60px'}}
+        > 
           <div>
             <Box display="flex" flexDirection="column" alignItems="left">
-              <Button variant="outlined" onClick={handleClickOpen}  
-                      style={{ 
+              <Button 
+                    variant="outlined" 
+                    onClick={handleClickOpen}  
+                    style={{ 
                         height: '56px', 
                         margin: '0',
                         width: '550px',
                         padding: '0px 14px',
                         color: 'rgba(0, 0, 0, 0.87)',
                         borderColor: 'rgba(0, 0, 0, 0.23)',
-                        }}>
+                        textTransform: 'none',
+                        fontSize: '16px'
+                    }}>
                   {textDialog}
               </Button>
               <MyDialog isOpen={open} handleClose={handleClose} onSelectionChangeDialog={setSelectedGroups}/>
@@ -228,7 +248,7 @@ export default function StartingForm() {
           }/>
           <TextField 
           id="outlined-search" 
-          label="Project(s)" 
+          label="Project(s) **" 
           type="search" 
           style={{ width: '27%', height: '40px',margin: '0'}} 
           value={projectCodes} 
@@ -238,26 +258,41 @@ export default function StartingForm() {
                 <Typography variant="body2" component="span">
                   Project(s) associated with this KPI. Enter the project LabOrders codes, separated by commas, e.g.: <i><strong>P-123</strong>, <strong>PI-456</strong></i>
                 </Typography><br></br><br></br>
-                <Typography variant="body2" component="span" fontStyle="italic" fontWeight="bold">
-                  * This field is mandatory for iBETXplore projects
-                </Typography>
               </>
-              // This field is mandatory for iBETXplore projects
           }/>
         </div>
         <div style={{ display: 'flex', justifyContent: 'right', width: '83.5vw' }}>
           {flag === 0 && (
             <Link>
-              <Button type="submit" variant="contained" color="primary" onClick={handleApiTest} style={{ width: '15%', marginTop:'50px' }}>
-                Submit
+              <Button 
+                  type="submit" 
+                  variant="contained" 
+                  color="primary" 
+                  onClick={handleApiTest} 
+                  style={{ 
+                    width: '7%', 
+                    marginTop:'25px', 
+                    position: 'fixed', 
+                    bottom: '460px', 
+                    right: '170px' 
+                  }}
+                  disabled={!isFormValid}
+                  >
+                Search DOI
               </Button>
             </Link>
             )}
           {flag === 1 && (
-            <div style={{}}>
+            <div style={{ width: '7%', marginTop:'25px', position: 'fixed', bottom: '420px', right: '190px' }}>
               <SPLoader />
             </div>
           )}
+        </div>
+        <div style={{ position: 'fixed', bottom: '80px', right: '170px', textAlign: 'right' }}>
+          <Typography variant="body2" component="span" fontStyle="italic" fontWeight="bold">
+            * Mandatory field <br />
+            ** Mandatory for iBETXplore, FCT, EC and other publicly funded projects
+          </Typography>
         </div>
       </Box>
       <Copyright sx={{ mt: 5 }} />

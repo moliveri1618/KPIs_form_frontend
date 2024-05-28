@@ -16,7 +16,8 @@ import Paper from '@mui/material/Paper';
 import Copyright from './CopyRight';
 import logos from './Images/ibet_logo.png'
 import axios from 'axios';
-
+import Avatar from '@mui/material/Avatar';
+import { deepOrange } from '@mui/material/colors';
 
 export default function FormSuccess() {
   const location = useLocation();
@@ -24,6 +25,7 @@ export default function FormSuccess() {
   const selectedGroups = location.state && location.state.selectedGroups;
   const projectCodes = location.state && location.state.projectCodes;
   const userName = location.state && location.state.userName;
+  const userSurname = location.state && location.state.userSurname;
 
   const splitGroups = (groups) => {
     const corresp = {}, other = {}, first = {};
@@ -107,13 +109,18 @@ export default function FormSuccess() {
   return (
     <>
       <Typography component="h2" variant="h5" style={{ textAlign: 'right', marginRight: '50px', marginTop: '30px' }}>
-        <span style={{ marginRight: '80px', marginTop: '20px', display: 'inline-block', fontStyle: 'italic', fontFamily: 'Georgia' }}> Hello, {userName} </span>
+        <span style={{ marginRight: '30px', marginTop: '20px', display: 'inline-block', fontStyle: 'italic', fontFamily: 'Georgia' }}> 
+          <Avatar sx={{ bgcolor: deepOrange[700],  width: 55, height: 55 }}>
+            {userName[0] + userSurname[0]}
+          </Avatar> 
+        </span>
         <img src={logos} alt="logo" width="150" height="80" style={{ float: 'left', marginLeft: '50px' }} />
       </Typography>
       <Box
         component="form"
         sx={{
           marginTop: 8,
+          marginBottom: 20,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -123,8 +130,8 @@ export default function FormSuccess() {
         autoComplete="off"
       >       
         <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
-          <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
-            Add papers to iBET KPIs
+          <Typography component="h1" variant="h3" style={{ fontFamily: 'Arial, sans-serif', fontWeight: 400 }}>
+            Check Paper Details
           </Typography>
         </div>
 
@@ -280,7 +287,7 @@ export default function FormSuccess() {
                   </TableCell>
                 </TableRow>
 
-                <TableRow>
+                {/* <TableRow>
                   <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Article Type:</TableCell>
                   <TableCell>
                     <Tooltip arrow>
@@ -289,7 +296,7 @@ export default function FormSuccess() {
                       </div>
                     </Tooltip>
                   </TableCell>
-                </TableRow>
+                </TableRow> */}
 
                 <TableRow>
                   <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>DOI:</TableCell>

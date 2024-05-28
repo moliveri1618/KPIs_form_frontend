@@ -18,6 +18,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { HiOutlineCheck } from "react-icons/hi2";
 import sign_in_pic from './Images/kpis_background.png'
+import { ConstructionOutlined } from '@mui/icons-material';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
@@ -51,7 +52,6 @@ export default function SignInSide() {
 
   const navigate = useNavigate();
   const [flagSuccess, setFlagSuccess] = useState(0); 
-  const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -102,18 +102,15 @@ export default function SignInSide() {
 
               if (response.statusText === 'OK') {
                 setFlagSuccess(1)
-                setUserName(response.data['name'] + ' ' + response.data['surname'])
-
                 setTimeout(() => {
                   var url = `/KPIs_form_frontend/start`;
-                  navigate(url, { state: { userName:userName } });
+                  navigate(url, { state: { userName: response.data['name'], userSurname: response.data['surname'] } });
                 }, 1500); // 3000 milliseconds = 3 seconds
             
               } 
             })
             .catch(error => {
               console.error(error.response.data['message']);
-              console.log('heer')
               notify(error.response.data['message'])
             });
         
