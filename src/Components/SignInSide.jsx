@@ -105,7 +105,7 @@ export default function SignInSide() {
                 setFlagSuccess(1)
                 setTimeout(() => {
                   var url = `/KPIs_form_frontend/start`;
-                  navigate(url, { state: { userName:response.data['name'] } });
+                  navigate(url, { state: { userName: response.data['name'], userSurname: response.data['surname'] } });
                 }, 1500); // 3000 milliseconds = 3 seconds
             
               } 

@@ -106,7 +106,7 @@ export default function FormSuccess() {
   return (
     <>
       <Typography component="h2" variant="h5" style={{ textAlign: 'right', marginRight: '50px', marginTop: '30px' }}>
-        <span style={{ marginRight: '80px', marginTop: '20px', display: 'inline-block', fontStyle: 'italic', fontFamily: 'Georgia' }}> Hello {userName} </span>
+        <span style={{ marginRight: '80px', marginTop: '20px', display: 'inline-block', fontStyle: 'italic', fontFamily: 'Georgia' }}> </span>
         <img src={logos} alt="logo" width="150" height="80" style={{ float: 'left', marginLeft: '50px' }} />
       </Typography>
       <Box

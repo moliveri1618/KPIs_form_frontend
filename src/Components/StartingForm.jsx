@@ -11,6 +11,9 @@ import SPLoader from './SpinnerLoader';
 import Copyright from './CopyRight';
 import MyDialog from './dialog';
 import { useLocation } from 'react-router-dom';
+import Avatar from '@mui/material/Avatar';
+import { deepOrange } from '@mui/material/colors';
+
 
 export default function StartingForm() {
   const [data, setData] = useState(null);
@@ -20,7 +23,7 @@ export default function StartingForm() {
   const navigate = useNavigate();
   const [flag, setFlag] = useState(0); 
   const [open, setOpen] = useState(false);
-  const [textDialog, setTextDialog] = useState('Select Groups');
+  const [textDialog, setTextDialog] = useState('Select Groups *');
   const [projectCodes, setProjectCodes] = useState('');
   const [showSelectedGroups, setShowSelectedGroups] = useState(0);
   const [corresp, setCorresp] = useState('');
@@ -28,7 +31,7 @@ export default function StartingForm() {
   const [first, setFirst] = useState('');
   const location = useLocation();
   const userName = location.state && location.state.userName;
-  console.log(userName)
+  const userSurname = location.state && location.state.userSurname;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -124,7 +127,11 @@ export default function StartingForm() {
   return (
     <>        
       <Typography component="h2" variant="h5" style={{ textAlign: 'right', marginRight: '50px', marginTop: '30px' }}>
-        <span style={{ marginRight: '80px', marginTop: '20px', display: 'inline-block', fontStyle: 'italic', fontFamily: 'Georgia' }}> Hello {userName} </span>
+        <span style={{ marginRight: '30px', marginTop: '20px', display: 'inline-block', fontStyle: 'italic', fontFamily: 'Georgia' }}> 
+          <Avatar sx={{ bgcolor: deepOrange[700],  width: 55, height: 55 }}>
+            {userName[0] + userSurname[0]}
+          </Avatar> 
+        </span>
         <img src={logos} alt="logo" width="150" height="80" style={{ float: 'left', marginLeft: '50px' }} />
       </Typography>
       <Box
@@ -161,7 +168,7 @@ export default function StartingForm() {
                         color: 'rgba(0, 0, 0, 0.87)',
                         borderColor: 'rgba(0, 0, 0, 0.23)',
                         textTransform: 'none',
-                        fontSize: '16px' 
+                        fontSize: '16px'
                         }}>
                   {textDialog}
               </Button>
@@ -232,7 +239,7 @@ export default function StartingForm() {
           }/>
           <TextField 
           id="outlined-search" 
-          label="Project(s)" 
+          label="Project(s) **" 
           type="search" 
           style={{ width: '27%', height: '40px',margin: '0'}} 
           value={projectCodes} 
@@ -242,18 +249,14 @@ export default function StartingForm() {
                 <Typography variant="body2" component="span">
                   Project(s) associated with this KPI. Enter the project LabOrders codes, separated by commas, e.g.: <i><strong>P-123</strong>, <strong>PI-456</strong></i>
                 </Typography><br></br><br></br>
-                <Typography variant="body2" component="span" fontStyle="italic" fontWeight="bold">
-                  * This field is mandatory for iBETXplore projects
-                </Typography>
               </>
-              // This field is mandatory for iBETXplore projects
           }/>
         </div>
         <div style={{ display: 'flex', justifyContent: 'right', width: '83.5vw' }}>
           {flag === 0 && (
             <Link>
               <Button type="submit" variant="contained" color="primary" onClick={handleApiTest} style={{ width: '15%', marginTop:'50px' }}>
-                Submit
+                Search DOI
               </Button>
             </Link>
             )}
@@ -262,6 +265,12 @@ export default function StartingForm() {
               <SPLoader />
             </div>
           )}
+        </div>
+        <div style={{ position: 'fixed', bottom: '80px', right: '170px', textAlign: 'right' }}>
+          <Typography variant="body2" component="span" fontStyle="italic" fontWeight="bold">
+            * Mandatory field <br />
+            ** Mandatory for iBETXplore, FCT, EC and other publicly funded projects
+          </Typography>
         </div>
       </Box>
       <Copyright sx={{ mt: 5 }} />
