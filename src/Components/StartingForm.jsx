@@ -163,7 +163,8 @@ export default function StartingForm() {
                       width: '100vw',  
                       justifyContent: 'center',
                       paddingTop: '40px', 
-                      paddingBottom: '60px'}}> 
+                      paddingBottom: '60px'}}
+        > 
           <div>
             <Box display="flex" flexDirection="column" alignItems="left">
               <Button 
