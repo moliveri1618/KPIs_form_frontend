@@ -18,7 +18,7 @@ function Copyright() {
       }}
     >
       <Typography variant="body2" color="text.secondary" align="center" style={{ marginBottom: '8px' }}>
-      Developed by Pedro Cruz, Inês Isidro and Mauro Oliveri. Please send an email to Pedro Cruz (pedro.cruz@ibet.pt), Ines Isidro (iaisidro@ibet.pt) and Mauro Oliveri (mauro.oliveri@ibet.pt) or reach out to any of us directly.
+        Developed by Mauro Oliveri, Inês Isidro and Pedro Cruz. For any issues or feedback, please send us an email or reach out directly.
       </Typography>
       <Typography variant="body2" color="text.secondary" align="center" style={{ marginTop: '0' }}>
         {'Copyright © '}
