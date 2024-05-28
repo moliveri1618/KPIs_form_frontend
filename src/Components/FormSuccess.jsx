@@ -113,6 +113,7 @@ export default function FormSuccess() {
         component="form"
         sx={{
           marginTop: 8,
+          marginBottom: 20,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -122,8 +123,8 @@ export default function FormSuccess() {
         autoComplete="off"
       >       
         <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
-          <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
-            Add paper to iBET KPIs
+          <Typography component="h1" variant="h3" style={{ fontFamily: 'Arial, sans-serif', fontWeight: 400 }}>
+            Check Paper Details
           </Typography>
         </div>
 
@@ -279,7 +280,7 @@ export default function FormSuccess() {
                   </TableCell>
                 </TableRow>
 
-                <TableRow>
+                {/* <TableRow>
                   <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Article Type:</TableCell>
                   <TableCell>
                     <Tooltip arrow>
@@ -288,7 +289,7 @@ export default function FormSuccess() {
                       </div>
                     </Tooltip>
                   </TableCell>
-                </TableRow>
+                </TableRow> */}
 
                 <TableRow>
                   <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>DOI:</TableCell>
