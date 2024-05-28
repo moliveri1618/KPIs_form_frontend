@@ -141,7 +141,7 @@ export default function FormFail() {
       let api = ''
       try {
         submit_success()
-        setbuttonDisabled(true)
+        setIsValid(false)
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -220,7 +220,7 @@ export default function FormFail() {
             </Button>
           </Link>
           <Link>
-            <Button variant="contained" color="primary" onClick={handleApiTest} disabled={buttonDisabled} style={{ width: '15%' }}>
+            <Button variant="contained" color="primary" onClick={handleApiTest} disabled={!isValid} style={{ width: '15%' }}>
               Submit
             </Button>
           </Link>
