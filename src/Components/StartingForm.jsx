@@ -255,13 +255,13 @@ export default function StartingForm() {
         <div style={{ display: 'flex', justifyContent: 'right', width: '83.5vw' }}>
           {flag === 0 && (
             <Link>
-              <Button type="submit" variant="contained" color="primary" onClick={handleApiTest} style={{ width: '100%', marginTop:'35px' }}>
+              <Button type="submit" variant="contained" color="primary" onClick={handleApiTest} style={{ width: '7%', marginTop:'25px', position: 'fixed', bottom: '460px', right: '170px' }}>
                 Search DOI
               </Button>
             </Link>
             )}
           {flag === 1 && (
-            <div style={{}}>
+            <div style={{ width: '7%', marginTop:'25px', position: 'fixed', bottom: '420px', right: '190px' }}>
               <SPLoader />
             </div>
           )}
