@@ -28,6 +28,7 @@ export default function StartingForm() {
   const [first, setFirst] = useState('');
   const location = useLocation();
   const userName = location.state && location.state.userName;
+  console.log(userName)
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -123,7 +124,7 @@ export default function StartingForm() {
   return (
     <>        
       <Typography component="h2" variant="h5" style={{ textAlign: 'right', marginRight: '50px', marginTop: '30px' }}>
-        <span style={{ marginRight: '80px', marginTop: '20px', display: 'inline-block', fontStyle: 'italic', fontFamily: 'Georgia' }}> Hello, {userName} </span>
+        <span style={{ marginRight: '80px', marginTop: '20px', display: 'inline-block', fontStyle: 'italic', fontFamily: 'Georgia' }}> Hello {userName} </span>
         <img src={logos} alt="logo" width="150" height="80" style={{ float: 'left', marginLeft: '50px' }} />
       </Typography>
       <Box
