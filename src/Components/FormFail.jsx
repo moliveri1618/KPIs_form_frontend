@@ -9,18 +9,24 @@ import 'react-toastify/dist/ReactToastify.css';
 import Copyright from './CopyRight';
 import logos from './Images/ibet_logo.png'
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
+import Avatar from '@mui/material/Avatar';
+import { deepOrange } from '@mui/material/colors';
+
 
 export default function FormFail() {
+  const location = useLocation();
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [volume, setVolume] = useState('');
   const [pages, setPages] = useState('');
   const [year, setYear] = useState('');
-  const [doi, setDoi] = useState(''); // Initially, doi is an empty string
-  let res = {}
-
+  const [doi, setDoi] = useState(''); 
   const [isValid, setIsValid] = useState(false);
   const [buttonDisabled, setbuttonDisabled] = useState(false);
+  const userName = location.state && location.state.userName;
+  const userSurname = location.state && location.state.userSurname;
+  let res = {}
 
   const handleChangeTitle = (event) => {
     setTitle(event.target.value);
@@ -132,18 +138,10 @@ export default function FormFail() {
       } catch (error) {
           console.error('Error fetching data:', error);
       }
-
       let api = ''
       try {
-        // if (process.env.NODE_ENV !== 'production') {
-        //   api = 'http://' + process.env.REACT_APP_API_URL_DEV + '/manual_submission'
-        // } else {
-        //   api = 'http://' + process.env.REACT_APP_API_URL_PROD + '/manual_submission'
-        // }
-        //const response = axios.post(api)
         submit_success()
         setbuttonDisabled(true)
-        // add dialog pop up saying: 
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -170,6 +168,14 @@ export default function FormFail() {
 
   return (
     <>
+      <Typography component="h2" variant="h5" style={{ textAlign: 'right', marginRight: '50px', marginTop: '30px' }}>
+        <span style={{ marginRight: '30px', marginTop: '20px', display: 'inline-block', fontStyle: 'italic', fontFamily: 'Georgia' }}> 
+          <Avatar sx={{ bgcolor: deepOrange[700],  width: 55, height: 55 }}>
+            {userName[0] + userSurname[0]}
+          </Avatar> 
+        </span>
+        <img src={logos} alt="logo" width="150" height="80" style={{ float: 'left', marginLeft: '50px' }} />
+      </Typography>
       <Box
         component="form"
         sx={{
@@ -182,9 +188,6 @@ export default function FormFail() {
         noValidate
         autoComplete="off"
       >
-        <Link to="/KPIs_form_frontend">
-          <img src={logos} alt="logo" width="150" height="80" style={{ float: 'left', marginRight: '1450px', paddingTop: '40px'  }} />
-        </Link>   
         <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
           <Typography component="h1" variant="h3" style={{ fontFamily: 'Arial, sans-serif', fontWeight: 400 }}>
             Add paper to iBET KPIs
