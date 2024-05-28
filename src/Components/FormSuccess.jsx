@@ -123,7 +123,7 @@ export default function FormSuccess() {
       >       
         <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
           <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
-            Add papers to iBET KPIs
+            Add paper to iBET KPIs
           </Typography>
         </div>
 

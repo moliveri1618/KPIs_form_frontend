@@ -141,7 +141,7 @@ export default function StartingForm() {
       >
         <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
           <Typography component="h1" variant="h3" style={{ fontFamily: 'Sedan-Regular', fontWeight: 400 }}>
-            Add papers to iBET KPIs
+            Add paper to iBET KPIs
           </Typography>
         </div>
         <div style={{ display: 'flex', 
@@ -160,6 +160,8 @@ export default function StartingForm() {
                         padding: '0px 14px',
                         color: 'rgba(0, 0, 0, 0.87)',
                         borderColor: 'rgba(0, 0, 0, 0.23)',
+                        textTransform: 'none',
+                        fontSize: '16px' 
                         }}>
                   {textDialog}
               </Button>
