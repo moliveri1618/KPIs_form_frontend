@@ -19,7 +19,10 @@ export default function StartingForm() {
   const [data, setData] = useState(null);
   const [selectedGroups, setSelectedGroups] = useState([]);
   const [doi, setDoi] = useState('');
+  const [isSelectedselectGroups, setIsSelectedselectGroups] = useState('');
+  const [isSelectedDoi, setIsSelectedDoi] = useState('');
   const [isValidDoi, setIsValidDoi] = useState(true);
+  const isFormValid = isSelectedDoi === true && isSelectedselectGroups !== '';
   const navigate = useNavigate();
   const [flag, setFlag] = useState(0); 
   const [open, setOpen] = useState(false);
@@ -33,11 +36,20 @@ export default function StartingForm() {
   const userName = location.state && location.state.userName;
   const userSurname = location.state && location.state.userSurname;
 
+
+  const handleDoiChange = (event) => {
+    console.log(event.target.value)
+    setDoi(event.target.value);
+    setIsValidDoi(isValidDOI(event.target.value));
+    setIsSelectedDoi(isValidDOI(event.target.value))
+  };
+
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
+    setIsSelectedselectGroups('selected');
     const splitGroups = (groups) => {
 
       // Initialize the objects
@@ -74,16 +86,11 @@ export default function StartingForm() {
     return doiPattern.test(trimmedDOI);
   };
 
-  const handleDoiChange = (event) => {
-    setDoi(event.target.value);
-    setIsValidDoi(isValidDOI(event.target.value));
-  };
-
   const handleApiTest = async (event) => {
     event.preventDefault();
     const timeoutId = setTimeout(() => {
     }, 1000000);
-    if (isValidDoi) {
+    if (isFormValid) {
       setFlag(1);
       let api = ''
       try {
@@ -159,8 +166,10 @@ export default function StartingForm() {
                       paddingBottom: '60px'}}> 
           <div>
             <Box display="flex" flexDirection="column" alignItems="left">
-              <Button variant="outlined" onClick={handleClickOpen}  
-                      style={{ 
+              <Button 
+                    variant="outlined" 
+                    onClick={handleClickOpen}  
+                    style={{ 
                         height: '56px', 
                         margin: '0',
                         width: '550px',
@@ -169,7 +178,7 @@ export default function StartingForm() {
                         borderColor: 'rgba(0, 0, 0, 0.23)',
                         textTransform: 'none',
                         fontSize: '16px'
-                        }}>
+                    }}>
                   {textDialog}
               </Button>
               <MyDialog isOpen={open} handleClose={handleClose} onSelectionChangeDialog={setSelectedGroups}/>
@@ -255,7 +264,20 @@ export default function StartingForm() {
         <div style={{ display: 'flex', justifyContent: 'right', width: '83.5vw' }}>
           {flag === 0 && (
             <Link>
-              <Button type="submit" variant="contained" color="primary" onClick={handleApiTest} style={{ width: '7%', marginTop:'25px', position: 'fixed', bottom: '460px', right: '170px' }}>
+              <Button 
+                  type="submit" 
+                  variant="contained" 
+                  color="primary" 
+                  onClick={handleApiTest} 
+                  style={{ 
+                    width: '7%', 
+                    marginTop:'25px', 
+                    position: 'fixed', 
+                    bottom: '460px', 
+                    right: '170px' 
+                  }}
+                  disabled={!isFormValid}
+                  >
                 Search DOI
               </Button>
             </Link>
