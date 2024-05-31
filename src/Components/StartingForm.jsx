@@ -94,7 +94,7 @@ export default function StartingForm() {
       setFlag(1);
       let api = ''
       try {
-          api = 'http://' + '172.17.231.51:8080' + `/stoca?DOI=${doi}`
+          api = `/stoca?DOI=${doi}`
           //api = 'http://' + '127.0.0.1:8000' + `/stoca?DOI=${doi}`
           axios.post(api)
             .then(response => {

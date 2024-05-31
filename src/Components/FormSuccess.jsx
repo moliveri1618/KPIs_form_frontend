@@ -68,7 +68,7 @@ export default function FormSuccess() {
   useEffect(() => {
 
     try {
-      let api = 'http://' + '172.17.231.51:8080' + `/doi_post/`
+      let api = '/doi_post/'
       //let api = 'http://' + '127.0.0.1:8000' + `/doi_post/`
 
       jsonData['research_groups_first'] = Object.keys(first).join(", ")
