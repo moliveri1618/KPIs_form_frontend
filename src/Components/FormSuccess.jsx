@@ -1,9 +1,8 @@
-import React, {useEffect } from 'react';
+import React, {useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Tooltip from '@mui/material/Tooltip';
@@ -18,6 +17,7 @@ import logos from './Images/ibet_logo.png'
 import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import { deepOrange } from '@mui/material/colors';
+import { useNavigate } from 'react-router-dom';
 
 export default function FormSuccess() {
   const location = useLocation();
@@ -26,6 +26,9 @@ export default function FormSuccess() {
   const projectCodes = location.state && location.state.projectCodes;
   const userName = location.state && location.state.userName;
   const userSurname = location.state && location.state.userSurname;
+  const [isValid, setIsValid] = useState(true);
+  const navigate = useNavigate();
+
 
   const splitGroups = (groups) => {
     const corresp = {}, other = {}, first = {};
@@ -36,8 +39,9 @@ export default function FormSuccess() {
     });
     return { corresp, other, first };
   };
-
   const { corresp, other, first } = splitGroups(selectedGroups);
+
+
 
   // Function to reformat the names
   const reformatNames = (namesStr) => {
@@ -49,23 +53,16 @@ export default function FormSuccess() {
     });
     return reorderedNames.join(", ");
   };
-  
-  const reformattedNames = reformatNames(jsonData['author']);
+  const reformattedNames = reformatNames(  jsonData?.author || 'No Author');
 
-  const notify = (message) => {
-    toast.success(message, {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      });
+
+  const navigateToStart = () => {
+    var url = `/KPIs_form_frontend/start`;
+    navigate(url, { state: {  userName: userName, userSurname: userSurname}});
   }
 
-  useEffect(() => {
+  const handleApiTest = async (event) => {
+    event.preventDefault();
 
     try {
       let api = '/doi_post/'
@@ -92,12 +89,27 @@ export default function FormSuccess() {
             console.log('hahaha')
             notify('This DOi is already inserted into the database')
           }
-        });
-        
+        }); 
     } catch (error) {
         console.error('Error fetching data:', error);
     }
+    setIsValid(false)
+  }
 
+  const notify = (message) => {
+    toast.success(message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      });
+  }
+
+  useEffect(() => {
 
     // Cleanup function
     return () => {
@@ -147,9 +159,9 @@ export default function FormSuccess() {
                 <TableRow>
                   <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Title:</TableCell>
                   <TableCell>
-                    <Tooltip  title={jsonData['title']} arrow>
+                    <Tooltip  title={jsonData?.title || 'No Title'} arrow>
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                        {jsonData['title']}
+                        {jsonData?.title || 'No Title'}
                       </div>
                     </Tooltip>
                   </TableCell>
@@ -165,13 +177,12 @@ export default function FormSuccess() {
                     </Tooltip>
                   </TableCell>
                 </TableRow>
-
                 <TableRow>
                   <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Year:</TableCell>
                   <TableCell>
-                    <Tooltip  title={jsonData['year']} arrow>
+                    <Tooltip  title={jsonData?.year || 'No Year'} arrow>
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                        {jsonData['year']}
+                        {jsonData?.year || 'No Year'}
                       </div>
                     </Tooltip>
                   </TableCell>
@@ -180,9 +191,9 @@ export default function FormSuccess() {
                 <TableRow>
                   <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Journal:</TableCell>
                   <TableCell>
-                    <Tooltip  title={jsonData['journal']} arrow>
+                    <Tooltip  title={jsonData?.journal || 'No Journal'} arrow>
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                        {jsonData['journal']}
+                        {jsonData?.journal || 'No Journal'}
                       </div>
                     </Tooltip>
                   </TableCell>
@@ -191,9 +202,9 @@ export default function FormSuccess() {
                 <TableRow>
                   <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Volume:</TableCell>
                   <TableCell>
-                    <Tooltip  title={jsonData['volume']} arrow>
+                    <Tooltip  title={jsonData?.volume || 'No Volume'} arrow>
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                        {jsonData['volume']}
+                        {jsonData?.volume || 'No Volume'}
                       </div>
                     </Tooltip>
                   </TableCell>
@@ -202,9 +213,9 @@ export default function FormSuccess() {
                 <TableRow>
                   <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Pages:</TableCell>
                   <TableCell>
-                    <Tooltip  title={jsonData['pages']} arrow>
+                    <Tooltip  title={jsonData?.pages || 'No Pages'} arrow>
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                        {jsonData['pages']}
+                        {jsonData?.pages || 'No Pages'}
                       </div>
                     </Tooltip>
                   </TableCell>
@@ -224,9 +235,9 @@ export default function FormSuccess() {
                 <TableRow>
                   <TableCell component="th" scope="row" sx={{ fontWeight: 'bold' }}>Publisher:</TableCell>
                   <TableCell>
-                    <Tooltip  title={jsonData['publisher']} arrow>
+                    <Tooltip  title={jsonData?.publisher || 'No Publisher'} arrow>
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                        {jsonData['publisher']}
+                        {jsonData?.publisher || 'No Publisher'}
                       </div>
                     </Tooltip>
                   </TableCell>
@@ -281,7 +292,7 @@ export default function FormSuccess() {
                   <TableCell>
                     <Tooltip arrow>
                       <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                        {jsonData['citation_count']}
+                        {jsonData?.citation_count || 'No Citation Count'}
                       </div>
                     </Tooltip>
                   </TableCell>
@@ -303,7 +314,7 @@ export default function FormSuccess() {
                     <TableCell>
                       <Tooltip arrow>
                         <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
-                          {jsonData['url']}
+                          {jsonData?.url || 'No Url'}
                         </div>
                       </Tooltip>
                     </TableCell>
@@ -315,12 +326,13 @@ export default function FormSuccess() {
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'right', width: '81.5vw' }}>
-          <Link to="/KPIs_form_frontend">
-            <Button variant="contained" color="primary" style={{ width: '15%' }}>
-              Back
-            </Button>
-          </Link>
-          {/* <ToastContainer
+          <Button variant="contained" color="primary" style={{ marginRight: '5px', width:'100px' }} onClick={navigateToStart}>
+            Back
+          </Button>
+          <Button variant="contained" color="primary" onClick={handleApiTest} disabled={!isValid} style={{ marginRight: '20px', width:'100px'}}>
+            Submit
+          </Button>
+          <ToastContainer
             position="top-right"
             autoClose={5000}
             hideProgressBar={false}
@@ -331,7 +343,7 @@ export default function FormSuccess() {
             draggable
             pauseOnHover
             theme="colored"
-            /> */}
+            /> 
         </div>
       </Box>
       <Copyright sx={{ mt: 5 }} />
