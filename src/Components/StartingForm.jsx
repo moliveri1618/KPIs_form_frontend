@@ -94,7 +94,8 @@ export default function StartingForm() {
       setFlag(1);
       let api = ''
       try {
-          api = `/stoca?DOI=${doi}`
+          const trimmedDOI = doi.trim();
+          api = `/stoca?DOI=${trimmedDOI}`
           //api = 'http://' + '127.0.0.1:8000' + `/stoca?DOI=${doi}`
           .post(api)
             .then(response => {
