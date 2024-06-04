@@ -125,7 +125,7 @@ export default function SignInSide() {
  //yoyoyyo
   return (
     <ThemeProvider theme={defaultTheme}>
-      <ToastContainer /> {/* Add this line */}
+      <ToastContainer />
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
@@ -134,7 +134,7 @@ export default function SignInSide() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: `url(${sign_in_pic})`, // Use your local image
+            backgroundImage: `url(${sign_in_pic})`, 
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -152,6 +152,9 @@ export default function SignInSide() {
               alignItems: 'center',
             }}
           >
+            <Typography component="h1" variant="h2" sx={{ mb: 12, mt:5 }}>
+              iBET Papers KPIs App
+            </Typography>
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
               <LockOutlinedIcon />
             </Avatar>
