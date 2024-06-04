@@ -152,9 +152,9 @@ export default function SignInSide() {
               alignItems: 'center',
             }}
           >
-            <Typography component="h1" variant="h2" sx={{ mb: 12, mt:5 }}>
-              iBET Papers KPIs App
-            </Typography>
+              <Typography component="h1" variant="h2" sx={{ mb: 12, mt: 5, fontWeight: 'bold', color: '#2E8BC0', textShadow: '2px 2px 4px rgba(0,0,0,0.3)', fontStyle: 'italic' }}>
+                iBET Papers KPIs App
+              </Typography>
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
               <LockOutlinedIcon />
             </Avatar>
