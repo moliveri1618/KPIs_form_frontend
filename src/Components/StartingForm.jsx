@@ -156,7 +156,7 @@ export default function StartingForm() {
         autoComplete="off"
       >
         <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '20px'  }}>
-          <Typography component="h1" variant="h3" style={{ fontFamily: 'Arial, sans-serif', fontWeight: 400 }}>
+          <Typography component="h1" variant="h3" style={{ fontFamily: 'Arial, sans-serif', fontWeight: 400, fontWeight: 'bold' }}>
             Add paper to iBET KPIs
           </Typography>
         </div>
