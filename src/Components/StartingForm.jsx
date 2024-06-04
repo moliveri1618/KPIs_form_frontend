@@ -96,12 +96,12 @@ export default function StartingForm() {
       try {
           api = `/stoca?DOI=${doi}`
           //api = 'http://' + '127.0.0.1:8000' + `/stoca?DOI=${doi}`
-          axios.post(api)
+          .post(api)
             .then(response => {
               setData(response.data['response']);
             })
             .catch(error => {
-              console.error(error);
+              conaxiossole.error(error);
             });
       } catch (error) {
         console.error('Error fetching data:', error);
