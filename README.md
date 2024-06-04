@@ -9,7 +9,6 @@ npm start
 main  -> prod
 local -> local
 
-
 # How to create SSL certificate
 it will expire 2026
 
