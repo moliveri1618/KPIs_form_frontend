@@ -101,7 +101,7 @@ export default function StartingForm() {
               setData(response.data['response']);
             })
             .catch(error => {
-              conaxiossole.error(error);
+              console.error(error);
             });
       } catch (error) {
         console.error('Error fetching data:', error);
