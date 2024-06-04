@@ -28,7 +28,7 @@ const allowed_users = {
   Patricia_Gomes_Alves: 'palves@ibet.pt',
   Ana_Batista: 'abatista@ibet.pt',
   Nadia_Duarte: 'nadia.duarte@ibet.pt',
-  Pedro_Cruz: 'pedro_cruz@ibet.pt',
+  Pedro_Cruz: 'pedro.cruz@ibet.pt',
   Teresa_Crespo: 'tcrespo@ibet.pt',
   Pedro_Matias: 'matias@ibet.pt',
   Rosario_Bronze: 'mbronze@ibet.pt',
