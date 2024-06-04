@@ -23,7 +23,6 @@ export default function FormFail() {
   const [year, setYear] = useState('');
   const [doi, setDoi] = useState(''); 
   const [isValid, setIsValid] = useState(false);
-  const [buttonDisabled, setbuttonDisabled] = useState(false);
   const userName = location.state && location.state.userName;
   const userSurname = location.state && location.state.userSurname;
   let res = {}
@@ -214,7 +213,7 @@ export default function FormFail() {
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'right', width: '83vw' }}>
-          <Link to="/KPIs_form_frontend">
+          <Link to="/KPIs_form_frontend/start">
             <Button variant="contained" color="primary" style={{ width: '15%' }}>
               Back
             </Button>

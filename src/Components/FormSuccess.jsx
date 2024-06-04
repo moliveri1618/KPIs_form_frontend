@@ -1,4 +1,4 @@
-import React, {useEffect } from 'react';
+import React, {useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -26,6 +26,9 @@ export default function FormSuccess() {
   const projectCodes = location.state && location.state.projectCodes;
   const userName = location.state && location.state.userName;
   const userSurname = location.state && location.state.userSurname;
+  const [isValid, setIsValid] = useState(true);
+
+
 
   const splitGroups = (groups) => {
     const corresp = {}, other = {}, first = {};
@@ -36,8 +39,9 @@ export default function FormSuccess() {
     });
     return { corresp, other, first };
   };
-
   const { corresp, other, first } = splitGroups(selectedGroups);
+
+
 
   // Function to reformat the names
   const reformatNames = (namesStr) => {
@@ -49,23 +53,12 @@ export default function FormSuccess() {
     });
     return reorderedNames.join(", ");
   };
-  
   const reformattedNames = reformatNames(jsonData['author']);
 
-  const notify = (message) => {
-    toast.success(message, {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      });
-  }
 
-  useEffect(() => {
+
+  const handleApiTest = async (event) => {
+    event.preventDefault();
 
     try {
       let api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/doi_post/`
@@ -91,12 +84,27 @@ export default function FormSuccess() {
             console.log('hahaha')
             notify('This DOi is already inserted into the database')
           }
-        });
-        
+        }); 
     } catch (error) {
         console.error('Error fetching data:', error);
     }
+    setIsValid(false)
+  }
 
+  const notify = (message) => {
+    toast.success(message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      });
+  }
+
+  useEffect(() => {
 
     // Cleanup function
     return () => {
@@ -314,9 +322,14 @@ export default function FormSuccess() {
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'right', width: '81.5vw' }}>
-          <Link to="/KPIs_form_frontend">
+          <Link to="/KPIs_form_frontend/start">
             <Button variant="contained" color="primary" style={{ width: '15%' }}>
               Back
+            </Button>
+          </Link>
+          <Link>
+            <Button variant="contained" color="primary" onClick={handleApiTest} disabled={!isValid} style={{ width: '15%' }}>
+              Submit
             </Button>
           </Link>
           <ToastContainer
