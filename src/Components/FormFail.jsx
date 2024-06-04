@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Copyright from './CopyRight';
@@ -12,9 +11,11 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import { deepOrange } from '@mui/material/colors';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function FormFail() {
+  const navigate = useNavigate();
   const location = useLocation();
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
@@ -63,6 +64,11 @@ export default function FormFail() {
     const isValidForm = titleValue.trim() !== '' && authorValue.trim() !== '' && volumeValue.trim() !== '' && pagesValue.trim() !== '' && yearValue.trim() !== '';
     setIsValid(isValidForm);
   };
+
+  const navigateToStart = () => {
+    var url = `/KPIs_form_frontend/start`;
+    navigate(url, { state: {  userName: userName, userSurname: userSurname}});
+  }
 
   const notify = (varValue) => {
     toast.error(`${varValue} could not be found`, {
@@ -213,16 +219,12 @@ export default function FormFail() {
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'right', width: '83vw' }}>
-          <Link to="/KPIs_form_frontend/start">
-            <Button variant="contained" color="primary" style={{ width: '15%' }}>
-              Back
-            </Button>
-          </Link>
-          <Link>
-            <Button variant="contained" color="primary" onClick={handleApiTest} disabled={!isValid} style={{ width: '15%' }}>
-              Submit
-            </Button>
-          </Link>
+          <Button variant="contained" color="primary" style={{ marginRight: '5px', width:'100px' }} onClick={navigateToStart}>
+            Back
+          </Button>
+          <Button variant="contained" color="primary" onClick={handleApiTest} disabled={!isValid} style={{ marginRight: '20px', width:'100px'}}>
+            Submit
+          </Button>
           <ToastContainer
             position="top-right"
             autoClose={5000}
