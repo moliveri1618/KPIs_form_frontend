@@ -22,7 +22,7 @@ function Copyright() {
       </Typography>
       <Typography variant="body2" color="text.secondary" align="center" style={{ marginTop: '0' }}>
         {'Copyright © '}
-        <strong>{'2023 iBET - Instituto de Biologia Experimental e Tecnológica.'}{' '}</strong>
+        <strong>{'2024 iBET - Instituto de Biologia Experimental e Tecnológica.'}{' '}</strong>
       </Typography>
     </div>
   );
