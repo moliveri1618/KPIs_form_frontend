@@ -18,3 +18,6 @@ https://github.com/FiloSottile/mkcert
 
 -->  mkcert -install
 -->  mkcert -cert-file C:\Users\mauro.oliveri\PROJECTS\KPIs_form_frontend\SSL_certificate\cert.pem -key-file C:\Users\mauro.   oliveri\PROJECTS\KPIs_form_frontend\SSL_certificate\key.pem localhost 192.168.1.221 172.17.231.51
+
+
+if using a cert(https) need "proxy": "http://172.17.231.51:8080" to call http on backend on package.json

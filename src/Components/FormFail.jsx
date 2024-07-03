@@ -26,7 +26,20 @@ export default function FormFail() {
   const [isValid, setIsValid] = useState(false);
   const userName = location.state && location.state.userName;
   const userSurname = location.state && location.state.userSurname;
+  const selectedGroups = location.state && location.state.selectedGroups;
+  const projectCodes = location.state && location.state.projectCodes;
   let res = {}
+
+  const splitGroups = (groups) => {
+    const corresp = {}, other = {}, first = {};
+    Object.entries(groups || {}).forEach(([group, properties]) => {
+      if (properties.corresp) corresp[group] = true;
+      if (properties.other) other[group] = true;
+      if (properties.first) first[group] = true;
+    });
+    return { corresp, other, first };
+  };
+  const { corresp, other, first } = splitGroups(selectedGroups);
 
   const handleChangeTitle = (event) => {
     setTitle(event.target.value);
@@ -118,10 +131,10 @@ export default function FormFail() {
       res['journal'] = "N/A"
       res['impact_factor'] = 0
       res['publisher'] = "N/A"
-      res['research_groups_first'] = "N/A"
-      res['research_groups_corresp'] = "N/A"
-      res['research_groups_other'] = "N/A"
-      res['projects'] = "N/A"
+      res['research_groups_first'] = Object.keys(first).join(", ")
+      res['research_groups_corresp'] = Object.keys(other).join(", ")
+      res['research_groups_other'] = Object.keys(corresp).join(", ")
+      res['projects'] = projectCodes
       res['citation_count'] = 0
       res['article_type'] = "N/A"
       res['url'] = doi
@@ -155,6 +168,7 @@ export default function FormFail() {
   };
 
   useEffect(() => {
+
     // Get doi from url
     const url = window.location.href;
     const doiMatch = url.match(/DOI=([^&]+)/);
