@@ -281,7 +281,7 @@ export default function StartingForm() {
                   }}
                   disabled={!isFormValid}
                   >
-                Search DOI
+                Next
               </Button>
             </Link>
             )}
