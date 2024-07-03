@@ -165,6 +165,25 @@ export default function StartingForm() {
                       paddingTop: '40px', 
                       paddingBottom: '60px'}}
         > 
+          <TextField 
+          id="outlined-search" 
+          label="DOI *" 
+          type="search" 
+          style={{ width: '27%', height: '40px',margin: '0'}} 
+          value={doi} 
+          onChange={handleDoiChange}
+          error={!isValidDoi}
+          helperText={
+                <>
+                  <Typography variant="body2" component="span">
+                      e.g.:
+                  </Typography>
+                  {' '}
+                  <Typography variant="body2" component="span" style={{ fontWeight: 'bold' }}>
+                      10.1016/j.carbpol.2016.01.046
+                  </Typography>
+                </>
+          }/>
           <div>
             <Box display="flex" flexDirection="column" alignItems="left">
               <Button 
@@ -228,25 +247,6 @@ export default function StartingForm() {
               )}
             </Box>
           </div>
-          <TextField 
-          id="outlined-search" 
-          label="DOI *" 
-          type="search" 
-          style={{ width: '27%', height: '40px',margin: '0'}} 
-          value={doi} 
-          onChange={handleDoiChange}
-          error={!isValidDoi}
-          helperText={
-              <>
-                <Typography variant="body2" component="span">
-                    e.g.:
-                </Typography>
-                {' '}
-                <Typography variant="body2" component="span" style={{ fontWeight: 'bold' }}>
-                    10.1016/j.carbpol.2016.01.046
-                </Typography>
-              </>
-          }/>
           <TextField 
           id="outlined-search" 
           label="Project(s) **" 
