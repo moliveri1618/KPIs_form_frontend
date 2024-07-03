@@ -109,7 +109,9 @@ export default function FormSuccess() {
   }
 
   useEffect(() => {
-
+    console.log(corresp)
+    console.log(other)
+    console.log(first)
     // Cleanup function
     return () => {
       toast.dismiss(); // Dismiss any existing toasts when the component unmounts

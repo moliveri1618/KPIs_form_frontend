@@ -112,8 +112,6 @@ export default function StartingForm() {
   };
 
   useEffect(() => {
-
-    console.log(userName)
     
     //The issue here might be related to the asynchronous nature of the axios.post call. 
     //When you call console.log(data) immediately after setData(response.data['response']), 
