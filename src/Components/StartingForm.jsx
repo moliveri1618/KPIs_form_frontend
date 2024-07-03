@@ -38,7 +38,6 @@ export default function StartingForm() {
 
 
   const handleDoiChange = (event) => {
-    console.log(event.target.value)
     setDoi(event.target.value);
     setIsValidDoi(isValidDOI(event.target.value));
     setIsSelectedDoi(isValidDOI(event.target.value))
