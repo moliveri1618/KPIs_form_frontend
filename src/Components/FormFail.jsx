@@ -143,29 +143,6 @@ export default function FormFail() {
       var url = `/KPIs_form_frontend/success`;
       navigate(url, { state: { data:res, selectedGroups:selectedGroups, projectCodes:projectCodes, userName: userName, userSurname: userSurname}});      
 
-      // try {
-      //   let api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/doi_post/`
-      //   console.log(res)
-      //   axios.post(api, res, {
-      //     headers: {
-      //       'Content-Type': 'application/json'
-      //     }})
-      //     .then(response => {
-      //       console.log('Response:', response);
-      //     })
-      //     .catch(error => {
-      //       console.error(error);
-      //     });
-          
-      // } catch (error) {
-      //     console.error('Error fetching data:', error);
-      // }
-      // try {
-      //   submit_success()
-      //   setIsValid(false)
-      // } catch (error) {
-      //   console.error('Error fetching data:', error);
-      // }
     }
   };
 
