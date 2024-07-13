@@ -139,30 +139,33 @@ export default function FormFail() {
       res['article_type'] = "N/A"
       res['url'] = doi
 
-      try {
-        let api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/doi_post/`
-        console.log(res)
-        axios.post(api, res, {
-          headers: {
-            'Content-Type': 'application/json'
-          }})
-          .then(response => {
-            console.log('Response:', response);
-          })
-          .catch(error => {
-            console.error(error);
-          });
+
+      var url = `/KPIs_form_frontend/success`;
+      navigate(url, { state: { data:res, selectedGroups:selectedGroups, projectCodes:projectCodes, userName: userName, userSurname: userSurname}});      
+
+      // try {
+      //   let api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/doi_post/`
+      //   console.log(res)
+      //   axios.post(api, res, {
+      //     headers: {
+      //       'Content-Type': 'application/json'
+      //     }})
+      //     .then(response => {
+      //       console.log('Response:', response);
+      //     })
+      //     .catch(error => {
+      //       console.error(error);
+      //     });
           
-      } catch (error) {
-          console.error('Error fetching data:', error);
-      }
-      let api = ''
-      try {
-        submit_success()
-        setIsValid(false)
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
+      // } catch (error) {
+      //     console.error('Error fetching data:', error);
+      // }
+      // try {
+      //   submit_success()
+      //   setIsValid(false)
+      // } catch (error) {
+      //   console.error('Error fetching data:', error);
+      // }
     }
   };
 
@@ -237,7 +240,7 @@ export default function FormFail() {
             Back
           </Button>
           <Button variant="contained" color="primary" onClick={handleApiTest} disabled={!isValid} style={{ marginRight: '20px', width:'100px'}}>
-            Submit
+            Next
           </Button>
           <ToastContainer
             position="top-right"

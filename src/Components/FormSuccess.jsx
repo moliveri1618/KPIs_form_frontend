@@ -28,6 +28,11 @@ export default function FormSuccess() {
   const userSurname = location.state && location.state.userSurname;
   const [isValid, setIsValid] = useState(true);
   const navigate = useNavigate();
+  console.log(jsonData)
+  console.log(selectedGroups)
+  console.log(projectCodes)
+  console.log(userName)
+  console.log(userSurname)
 
 
   const splitGroups = (groups) => {
