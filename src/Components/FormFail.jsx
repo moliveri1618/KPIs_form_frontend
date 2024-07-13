@@ -139,31 +139,10 @@ export default function FormFail() {
       res['article_type'] = "N/A"
       res['url'] = doi
 
-      try {
-        let api = '/doi_post/'
-        //let api = 'http://' + '127.0.0.1:8000' + `/doi_post/`
-        console.log(res)
-        axios.post(api, res, {
-          headers: {
-            'Content-Type': 'application/json'
-          }})
-          .then(response => {
-            console.log('Response:', response);
-          })
-          .catch(error => {
-            console.error(error);
-          });
-          
-      } catch (error) {
-          console.error('Error fetching data:', error);
-      }
-      let api = ''
-      try {
-        submit_success()
-        setIsValid(false)
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
+
+      var url = `/KPIs_form_frontend/success`;
+      navigate(url, { state: { data:res, selectedGroups:selectedGroups, projectCodes:projectCodes, userName: userName, userSurname: userSurname}});      
+
     }
   };
 
@@ -238,7 +217,7 @@ export default function FormFail() {
             Back
           </Button>
           <Button variant="contained" color="primary" onClick={handleApiTest} disabled={!isValid} style={{ marginRight: '20px', width:'100px'}}>
-            Submit
+            Next
           </Button>
           <ToastContainer
             position="top-right"
