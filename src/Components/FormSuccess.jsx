@@ -78,8 +78,8 @@ export default function FormSuccess() {
           'Content-Type': 'application/json'
         }})
         .then(response => {
-          console.log('Response:', response);
-          console.log(response['data'])
+          // console.log('Response:', response);
+          // console.log(response['data'])
           notify('The information for this paper are successfully saved into the database 😍')
         })
         .catch(error => {
