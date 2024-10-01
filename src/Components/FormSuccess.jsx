@@ -82,14 +82,14 @@ export default function FormSuccess() {
           'Content-Type': 'application/json'
         }})
         .then(response => {
-          console.log('Response:', response);
-          console.log(response['data'])
+          // console.log('Response:', response);
+          // console.log(response['data'])
           notify('The information for this paper are successfully saved into the database 😍')
         })
         .catch(error => {
-          console.error(error);
-          console.log(error['response']['data']['doi'])
-          if (error['response']['data']['doi'][0] === 'do is with this doi already exists.') {
+          // console.error(error);
+          // console.log(error['response']['data']['doi'])
+          if (error?.response?.data?.doi && error['response']['data']['doi'][0] === 'do is with this doi already exists.') {
             console.log('hahaha')
             notify('This DOi is already inserted into the database')
           }
