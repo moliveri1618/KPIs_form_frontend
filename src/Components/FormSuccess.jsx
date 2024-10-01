@@ -83,8 +83,8 @@ export default function FormSuccess() {
           notify('The information for this paper are successfully saved into the database 😍')
         })
         .catch(error => {
-          console.error(error);
-          console.log(error['response']['data']['doi'])
+          //console.error(error);
+          //console.log(error['response']['data']['doi'])
           if (error['response']['data']['doi'][0] === 'do is with this doi already exists.') {
             console.log('hahaha')
             notify('This DOi is already inserted into the database')
