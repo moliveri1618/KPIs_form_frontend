@@ -85,9 +85,13 @@ export default function FormSuccess() {
         .catch(error => {
           //console.error(error);
           //console.log(error['response']['data']['doi'])
-          if (error['response']['data']['doi'][0] === 'do is with this doi already exists.') {
-            console.log('hahaha')
-            notify('This DOi is already inserted into the database')
+          // Safely accessing error response properties
+          if (error.response && error.response.data && error.response.data.doi) {
+            console.log(error.response.data.doi);
+            if (error.response.data.doi[0] === 'doi with this doi already exists.') {
+              console.log('hahaha');
+              notify('This DOI is already inserted into the database');
+            }
           }
         }); 
     } catch (error) {
