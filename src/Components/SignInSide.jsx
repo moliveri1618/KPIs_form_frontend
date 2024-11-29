@@ -96,8 +96,7 @@ export default function SignInSide() {
       let api = ''
       try {
           //api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/check_pws_ms_AD/`
-          //api = '/check_pws_ms_AD/';
-          api = 'https://172.17.231.51:8081/check_pws_ms_AD/';
+          api = '/check_pws_ms_AD/';
           axios.post(api, userData)
             .then(response => {
 
