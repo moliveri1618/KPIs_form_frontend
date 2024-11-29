@@ -97,12 +97,8 @@ export default function SignInSide() {
       try {
           //api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/check_pws_ms_AD/`
           //api = '/check_pws_ms_AD/';
-          const https = require('https');
-          const agent = new https.Agent({
-              rejectUnauthorized: false, // Disable SSL verification
-          });
-          api = 'http://172.17.231.51:8080/check_pws_ms_AD/';
-          axios.post(api, userData, { httpsAgent: agent })
+          api = 'https://172.17.231.51:8081/check_pws_ms_AD/';
+          axios.post(api, userData)
             .then(response => {
 
               if (response.statusText === 'OK') {
