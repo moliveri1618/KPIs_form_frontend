@@ -94,7 +94,8 @@ export default function StartingForm() {
       let api = ''
       try {
           const trimmedDOI = doi.trim();
-          api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/stoca?DOI=${trimmedDOI}`
+          api = `/stoca?DOI=${trimmedDOI}`
+          //api = 'http://' + '127.0.0.1:8000' + `/stoca?DOI=${doi}`
           axios.post(api)
             .then(response => {
               setData(response.data['response']);
@@ -102,12 +103,10 @@ export default function StartingForm() {
             .catch(error => {
               console.error(error);
             });
-        
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     }
-
   };
 
   useEffect(() => {

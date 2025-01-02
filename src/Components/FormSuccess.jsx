@@ -28,11 +28,6 @@ export default function FormSuccess() {
   const userSurname = location.state && location.state.userSurname;
   const [isValid, setIsValid] = useState(true);
   const navigate = useNavigate();
-  console.log(jsonData)
-  console.log(selectedGroups)
-  console.log(projectCodes)
-  console.log(userName)
-  console.log(userSurname)
 
 
   const splitGroups = (groups) => {
@@ -70,7 +65,8 @@ export default function FormSuccess() {
     event.preventDefault();
 
     try {
-      let api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/doi_post/`
+      let api = '/doi_post/'
+      //let api = 'http://' + '127.0.0.1:8000' + `/doi_post/`
 
       jsonData['research_groups_first'] = Object.keys(first).join(", ")
       jsonData['research_groups_other'] = Object.keys(other).join(", ")
@@ -94,7 +90,7 @@ export default function FormSuccess() {
             console.log('hahaha')
             notify('This DOi is already inserted into the database')
           }
-        }); 
+        });  
     } catch (error) {
         console.error('Error fetching data:', error);
     }
@@ -350,7 +346,7 @@ export default function FormSuccess() {
             draggable
             pauseOnHover
             theme="colored"
-            />
+            /> 
         </div>
       </Box>
       <Copyright sx={{ mt: 5 }} />

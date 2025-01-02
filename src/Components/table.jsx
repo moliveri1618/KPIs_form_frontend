@@ -24,6 +24,7 @@ const rows = [
   { labs_name: "Stem Cell Bioengineering Lab", first: 'Jon', corresp: 'Snow', other: 35 },
   { labs_name: "TCA Science and Services (others)", first: 'Jon', corresp: 'Snow', other: 35 },
   { labs_name: "Translational Immunology Lab", first: 'Jon', corresp: 'Snow', other: 35 },
+  { labs_name: "Downstream Process Development Lab", first: 'Jon', corresp: 'Snow', other: 35 },
 ];
 
 function SimpleTable ({ onSelectionChange })  {
