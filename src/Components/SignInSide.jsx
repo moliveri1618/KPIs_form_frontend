@@ -19,6 +19,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { HiOutlineCheck } from "react-icons/hi2";
 import sign_in_pic from './Images/kpis_background.png'
 import { ConstructionOutlined } from '@mui/icons-material';
+import WarningBanner from './WarningBanner';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
@@ -142,6 +143,7 @@ export default function SignInSide() {
           }}
         />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <WarningBanner />
           <Box
             sx={{
               my: 8,
