@@ -65,18 +65,30 @@ export default function FormSuccess() {
     event.preventDefault();
 
     try {
-      let api = '/doi_post/'
-      //let api = 'http://' + '127.0.0.1:8000' + `/doi_post/`
+      //let api = '/doi_post/'
+      let api = 'http://' + '127.0.0.1:8000' + `/doi_post/`
+      const csrfUrl = `http://127.0.0.1:8000/csrf/`;
+
+      // ✅ Step 1: Fetch CSRF token
+      const csrfRes = await axios.get(csrfUrl, { withCredentials: true });
+      const csrfToken = csrfRes.data.csrfToken;
+      console.log("CSRF token from /csrf/:", csrfToken);
 
       jsonData['research_groups_first'] = Object.keys(first).join(", ")
       jsonData['research_groups_other'] = Object.keys(other).join(", ")
       jsonData['research_groups_corresp'] = Object.keys(corresp).join(", ")
       jsonData['projects'] = projectCodes
     
-      axios.post(api, jsonData, {
-        headers: {
-          'Content-Type': 'application/json'
-        }})
+      axios.post(
+        api, 
+        jsonData, 
+        {
+          withCredentials: true, 
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrfToken
+          }
+        })
         .then(response => {
           console.log('yooo')
           console.log('Response:', response);

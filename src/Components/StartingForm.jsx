@@ -14,6 +14,15 @@ import { useLocation } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import { deepOrange } from '@mui/material/colors';
 
+function getCookie(name) {
+  const cookies = document.cookie.split(';');
+  for (let cookie of cookies) {
+    const [key, value] = cookie.trim().split('=');
+    if (key === name) return decodeURIComponent(value);
+  }
+  return null;
+}
+
 
 export default function StartingForm() {
   const [data, setData] = useState(null);
@@ -89,20 +98,40 @@ export default function StartingForm() {
     event.preventDefault();
     const timeoutId = setTimeout(() => {
     }, 1000000);
+
     if (isFormValid) {
       setFlag(1);
       let api = ''
+
       try {
-          const trimmedDOI = doi.trim();
-          api = `/stoca?DOI=${trimmedDOI}`
+          //api = `/stoca?DOI=${trimmedDOI}`
           //api = 'http://' + '127.0.0.1:8000' + `/stoca?DOI=${doi}`
-          axios.post(api)
-            .then(response => {
+          const api = `http://127.0.0.1:8000/stoca?DOI=${encodeURIComponent(doi)}`;
+          const csrfUrl = `http://127.0.0.1:8000/csrf/`;
+
+          // ✅ Step 1: Fetch CSRF token
+          const csrfRes = await axios.get(csrfUrl, { withCredentials: true });
+          const csrfToken = csrfRes.data.csrfToken;
+          console.log("CSRF token from /csrf/:", csrfToken);
+
+          // ✅ Step 2: Call /stoca with CSRF token
+          await axios.post(
+            api,
+            {},  
+            {
+              withCredentials: true, 
+              headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrfToken
+              }
+            }
+          )
+          .then(response => {
               setData(response.data['response']);
-            })
-            .catch(error => {
+          })
+          .catch(error => {
               console.error(error);
-            });
+          });
       } catch (error) {
         console.error('Error fetching data:', error);
       }
