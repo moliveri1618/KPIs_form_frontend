@@ -100,7 +100,7 @@ export default function SignInSide() {
           api = '/check_pws_ms_AD/';
           axios.post(api, userData, { withCredentials: true })
             .then(response => {
-
+              console.log(response)
               if (response.statusText === 'OK') {
                 setFlagSuccess(1)
                 setTimeout(() => {
