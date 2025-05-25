@@ -65,8 +65,8 @@ export default function FormSuccess() {
     event.preventDefault();
 
     try {
-      //let api = '/doi_post/'
-      let api = 'http://' + '127.0.0.1:8000' + `/doi_post/`
+      let api = '/doi_post/'
+      //let api = 'http://' + '127.0.0.1:8000' + `/doi_post/`
       const csrfUrl = `http://127.0.0.1:8000/csrf/`;
 
       // ✅ Step 1: Fetch CSRF token

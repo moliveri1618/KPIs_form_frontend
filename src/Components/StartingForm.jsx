@@ -104,10 +104,13 @@ export default function StartingForm() {
       let api = ''
 
       try {
-          //api = `/stoca?DOI=${trimmedDOI}`
-          //api = 'http://' + '127.0.0.1:8000' + `/stoca?DOI=${doi}`
-          const api = `http://127.0.0.1:8000/stoca?DOI=${encodeURIComponent(doi)}`;
-          const csrfUrl = `http://127.0.0.1:8000/csrf/`;
+        //api = 'http://' + '127.0.0.1:8000' + `/stoca?DOI=${doi}`
+
+          const api = `/stoca?DOI=${encodeURIComponent(doi)}`
+          //const api = `http://127.0.0.1:8000/stoca?DOI=${encodeURIComponent(doi)}`;
+          
+          //const csrfUrl = `http://127.0.0.1:8000/csrf/`;
+          const csrfUrl = `/csrf/`;
 
           // ✅ Step 1: Fetch CSRF token
           const csrfRes = await axios.get(csrfUrl, { withCredentials: true });

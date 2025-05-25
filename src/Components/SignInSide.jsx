@@ -80,10 +80,10 @@ export default function SignInSide() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    // console.log({
+    //   email: data.get('email'),
+    //   password: data.get('password'),
+    // });
 
     // Prepare the JSON data
     const userData = {
@@ -96,8 +96,8 @@ export default function SignInSide() {
     if (emailExists) {
       let api = ''
       try {
-          api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/login/`
-          //api = '/check_pws_ms_AD/';
+          //api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/login/`
+          api = '/login/';
           axios.post(api, userData, { withCredentials: true })
             .then(response => {
 
