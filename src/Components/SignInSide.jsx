@@ -97,7 +97,7 @@ export default function SignInSide() {
       let api = ''
       try {
           //api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/login/`
-          api = '/login/';
+          api = '/check_pws_ms_AD/';
           axios.post(api, userData, { withCredentials: true })
             .then(response => {
 
@@ -110,10 +110,25 @@ export default function SignInSide() {
             
               } 
             })
-            .catch(error => {
-              console.error(error.response.data['message']);
-              notify(error.response.data['message'])
-            });
+
+          //api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/check_pws_ms_AD/`
+          // api = '/check_pws_ms_AD/';
+          // axios.post(api, userData)
+          //   .then(response => {
+
+          //     if (response.statusText === 'OK') {
+          //       setFlagSuccess(1)
+          //       setTimeout(() => {
+          //         var url = `/KPIs_form_frontend/start`;
+          //         navigate(url, { state: { userName: response.data['name'], userSurname: response.data['surname'] } });
+          //       }, 1500); // 3000 milliseconds = 3 seconds
+            
+          //     } 
+          //   })
+          //   .catch(error => {
+          //     console.error(error.response.data['message']);
+          //     notify(error.response.data['message'])
+          //   });
         
       } catch (error) {
         console.error('Error fetching data:', error);
