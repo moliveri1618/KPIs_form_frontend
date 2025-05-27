@@ -97,7 +97,8 @@ export default function SignInSide() {
       let api = ''
       try {
           //api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/login/`
-          api = `/login/`;
+          //api = `/login/`;
+          api = "http://172.17.231.51:8080/login/"
           axios.post(api, userData)
             .then(response => {
               console.log(response)
