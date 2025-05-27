@@ -96,8 +96,8 @@ export default function SignInSide() {
     if (emailExists) {
       let api = ''
       try {
-          //api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/check_pws_ms_AD/`
-          api = '/check_pws_ms_AD/';
+          //api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/login/`
+          api = '/login/';
           axios.post(api, userData)
             .then(response => {
 
@@ -111,9 +111,26 @@ export default function SignInSide() {
               } 
             })
             .catch(error => {
-              console.error(error.response.data['message']);
-              notify(error.response.data['message'])
+              console.error("Full Axios Error:", error);
+
+              if (error.response) {
+                console.error("Response data:", error.response.data);
+                console.error("Status code:", error.response.status);
+                console.error("Headers:", error.response.headers);
+
+                const msg = error.response.data?.message || `Error ${error.response.status}: ${error.response.statusText}`;
+                notify(msg);
+
+              } else if (error.request) {
+                console.error("No response received. Request object:", error.request);
+                notify("No response from server.");
+              } else {
+                console.error("Error setting up request:", error.message);
+                notify("Request setup failed.");
+              }
             });
+
+
           // //const my_api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/login/`
           // //const csrfUrl = `http://127.0.0.1:8000/csrf/`;
 
