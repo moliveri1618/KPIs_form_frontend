@@ -98,7 +98,7 @@ export default function SignInSide() {
       try {
           //api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/login/`
           api = `/login/`;
-          axios.post(api, userData, { withCredentials: true })
+          axios.post(api, userData)
             .then(response => {
               console.log(response)
               if (response.statusText === 'OK') {
