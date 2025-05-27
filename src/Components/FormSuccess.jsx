@@ -66,8 +66,10 @@ export default function FormSuccess() {
 
     try {
       let api = '/doi_post/'
+      const csrfUrl = `/csrf/`;
+
       //let api = 'http://' + '127.0.0.1:8000' + `/doi_post/`
-      const csrfUrl = `http://127.0.0.1:8000/csrf/`;
+      //const csrfUrl = `http://127.0.0.1:8000/csrf/`;
 
       // ✅ Step 1: Fetch CSRF token
       const csrfRes = await axios.get(csrfUrl, { withCredentials: true });
