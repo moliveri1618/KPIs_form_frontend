@@ -97,7 +97,7 @@ export default function SignInSide() {
       let api = ''
       try {
           //api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/login/`
-          api = '/login/';
+          api = `/login/`;
           axios.post(api, userData, { withCredentials: true })
             .then(response => {
               console.log(response)
