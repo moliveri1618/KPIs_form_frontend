@@ -109,14 +109,7 @@ export default function SignInSide() {
 
           axios.post(
             my_api, 
-            userData,
-            {
-            withCredentials: true, 
-            headers: {
-              "Content-Type": "application/json",
-              "X-CSRFToken": csrfToken
-            }
-            })
+            userData)
             .then(response => {
               console.log(response)
               if (response.statusText === 'OK') {
