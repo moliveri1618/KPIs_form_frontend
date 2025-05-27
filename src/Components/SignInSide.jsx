@@ -96,22 +96,11 @@ export default function SignInSide() {
     if (emailExists) {
       let api = ''
       try {
-          //const my_api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/login/`
-          //const csrfUrl = `http://127.0.0.1:8000/csrf/`;
-
-          const my_api = '/check_pws_ms_AD/';
-          // const csrfUrl = '/csrf/';
-
-          // // ✅ Step 1: Fetch CSRF token
-          // const csrfRes = await axios.get(csrfUrl, { withCredentials: true });
-          // const csrfToken = csrfRes.data.csrfToken;
-          // console.log("CSRF token from /csrf/:", csrfToken);
-
-          axios.post(
-            my_api, 
-            userData)
+          //api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/check_pws_ms_AD/`
+          api = '/check_pws_ms_AD/';
+          axios.post(api, userData)
             .then(response => {
-              console.log(response)
+
               if (response.statusText === 'OK') {
                 setFlagSuccess(1)
                 setTimeout(() => {
@@ -121,6 +110,35 @@ export default function SignInSide() {
             
               } 
             })
+            .catch(error => {
+              console.error(error.response.data['message']);
+              notify(error.response.data['message'])
+            });
+          // //const my_api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/login/`
+          // //const csrfUrl = `http://127.0.0.1:8000/csrf/`;
+
+          // const my_api = '/check_pws_ms_AD/';
+          // // const csrfUrl = '/csrf/';
+
+          // // // ✅ Step 1: Fetch CSRF token
+          // // const csrfRes = await axios.get(csrfUrl, { withCredentials: true });
+          // // const csrfToken = csrfRes.data.csrfToken;
+          // // console.log("CSRF token from /csrf/:", csrfToken);
+
+          // axios.post(
+          //   my_api, 
+          //   userData)
+          //   .then(response => {
+          //     console.log(response)
+          //     if (response.statusText === 'OK') {
+          //       setFlagSuccess(1)
+          //       setTimeout(() => {
+          //         var url = `/KPIs_form_frontend/start`;
+          //         navigate(url, { state: { userName: response.data['name'], userSurname: response.data['surname'] } });
+          //       }, 1500); // 3000 milliseconds = 3 seconds
+            
+          //     } 
+          //   })
 
           //api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/check_pws_ms_AD/`
           // api = '/check_pws_ms_AD/';
