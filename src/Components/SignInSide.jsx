@@ -77,7 +77,7 @@ export default function SignInSide() {
       });
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // console.log({
@@ -96,10 +96,27 @@ export default function SignInSide() {
     if (emailExists) {
       let api = ''
       try {
-          //api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/login/`
-          //api = `/login/`;
-          api = "http://172.17.231.51:8080/login/"
-          axios.post(api, userData)
+          //const my_api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/login/`
+          //const csrfUrl = `http://127.0.0.1:8000/csrf/`;
+
+          const my_api = '/check_pws_ms_AD/';
+          // const csrfUrl = '/csrf/';
+
+          // // ✅ Step 1: Fetch CSRF token
+          // const csrfRes = await axios.get(csrfUrl, { withCredentials: true });
+          // const csrfToken = csrfRes.data.csrfToken;
+          // console.log("CSRF token from /csrf/:", csrfToken);
+
+          axios.post(
+            my_api, 
+            userData,
+            {
+            withCredentials: true, 
+            headers: {
+              "Content-Type": "application/json",
+              "X-CSRFToken": csrfToken
+            }
+            })
             .then(response => {
               console.log(response)
               if (response.statusText === 'OK') {
