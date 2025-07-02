@@ -101,7 +101,8 @@ export default function SignInSide() {
           axios.post(api, userData, {
               headers: {
                 'Content-Type': 'application/json'
-              }
+              },
+              withCredentials: true
             })
             .then(response => {
 
