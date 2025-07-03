@@ -79,6 +79,16 @@ export default function SignInSide() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // Clear cookies before login
+    try {
+      await axios.post('/logout/', {}, { withCredentials: true });
+      console.log('✅ Pre-login logout successful');
+    } catch (err) {
+      console.warn('⚠️ Pre-login logout failed (likely already logged out):', err.response?.status);
+    }
+
+
     const data = new FormData(event.currentTarget);
     // console.log({
     //   email: data.get('email'),
