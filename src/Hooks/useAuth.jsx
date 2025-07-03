@@ -24,7 +24,7 @@ export const useAuth = () => {
         console.log('✅ check_auth success:', res.data); // 🔍 log the response data
         setIsAuthenticated(true);
       } catch (err) {
-        //console.log('❌ check_auth failed:', err.response?.status, err.response?.data); // 🔍 log the error details
+        console.log('❌ check_auth failed:', err.response?.status, err.response?.data); // 🔍 log the error details
         if (err.response?.status === 401) {
           try {
             const refreshRes = await axios.post('/token/refresh/', {}, { withCredentials: true });
