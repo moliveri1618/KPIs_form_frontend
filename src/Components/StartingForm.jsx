@@ -26,7 +26,7 @@ function getCookie(name) {
 
 
 export default function StartingForm() {
-  const { isAuthenticated } = useAuth();
+  // const { isAuthenticated } = useAuth();
 
 
   const [data, setData] = useState(null);
@@ -163,12 +163,12 @@ export default function StartingForm() {
   }, [data]); // Dependency array ensures this effect runs only when 'data' changes
 
   //if user not authenticated redirect to home page
-  useEffect(() => {
-    console.log(isAuthenticated)
-    if (isAuthenticated === false) {
-      navigate('/');
-    }
-  }, [isAuthenticated]);
+  // useEffect(() => {
+  //   console.log(isAuthenticated)
+  //   if (isAuthenticated === false) {
+  //     navigate('/');
+  //   }
+  // }, [isAuthenticated]);
 
   useEffect(() => {
     const tryLogout = async () => {
