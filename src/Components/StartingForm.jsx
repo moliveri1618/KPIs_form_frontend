@@ -13,6 +13,7 @@ import MyDialog from './dialog';
 import { useLocation } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import { deepOrange } from '@mui/material/colors';
+import { useAuth } from '../Hooks/useAuth';
 
 function getCookie(name) {
   const cookies = document.cookie.split(';');
@@ -25,6 +26,9 @@ function getCookie(name) {
 
 
 export default function StartingForm() {
+  const { isAuthenticated } = useAuth();
+
+
   const [data, setData] = useState(null);
   const [selectedGroups, setSelectedGroups] = useState([]);
   const [doi, setDoi] = useState('');
@@ -104,13 +108,10 @@ export default function StartingForm() {
       let api = ''
 
       try {
-        //api = 'http://' + '127.0.0.1:8000' + `/stoca?DOI=${doi}`
 
+          //defining urls
           const api = `/stoca?DOI=${encodeURIComponent(doi)}`
           const csrfUrl = `/csrf/`;
-          
-          //const api = `http://127.0.0.1:8000/stoca?DOI=${encodeURIComponent(doi)}`;
-          //const csrfUrl = `http://127.0.0.1:8000/csrf/`;
 
           // ✅ Step 1: Fetch CSRF token
           const csrfRes = await axios.get(csrfUrl, { withCredentials: true });
@@ -160,6 +161,14 @@ export default function StartingForm() {
     }
 
   }, [data]); // Dependency array ensures this effect runs only when 'data' changes
+
+  //if user not authenticated redirect to home page
+  useEffect(() => {
+    console.log(isAuthenticated)
+    if (isAuthenticated === false) {
+      navigate('/');
+    }
+  }, [isAuthenticated]);
 
   return (
     <>        
