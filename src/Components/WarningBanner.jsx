@@ -18,7 +18,7 @@ function WarningBanner() {
         boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
       }}
     >
-      <Typography
+      {/* <Typography
         variant="body1" // slightly bigger variant
         sx={{
           fontWeight: 600, // valid MUI weight
@@ -28,7 +28,7 @@ function WarningBanner() {
         }}
       >
         Warning: Security still being improved, do not use any critical data.
-      </Typography>
+      </Typography> */}
     </Box>
   );
 }
