@@ -173,7 +173,7 @@ export default function StartingForm() {
   useEffect(() => {
     const tryLogout = async () => {
       try {
-        const res = await axios.post('/token-refresh/', {}, { withCredentials: true });
+        const res = await axios.post('/token-refresh/', {});
         console.log('res', res);
       } catch (err) {
         console.warn('⚠️ Pre-login logout failed (likely already logged out):', err.response?.status);
