@@ -19,6 +19,28 @@ import Avatar from '@mui/material/Avatar';
 import { deepOrange } from '@mui/material/colors';
 import { useNavigate } from 'react-router-dom';
 
+const ensureAuthenticated = async () => {
+  try {
+    await axios.get('/auth-check/', { withCredentials: true });
+    return true; 
+  } catch (err) {
+    if (err.response?.status === 401) {
+      try {
+        await axios.post('/token-refresh/', {}, { withCredentials: true });
+        return true; 
+      } catch (refreshErr) {
+        console.warn('❌ Token refresh failed:', refreshErr.response?.status);
+        window.location.href = '/'; 
+        return false;
+      }
+    } else {
+      console.error('❌ Unexpected auth error:', err);
+      return false;
+    }
+  }
+};
+
+
 export default function FormSuccess() {
   const location = useLocation();
   const jsonData = location.state && location.state.data;

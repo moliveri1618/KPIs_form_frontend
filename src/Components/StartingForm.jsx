@@ -24,6 +24,36 @@ function getCookie(name) {
   return null;
 }
 
+const ensureAuthenticated = async () => {
+  try {
+    console.log('🔐 Checking access token validity via /auth-check/');
+    await axios.get('/auth-check/', { withCredentials: true });
+    console.log('✅ Access token is valid');
+    return true;
+  } catch (err) {
+    console.warn('⚠️ /auth-check/ failed:', err.response?.status);
+
+    if (err.response?.status === 401) {
+      console.log('🔄 Attempting to refresh access token via /token-refresh/');
+      try {
+        const refreshRes = await axios.post('/token-refresh/', {}, { withCredentials: true });
+        console.log('✅ Access token refreshed:', refreshRes.data);
+        return true;
+      } catch (refreshErr) {
+        console.error('❌ Token refresh failed:', refreshErr.response?.status, refreshErr.response?.data);
+        console.log('🚪 Redirecting to login page...');
+        window.location.href = '/';
+        return false;
+      }
+    } else {
+      console.error('❌ Unexpected error during auth check:', err.response?.status, err.message);
+      return false;
+    }
+  }
+};
+
+ 
+
 
 export default function StartingForm() {
   const { isAuthenticated } = useAuth();
@@ -108,6 +138,10 @@ export default function StartingForm() {
       let api = ''
 
       try {
+
+          //check if valid tokens first
+          const ok = await ensureAuthenticated();
+          if (!ok) return;
 
           //defining urls
           const api = `/stoca?DOI=${encodeURIComponent(doi)}`
@@ -317,24 +351,22 @@ export default function StartingForm() {
         </div>
         <div style={{ display: 'flex', justifyContent: 'right', width: '83.5vw' }}>
           {flag === 0 && (
-            <Link>
-              <Button 
-                  type="submit" 
-                  variant="contained" 
-                  color="primary" 
-                  onClick={handleApiTest} 
-                  style={{ 
-                    width: '7%', 
-                    marginTop:'25px', 
-                    position: 'fixed', 
-                    bottom: '460px', 
-                    right: '170px' 
-                  }}
-                  disabled={!isFormValid}
-                  >
-                Next
-              </Button>
-            </Link>
+            <Button 
+                type="submit" 
+                variant="contained" 
+                color="primary" 
+                onClick={handleApiTest} 
+                style={{ 
+                  width: '7%', 
+                  marginTop:'25px', 
+                  position: 'fixed', 
+                  bottom: '460px', 
+                  right: '170px' 
+                }}
+                disabled={!isFormValid}
+                >
+              Next
+            </Button>
             )}
           {flag === 1 && (
             <div style={{ width: '7%', marginTop:'25px', position: 'fixed', bottom: '420px', right: '190px' }}>
