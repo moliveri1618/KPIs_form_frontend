@@ -116,7 +116,7 @@ export default function StartingForm() {
           // ✅ Step 1: Fetch CSRF token
           const csrfRes = await axios.get(csrfUrl, { withCredentials: true });
           const csrfToken = csrfRes.data.csrfToken;
-          console.log("CSRF token from /csrf/:", csrfToken);
+          // console.log("CSRF token from /csrf/:", csrfToken);
 
           // ✅ Step 2: Call /stoca with CSRF token
           await axios.post(

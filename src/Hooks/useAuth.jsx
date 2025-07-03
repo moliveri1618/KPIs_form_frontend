@@ -21,17 +21,17 @@ export const useAuth = () => {
     const validate = async () => {
       try {
         const res = await axios.get('/auth-check/', { withCredentials: true });
-        console.log('✅ check_auth success:', res.data); // 🔍 log the response data
+        // console.log('✅ check_auth success:', res.data); // 🔍 log the response data
         setIsAuthenticated(true);
       } catch (err) {
-        console.log('❌ check_auth failed:', err.response?.status, err.response?.data); // 🔍 log the error details
+        // console.log('❌ check_auth failed:', err.response?.status, err.response?.data); // 🔍 log the error details
         if (err.response?.status === 401) {
           try {
             const refreshRes = await axios.post('/token-refresh/', {}, { withCredentials: true });
-            console.log('🔄 token refreshed:', refreshRes.data);
+            // console.log('🔄 token refreshed:', refreshRes.data);
             setIsAuthenticated(true);
           } catch (refreshErr) {
-            console.log('❌ token refresh failed:', refreshErr.response?.status, refreshErr.response?.data);
+            // console.log('❌ token refresh failed:', refreshErr.response?.status, refreshErr.response?.data);
             logoutAndRedirect();
           }
         } else {

@@ -74,7 +74,7 @@ export default function FormSuccess() {
       // ✅ Step 1: Fetch CSRF token
       const csrfRes = await axios.get(csrfUrl, { withCredentials: true });
       const csrfToken = csrfRes.data.csrfToken;
-      console.log("CSRF token from /csrf/:", csrfToken);
+      // console.log("CSRF token from /csrf/:", csrfToken);
 
       jsonData['research_groups_first'] = Object.keys(first).join(", ")
       jsonData['research_groups_other'] = Object.keys(other).join(", ")
@@ -92,21 +92,19 @@ export default function FormSuccess() {
           }
         })
         .then(response => {
-          console.log('yooo')
-          console.log('Response:', response);
-          console.log(response['data'])
+          // console.log('Response:', response);
+          // console.log(response['data'])
           notify('The information for this paper are successfully saved into the database 😍')
         })
         .catch(error => {
-          console.error(error);
-          console.log(error['response']['data']['doi'])
+          // console.error(error);
+          // console.log(error['response']['data']['doi'])
           if (error?.response?.data?.doi && error['response']['data']['doi'][0] === 'do is with this doi already exists.') {
-            console.log('hahaha')
             notify('This DOi is already inserted into the database')
           }
         });  
     } catch (error) {
-        console.error('Error fetching data:', error);
+        // console.error('Error fetching data:', error);
     }
     setIsValid(false)
   }
@@ -125,9 +123,9 @@ export default function FormSuccess() {
   }
 
   useEffect(() => {
-    console.log(corresp)
-    console.log(other)
-    console.log(first)
+    // console.log(corresp)
+    // console.log(other)
+    // console.log(first)
     // Cleanup function
     return () => {
       toast.dismiss(); // Dismiss any existing toasts when the component unmounts
