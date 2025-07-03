@@ -26,27 +26,27 @@ function getCookie(name) {
 
 const ensureAuthenticated = async () => {
   try {
-    console.log('🔐 Checking access token validity via /auth-check/');
+    // console.log('🔐 Checking access token validity via /auth-check/');
     await axios.get('/auth-check/', { withCredentials: true });
-    console.log('✅ Access token is valid');
+    // console.log('✅ Access token is valid');
     return true;
   } catch (err) {
-    console.warn('⚠️ /auth-check/ failed:', err.response?.status);
+    // console.warn('⚠️ /auth-check/ failed:', err.response?.status);
 
     if (err.response?.status === 401) {
-      console.log('🔄 Attempting to refresh access token via /token-refresh/');
+      // console.log('🔄 Attempting to refresh access token via /token-refresh/');
       try {
         const refreshRes = await axios.post('/token-refresh/', {}, { withCredentials: true });
-        console.log('✅ Access token refreshed:', refreshRes.data);
+        // console.log('✅ Access token refreshed:', refreshRes.data);
         return true;
       } catch (refreshErr) {
-        console.error('❌ Token refresh failed:', refreshErr.response?.status, refreshErr.response?.data);
-        console.log('🚪 Redirecting to login page...');
+        // console.error('❌ Token refresh failed:', refreshErr.response?.status, refreshErr.response?.data);
+        // console.log('🚪 Redirecting to login page...');
         window.location.href = '/';
         return false;
       }
     } else {
-      console.error('❌ Unexpected error during auth check:', err.response?.status, err.message);
+      // console.error('❌ Unexpected error during auth check:', err.response?.status, err.message);
       return false;
     }
   }
