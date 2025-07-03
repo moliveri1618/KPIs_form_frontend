@@ -94,6 +94,15 @@ export default function SignInSide() {
     // Check if email from userData is in allowed_users
     const emailExists = Object.values(allowed_users).includes(userData.email);
     if (emailExists) {
+
+      // Clear cookies before login
+      try {
+        await axios.post('/logout/', {}, { withCredentials: true });
+        console.log('✅ Pre-login logout successful');
+      } catch (err) {
+        console.warn('⚠️ Pre-login logout failed (likely already logged out):', err.response?.status);
+      }
+
       let api = ''
       try {
           //api = 'http://' + process.env.REACT_APP_API_URL_DEV + `/login/`
