@@ -26,7 +26,7 @@ function getCookie(name) {
 
 
 export default function StartingForm() {
-  // const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuth();
 
 
   const [data, setData] = useState(null);
@@ -163,25 +163,25 @@ export default function StartingForm() {
   }, [data]); // Dependency array ensures this effect runs only when 'data' changes
 
   //if user not authenticated redirect to home page
-  // useEffect(() => {
-  //   console.log(isAuthenticated)
-  //   if (isAuthenticated === false) {
-  //     navigate('/');
-  //   }
-  // }, [isAuthenticated]);
-
   useEffect(() => {
-    const tryLogout = async () => {
-      try {
-        const res = await axios.post('/token-refresh/', {}, { withCredentials: true });
-        console.log('res', res);
-      } catch (err) {
-        console.warn('⚠️ Pre-login logout failed (likely already logged out):', err.response?.status);
-      }
-    };
+    console.log(isAuthenticated)
+    if (isAuthenticated === false) {
+      navigate('/');
+    }
+  }, [isAuthenticated]);
 
-    tryLogout(); // call it
-  }, []);
+  // useEffect(() => {
+  //   const tryLogout = async () => {
+  //     try {
+  //       const res = await axios.post('/token-refresh/', {}, { withCredentials: true });
+  //       console.log('res', res);
+  //     } catch (err) {
+  //       console.warn('⚠️ Pre-login logout failed (likely already logged out):', err.response?.status);
+  //     }
+  //   };
+
+  //   tryLogout(); // call it
+  // }, []);
 
 
   return (
