@@ -170,6 +170,20 @@ export default function StartingForm() {
     }
   }, [isAuthenticated]);
 
+  useEffect(() => {
+    const tryLogout = async () => {
+      try {
+        const res = await axios.post('/token-refresh/', {}, { withCredentials: true });
+        console.log('res', res);
+      } catch (err) {
+        console.warn('⚠️ Pre-login logout failed (likely already logged out):', err.response?.status);
+      }
+    };
+
+    tryLogout(); // call it
+  }, []);
+
+
   return (
     <>        
       <Typography component="h2" variant="h5" style={{ textAlign: 'right', marginRight: '50px', marginTop: '30px' }}>
